@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science Prozess – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    .crisp-flow { display:flex; align-items:center; gap:0; margin:24px 0; flex-wrap:wrap; }
+    .crisp-step {
+      flex:1; min-width:100px; padding:14px 10px; text-align:center;
+      border-radius:10px; position:relative;
+    }
+    .crisp-step .cs-icon { font-size:24px; margin-bottom:6px; }
+    .crisp-step .cs-num { font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; }
+    .crisp-step .cs-title { font-size:13px; font-weight:700; margin-top:4px; }
+    .crisp-step .cs-detail { font-size:11px; color:var(--text-secondary); margin-top:4px; line-height:1.4; }
+    .crisp-arrow { font-size:20px; color:var(--border); flex-shrink:0; margin:0 2px; }
+    .crisp-loop { text-align:center; margin:8px 0 0; font-size:12px; color:var(--text-secondary); }
+
+    .phase-card {
+      background:var(--surface);
+      border:1.5px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px 20px;
+      margin:14px 0;
+      border-left:4px solid;
+    }
+    .phase-card h4 { font-size:15px; font-weight:700; margin-bottom:8px; }
+    .phase-card p { font-size:13px; margin:0; }
+    .phase-card ul { padding-left:18px; margin-top:6px; }
+    .phase-card ul li { font-size:13px; color:var(--text-secondary); margin-bottom:4px; }
+
+    .use-case-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+    .use-case-card {
+      border:1.5px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px 18px;
+      background:var(--surface);
+    }
+    .use-case-card h4 { font-size:14px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+    .use-case-card p, .use-case-card li { font-size:13px; color:var(--text-secondary); }
+    .use-case-card ul { padding-left:16px; margin-top:6px; }
+
+    .qg-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:18px 0; }
+    .qg-card {
+      border:1.5px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px 12px;
+      text-align:center;
+      background:var(--surface);
+    }
+    .qg-card .qg-num { font-size:20px; margin-bottom:6px; }
+    .qg-card .qg-title { font-size:12px; font-weight:700; }
+    .qg-card .qg-sub { font-size:11px; color:var(--text-muted); margin-top:4px; }
+
+    .var-table { width:100%; border-collapse:collapse; font-size:13px; margin:14px 0; }
+    .var-table th { text-align:left; padding:8px 12px; border:1px solid var(--border); background:var(--bg); font-weight:700; }
+    .var-table td { padding:7px 12px; border:1px solid var(--border); }
+    .var-table tr:nth-child(even) td { background:var(--bg); }
+
+    .cycle-diagram {
+      display:flex; align-items:center; justify-content:center;
+      gap:8px; flex-wrap:wrap; margin:18px 0; font-size:13px; font-weight:600;
+    }
+    .cycle-node {
+      padding:8px 14px; border-radius:20px; border:1.5px solid;
+      text-align:center; font-size:12px; font-weight:700;
+    }
+    .cycle-arrow { color:var(--text-muted); font-size:16px; }
+
+    .formula-box {
+      background:var(--bg);
+      border:1.5px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px 20px;
+      margin:14px 0;
+      text-align:center;
+      font-family:var(--font-mono);
+      font-size:15px;
+      letter-spacing:0.3px;
+    }
+    .formula-box .formula-sub { font-size:11px; font-family:var(--font); color:var(--text-muted); margin-top:6px; font-style:italic; }
+
+    .deliverable-list { list-style:none; padding:0; margin:8px 0; }
+    .deliverable-list li {
+      display:flex; align-items:baseline; gap:8px;
+      padding:5px 0; border-bottom:1px solid var(--border); font-size:13px;
+    }
+    .deliverable-list li:last-child { border-bottom:none; }
+    .deliverable-list .dl-name { font-weight:700; min-width:200px; }
+    .deliverable-list .dl-desc { color:var(--text-secondary); }
+
+    .subtask-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0; }
+    .subtask-card {
+      border:1px solid var(--border); border-radius:8px;
+      padding:12px 14px; background:var(--bg);
+    }
+    .subtask-card .st-title { font-size:12px; font-weight:700; margin-bottom:4px; }
+    .subtask-card .st-out { font-size:11px; color:var(--text-muted); }
+    .subtask-card .st-out strong { color:var(--text-secondary); }
+
+    .letter-card {
+      background:#fffbeb;
+      border:1.5px solid #fde68a;
+      border-radius:var(--radius);
+      padding:16px 20px;
+      margin:14px 0;
+      font-size:13px;
+      line-height:1.7;
+    }
+    .letter-card .letter-from { font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px; }
+
+    @media(max-width:700px) {
+      .use-case-grid { grid-template-columns:1fr; }
+      .qg-grid { grid-template-columns:1fr 1fr; }
+      .subtask-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item active mod-ds" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Modul 05 – Data Science Prozess</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-ds">
+        <span>🗺️</span> Modul 05 · Data Science
+      </div>
+      <h1 class="page-title">Der Data Science Prozess</h1>
+      <p class="page-subtitle">Wie geht man ein Datenprojekt systematisch an? CRISP-DM gibt den bewährten Rahmen — und Wissenschaftstheorie das nötige Fundament.</p>
+    </div>
+
+    <!-- ToC -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin:20px 0">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:10px">Inhalt</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;font-size:13px">
+        <a href="#crisp" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🔄 CRISP-DM Überblick</a>
+        <a href="#wissenschaft" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🔬 Wissenschaftstheorie</a>
+        <a href="#usecases" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">📋 Zwei Use Cases</a>
+        <a href="#business" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🎯 Phase 1: Business Understanding</a>
+        <a href="#qualitygates" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🚧 Quality Gates</a>
+        <a href="#data-understanding-phase" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🔍 Phase 2: Data Understanding</a>
+        <a href="#data-prep-phase" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🛠️ Phase 3: Data Preparation</a>
+        <a href="#modeling-phase" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🤖 Phase 4–6: Modeling bis Deployment</a>
+        <a href="#quiz" style="color:var(--text-secondary);text-decoration:none;padding:2px 0">🎯 Selbsttest</a>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         1. CRISP-DM ÜBERBLICK
+    =================================================== -->
+    <h2 class="section-title" id="crisp">🔄 CRISP-DM — Überblick & Entstehung</h2>
+
+    <p><strong>CRISP-DM</strong> (Cross-Industry Standard Process for Data Mining) ist der meistgenutzte Prozessrahmen für Data-Science-Projekte. Er entstand in den <strong>1990er Jahren</strong>, wurde <strong>von der EU gefördert</strong> und von einer <strong>Special Interest Group mit über 200 Mitgliedsunternehmen</strong> konsensuell entwickelt. Die Referenz: <em>Chapman et al. (2000): „CRISP-DM 1.0 Step-by-step data mining guide"</em> — frei verfügbar.</p>
+
+    <!-- Visuelles Prozessdiagramm -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:20px 16px;margin:20px 0">
+      <div class="crisp-flow">
+        <div class="crisp-step" style="background:#f0fdf4">
+          <div class="cs-icon">🎯</div>
+          <div class="cs-num">Phase 1</div>
+          <div class="cs-title" style="color:#059669">Business<br>Understanding</div>
+          <div class="cs-detail">Ziel &amp; Frage definieren</div>
+        </div>
+        <div class="crisp-arrow">→</div>
+        <div class="crisp-step" style="background:#eff6ff">
+          <div class="cs-icon">🔍</div>
+          <div class="cs-num">Phase 2</div>
+          <div class="cs-title" style="color:#2563eb">Data<br>Understanding</div>
+          <div class="cs-detail">Daten erkunden &amp; verstehen</div>
+        </div>
+        <div class="crisp-arrow">→</div>
+        <div class="crisp-step" style="background:#fffbeb">
+          <div class="cs-icon">🛠️</div>
+          <div class="cs-num">Phase 3</div>
+          <div class="cs-title" style="color:#d97706">Data<br>Preparation</div>
+          <div class="cs-detail">Bereinigen &amp; transformieren</div>
+        </div>
+        <div class="crisp-arrow">→</div>
+        <div class="crisp-step" style="background:#fdf4ff">
+          <div class="cs-icon">🤖</div>
+          <div class="cs-num">Phase 4</div>
+          <div class="cs-title" style="color:#9333ea">Modeling</div>
+          <div class="cs-detail">Modell wählen &amp; trainieren</div>
+        </div>
+        <div class="crisp-arrow">→</div>
+        <div class="crisp-step" style="background:#fff1f2">
+          <div class="cs-icon">📊</div>
+          <div class="cs-num">Phase 5</div>
+          <div class="cs-title" style="color:#e11d48">Evaluation</div>
+          <div class="cs-detail">Ergebnis bewerten</div>
+        </div>
+        <div class="crisp-arrow">→</div>
+        <div class="crisp-step" style="background:#f0f9ff">
+          <div class="cs-icon">🚀</div>
+          <div class="cs-num">Phase 6</div>
+          <div class="cs-title" style="color:#0284c7">Deployment</div>
+          <div class="cs-detail">Modell in Produktion</div>
+        </div>
+      </div>
+      <div class="crisp-loop">↩️ Iterativ: innere Pfeile = häufigste Iterationen zwischen benachbarten Phasen · äußerer Kreis = neue Erkenntnisse stellen neue Fragen — Data Science ist nie „fertig"</div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Kein linearer Prozess!</strong>
+        <p>In der Praxis springt man ständig zwischen den Phasen. Neue Erkenntnisse aus der Datenexploration können die ursprüngliche Fragestellung verändern — und damit beginnt man wieder von vorn.</p>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">📦</div>
+      <div class="content">
+        <strong>Deliverables — Was muss man liefern?</strong>
+        <p>In der Industrie gibt es immer einen Kunden oder Stakeholder, der bezahlt und konkrete <strong>Deliverables</strong> erwartet. Empfehlung: Den Erkenntnisstand aus jeder CRISP-DM Phase in einen <strong>Bericht</strong> gießen. Das schützt auch den Analysten — vereinbarte Erfolgskriterien machen Erfolg messbar.</p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         2. WISSENSCHAFTSTHEORIE
+    =================================================== -->
+    <h2 class="section-title" id="wissenschaft">🔬 Wissenschaftstheorie — Das Fundament</h2>
+
+    <p>Bevor man Data Science praktisch macht, lohnt ein Blick auf das <strong>wissenschaftliche Fundament</strong>. Die folgenden Konzepte klingen theoretisch — bestimmen aber, wie man Daten richtig interpretiert und Fragen richtig stellt.</p>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Namen vs. Inhalt</strong>
+        <p>„Ein Problem ist, dass Namen oft mehr Gewicht haben als Inhalt!" — Versuche Konzepte wirklich zu verstehen, nicht nur Labels auswendig zu lernen. Empfehlung: <a href="https://www.youtube.com/watch?v=BKorP55Aqvg" target="_blank">„The Expert" (YouTube)</a>.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Empirie (Erfahrungswissenschaft)</h3>
+
+    <p>Das Ziel der Wissenschaft ist die Produktion von <strong>gesichertem Wissen über die Realität</strong>. Die empirische Methode testet die Übereinstimmung wissenschaftlicher Aussagen mit beobachtbaren Ereignissen.</p>
+
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:16px 0;font-size:13px;font-weight:600">
+      <div style="text-align:center;padding:12px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius)">
+        🧠 <strong>Theorie</strong><br><span style="font-weight:400;color:var(--text-muted)">allgemein</span>
+      </div>
+      <div style="text-align:center;color:var(--text-muted);font-size:12px">
+        ↕ Deduktion<br>↕ Induktion
+      </div>
+      <div style="text-align:center;padding:12px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius)">
+        👁️ <strong>Empirie</strong><br><span style="font-weight:400;color:var(--text-muted)">speziell · Daten = archivierte Beobachtungen</span>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Forschungszyklus ↔ CRISP-DM</h3>
+
+    <p>Der empirische Forschungszyklus nach Wottawa (1988) bildet sich fast identisch im CRISP-DM ab:</p>
+
+    <div style="overflow-x:auto;margin:14px 0">
+      <table class="var-table">
+        <thead>
+          <tr><th>Forschungszyklus (Wissenschaft)</th><th>CRISP-DM Phase</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Theorie formulieren</td><td>Business Understanding: Hypothesen & Ziele</td></tr>
+          <tr><td>Hypothese ableiten</td><td>Business Understanding: Data Mining Goals</td></tr>
+          <tr><td>Operationalisierung</td><td>Business Understanding: Variablen wählen</td></tr>
+          <tr><td>Datenerhebung</td><td>Data Understanding: Initial Data Collection</td></tr>
+          <tr><td>Datenauswertung</td><td>Data Preparation + Modeling</td></tr>
+          <tr><td>Interpretation</td><td>Evaluation + Deployment</td></tr>
+          <tr><td>→ zurück zur Theorie</td><td>→ äußerer CRISP-DM Zyklus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">🔗</div>
+      <div class="content"><strong>Data Science und Empirie gehen Hand in Hand!</strong></div>
+    </div>
+
+    <h3 class="subsection-title">Theorie</h3>
+
+    <p>Der Startpunkt empirischer Forschung ist die <strong>Theorie</strong> — ein geordnetes System von Aussagen. Eine gute Theorie muss:</p>
+
+    <ul style="font-size:13px;line-height:1.8;margin-left:20px">
+      <li>Empirisch testbar und widerstandsfähig gegenüber Tests sein</li>
+      <li>Widerlegbar formuliert sein — <strong>Falsifikationismus (Karl Popper)</strong></li>
+      <li>Widerspruchsfrei sein</li>
+      <li>Präzise Begriffe verwenden</li>
+      <li>So einfach wie möglich sein → <strong>Occam's Razor:</strong> „Von mehreren ausreichenden möglichen Erklärungen ist die einfachste zu bevorzugen"</li>
+      <li>Möglichst viele Phänomene erklären → „Jagd nach der Theory of Everything"</li>
+    </ul>
+
+    <h3 class="subsection-title">Hypothesen</h3>
+
+    <p>Theorien können nicht direkt getestet werden — man muss zuerst eine <strong>Hypothese</strong> ableiten, die eine testbare Vorhersage enthält. Das führt direkt zu <strong>Inferenzstatistik</strong>, Null- und Alternativhypothesen.</p>
+
+    <h3 class="subsection-title">Operationalisierung</h3>
+
+    <p>Nach der Hypothese müssen die Variablen <strong>operationalisiert</strong> werden — d.h. theoretische Konstrukte (z.B. „Verschleiß", „Intelligenz") müssen <strong>messbar und beobachtbar</strong> gemacht werden.</p>
+
+    <h3 class="subsection-title">Variablentypen — AV, UV, SV</h3>
+
+    <table class="var-table">
+      <thead>
+        <tr>
+          <th>Abkürzung</th>
+          <th>Name (DE)</th>
+          <th>ML-Begriff</th>
+          <th>Statistik-Synonyme</th>
+          <th>Bedeutung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>AV</strong></td>
+          <td>Abhängige Variable</td>
+          <td>Target · Label</td>
+          <td>Regressand · endogene Variable · erklärte Variable · Zielgröße</td>
+          <td>Was vorhergesagt / erklärt werden soll</td>
+        </tr>
+        <tr>
+          <td><strong>UV</strong></td>
+          <td>Unabhängige Variable</td>
+          <td>Feature · Faktor</td>
+          <td>Regressor · exogene Variable · erklärende Variable · Prädiktorvariable</td>
+          <td>Was die AV beeinflusst</td>
+        </tr>
+        <tr>
+          <td><strong>SV</strong></td>
+          <td>Störvariable</td>
+          <td>Confounding Variable</td>
+          <td>—</td>
+          <td>Beeinflusst AV <em>und</em> UV, ohne kontrolliert zu werden</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:13px;margin-top:4px">In der Regressionsformel: <code>yᵢ = β₀ + β₁xᵢ + εᵢ</code> ist <code>y</code> die AV (Regressand), <code>x</code> die UV (Regressor) und <code>ε</code> das Residuum (nicht erklärte Varianz — enthält Störvariablen).</p>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Störvariablen-Beispiel: COVID-Kurve</strong>
+        <p>Steigende Infektionskurven im Frühjahr 2020 sehen dramatisch aus — aber die offensichtlichste Störvariable ist die <strong>Dunkelziffer</strong> (Testrate). Ohne Kontrolle dieser SV ist die Interpretation der Daten irreführend.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Experiment & Kausalität</h3>
+
+    <p>Ein <strong>Experiment</strong> ist eine besondere Form der Datenerhebung, bei der der Forscher aktiv eingreift — mindestens eine Variable wird <strong>systematisch variiert</strong>, Störvariablen werden kontrolliert.</p>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Kausalität ≠ Korrelation</strong>
+        <p>Bei <strong>nicht-experimenteller Forschung</strong> (und das ist der Normalfall für Data Scientists!) können nur <strong>Zusammenhänge</strong> festgestellt werden — keine Kausalaussagen. „Als Data Scientist erhält man meistens nur Daten, ohne die Möglichkeit einzugreifen → Mit Interpretationen muss vorsichtig umgegangen werden."</p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         3. USE CASES
+    =================================================== -->
+    <h2 class="section-title" id="usecases">📋 Zwei konkrete Use Cases</h2>
+
+    <p>Diese beiden Use Cases laufen als <strong>roter Faden</strong> durch das gesamte Modul. Jede Phase wird anhand dieser Beispiele konkretisiert.</p>
+
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <h4>🔧 Use Case 1: Predictive Maintenance</h4>
+        <p><strong>Situation:</strong> Ein Unternehmen hat eine Produktionslinie mit wiederkehrenden <strong>Kugellager-Ausfällen</strong>. Maschinenstillstände verursachen hohe Kosten. Maschinendaten werden bereits aufgezeichnet und archiviert.</p>
+        <ul>
+          <li><strong>Business Goal:</strong> Vorhersage von Maschinenfehlern, um Stillstände zu vermeiden</li>
+          <li><strong>Zielvariablen:</strong> TTF (Time to Failure), RUL (Remaining Useful Life), Schadensklassen</li>
+          <li><strong>Ideale Vorbedingungen für ML</strong> — strukturierte Sensordaten</li>
+        </ul>
+      </div>
+      <div class="use-case-card">
+        <h4>📦 Use Case 2: Sales / Demand Forecast</h4>
+        <p><strong>Situation:</strong> Ein großes Unternehmen beliefert mehrere Lager. Kurzfristige Bestellspitzen von Endkunden erzeugen Schwankungen. Fahrermangel macht präzise Planung der LKW-Einsätze kritisch.</p>
+        <ul>
+          <li><strong>Business Goal:</strong> Tagesgenaue Bedarfsprognose → weniger Rücksendungen, kleinere Lager</li>
+          <li><strong>Primäres Ziel:</strong> Weniger Rücksendungen durch bessere Fahrerplanung</li>
+          <li><strong>Sekundäres Ziel:</strong> Glättung von Bestellspitzen, Reduktion der Lagergrößen</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         4. BUSINESS UNDERSTANDING
+    =================================================== -->
+    <h2 class="section-title" id="business">🎯 Phase 1: Business Understanding</h2>
+
+    <p>Die wichtigste Phase — hier wird festgelegt, <strong>was</strong> das Projekt erreichen soll. Ohne klare Zieldefinition scheitern viele Projekte. Zentrale Frage: <em>„Wie übersetze ich das, was mein Kunde will, in Data-Science-Sprache?"</em></p>
+
+    <p style="font-size:13px;color:var(--text-muted)">⚠️ Warnung: Vermeide es, <strong>„gute Antworten auf falsche Fragen zu finden"</strong> — in der Industrie ist das ein teurer Fehler.</p>
+
+    <h3 class="subsection-title">Sub-Task 1: Determine Business Objectives</h3>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">📄 Output: Background</div>
+        <div class="st-out">Use Case beschreiben <strong>+</strong> Unternehmenssituation (Datenquellen, Infrastruktur, Personal)</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🎯 Output: Business Objectives</div>
+        <div class="st-out">Ziele aus Unternehmensperspektive — ggf. in <strong>primäre</strong> und <strong>sekundäre Ziele</strong> aufteilen</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">✅ Output: Business Success Criteria</div>
+        <div class="st-out">Erfolg <strong>quantifizieren</strong> — messbare KPIs vereinbaren. Schützt den Analysten vor unrealistischen Erwartungen</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📌 Business Goals → Data Mining Goals</div>
+        <div class="st-out">Businessfrage in eine technische/mathematische Aufgabe übersetzen (Klassifikation, Regression, Clustering…)</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:16px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Businessfrage</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Data-Science-Aufgabe</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Typ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Wird ein Kunde kündigen?</td><td style="padding:7px 12px;border:1px solid var(--border)">Vorhersage: Ja/Nein</td><td style="padding:7px 12px;border:1px solid var(--border)">Klassifikation</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Wie hoch wird der Umsatz?</td><td style="padding:7px 12px;border:1px solid var(--border)">Vorhersage einer Zahl</td><td style="padding:7px 12px;border:1px solid var(--border)">Regression</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Welche Kunden sind ähnlich?</td><td style="padding:7px 12px;border:1px solid var(--border)">Gruppen finden</td><td style="padding:7px 12px;border:1px solid var(--border)">Clustering</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Welche Produkte werden zusammen gekauft?</td><td style="padding:7px 12px;border:1px solid var(--border)">Muster finden</td><td style="padding:7px 12px;border:1px solid var(--border)">Association Rules</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Use Case: Business Objectives -->
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <h4>🔧 PM: Business Goals &amp; Success Criteria</h4>
+        <p><strong>Goals:</strong></p>
+        <ul>
+          <li>Wartungskosten reduzieren</li>
+          <li>Produktionsausfall reduzieren</li>
+          <li>Maschinenstillstände reduzieren</li>
+        </ul>
+        <p style="margin-top:8px"><strong>Success Criteria:</strong></p>
+        <ul>
+          <li>10% weniger Stillstände</li>
+          <li>20% weniger Ersatzteilbestellungen</li>
+          <li>10% weniger Hersteller-Wartungsrufe</li>
+        </ul>
+      </div>
+      <div class="use-case-card">
+        <h4>📦 Sales Forecast: Business Goals &amp; Success Criteria</h4>
+        <p><strong>Goals:</strong></p>
+        <ul>
+          <li>Primär: Weniger Rücksendungen durch bessere Fahrerplanung</li>
+          <li>Sekundär: Glättung der Bestellspitzen, Reduktion der Lagergrößen</li>
+        </ul>
+        <p style="margin-top:8px"><strong>Success Criteria:</strong></p>
+        <ul>
+          <li>10% weniger Vertragsstrafen von Endkunden</li>
+          <li>20% kleinere Lager</li>
+          <li>10% weniger Rücksendungen</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Sub-Task 2: Assess Situation</h3>
+
+    <p>Fact-Finding — detaillierte Informationen über Ressourcen, Datenquellen, Einschränkungen und Annahmen sammeln.</p>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">🗂️ Inventory of Resources</div>
+        <div class="st-out">Personal, alle datenbezogenen Ressourcen, Hard- und Softwareressourcen auflisten</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📋 Requirements, Assumptions &amp; Constraints</div>
+        <div class="st-out">Timeline, Ergebnisqualität, Datenschutz, nicht prüfbare Annahmen, eingeschränkte Datenverfügbarkeit</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">⚠️ Risks &amp; Contingencies</div>
+        <div class="st-out">Risiken und Notfallpläne, die das Projekt verzögern könnten</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">💰 Costs &amp; Benefits</div>
+        <div class="st-out">Projektkosten vs. spätere Gewinne abwägen — Terminologie/Glossar erstellen</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Sub-Task 3: Determine Data Mining Goals</h3>
+
+    <p>Hier werden die Business-Ziele in <strong>technische/mathematische Ziele</strong> übersetzt — das erfordert methodisches Fachwissen.</p>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">🔬 Data Mining Goals</div>
+        <div class="st-out">Hypothesen, Operationalisierung, Variablenauswahl, Verständnis des datengenerierenden Prozesses</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📏 Data Mining Success Criteria</div>
+        <div class="st-out">Technische Erfolgskriterien: Modellgenauigkeit, Verbesserung gegenüber <strong>Naive Baseline</strong></div>
+      </div>
+    </div>
+
+    <!-- Use Cases: Theorie, Hypothese, Operationalisierung, Variablen -->
+    <h3 class="subsection-title">Use Cases: Theorie → Hypothese → Operationalisierung → Variablen</h3>
+
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <h4>🔧 Predictive Maintenance</h4>
+        <p><strong>Theorie:</strong> „Der Verlauf des Verschleißes – RUL / TTF – weist eine zeitliche Abhängigkeit auf und kann somit vorhergesagt werden."</p>
+        <p style="margin-top:6px"><strong>Hypothese:</strong> „Der Verschleiß weist über die Zeit einen signifikanten, exponentiellen Zusammenhang auf."</p>
+        <p style="margin-top:6px"><strong>Operationalisierung:</strong> Verschleiß gemessen in: Zunahme der Stromamplitude + Zunahme der Standardabweichung des Vibrationssignals über die Zeit.</p>
+        <p style="margin-top:6px"><strong>UV:</strong> Strom-/Vibrationssignal &amp; abgeleitete Features</p>
+        <p><strong>AV:</strong> TTF, RUL, Schadensklassen</p>
+        <p><strong>SV:</strong> Schwingungen benachbarter Maschinen, 50Hz-Signal der Netzspannung</p>
+      </div>
+      <div class="use-case-card">
+        <h4>📦 Sales / Demand Forecast</h4>
+        <p><strong>Theorie:</strong> „Die Absatzzahlen weisen eine jährliche und wöchentliche Saisonalität auf und können somit vorhergesagt werden."</p>
+        <p style="margin-top:6px"><strong>Hypothese:</strong> „Es gibt signifikante Korrelationen aus saisonalen Indikatoren und Absatzzahlen auf unterschiedlichen zeitlichen Skalen."</p>
+        <p style="margin-top:6px"><strong>Operationalisierung:</strong> Signifikante Korrelation zwischen Temperatur, Sonnenscheindauer und Absatzzahlen; Absatz Wochentags vs. Wochenende.</p>
+        <p style="margin-top:6px"><strong>UV:</strong> Absatzzahlen der vergangenen x Wochen, klimatische Daten</p>
+        <p><strong>AV:</strong> Absatzzahlen der kommenden z Wochen</p>
+        <p><strong>SV:</strong> Promotions/Rabatte, Feiertage/Urlaub</p>
+      </div>
+    </div>
+
+    <!-- n=1 Kundendialog -->
+    <h3 class="subsection-title">Praxis: Der n=1-Brief</h3>
+
+    <p>Ein realistisches Szenario aus der Industrie — und warum das Verständnis des datengenerierenden Prozesses entscheidend ist:</p>
+
+    <div class="letter-card">
+      <div class="letter-from">📧 Kundenanfrage</div>
+      <p>„Sehr geehrte Damen und Herren, anbei schicke ich Ihnen Daten von kurz vor dem letzten Motorausfall. Bitte bauen Sie uns eine KI, die zukünftige Ausfälle vorhersagt."</p>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Problem: n = 1</strong>
+        <p>Mit einem einzigen Fehlerereignis kann kein generalisierbares Modell trainiert werden — <strong>n &gt; 1: das ist Wissenschaft!</strong> Außerdem fehlen Daten aus den <strong>Gesund-Perioden</strong> — ohne diese kann das Modell nicht zwischen „normal" und „fehlerhaft" unterscheiden. Das muss klar mit dem Kunden kommuniziert werden.</p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         5. QUALITY GATES
+    =================================================== -->
+    <h2 class="section-title" id="qualitygates">🚧 Quality Gates &amp; Abbruchkriterien</h2>
+
+    <p>Data-Science-Projekte haben ein <strong>offenes Ergebnis</strong> — man kann dem Kunden keine Garantie geben. Deshalb müssen <strong>Abbruchkriterien</strong> gemeinsam mit dem Kunden vereinbart werden. Das ist eine wichtige Soft Skill: <strong>Erwartungsmanagement</strong>.</p>
+
+    <p style="font-size:13px;color:var(--text-secondary)">Als Analyst kann man nicht garantieren: ausreichende Datenqualität · ein trainierbares genaues Modell · die Deployment-Möglichkeit in der Infrastruktur des Kunden.</p>
+
+    <div class="qg-grid">
+      <div class="qg-card">
+        <div class="qg-num">🔎</div>
+        <div class="qg-title">Machbarkeit</div>
+        <div class="qg-sub">Sind die Grundvoraussetzungen erfüllt?</div>
+      </div>
+      <div class="qg-card" style="border-color:#059669">
+        <div class="qg-num">1️⃣</div>
+        <div class="qg-title">Quality Gate 1</div>
+        <div class="qg-sub">Datenqualität ausreichend?</div>
+      </div>
+      <div class="qg-card" style="border-color:#9333ea">
+        <div class="qg-num">2️⃣</div>
+        <div class="qg-title">Quality Gate 2</div>
+        <div class="qg-sub">Modellgenauigkeit über Baseline?</div>
+      </div>
+      <div class="qg-card" style="border-color:#0284c7">
+        <div class="qg-num">3️⃣</div>
+        <div class="qg-title">Quality Gate 3</div>
+        <div class="qg-sub">Transfer in Infrastruktur möglich?</div>
+      </div>
+    </div>
+
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <h4>🔧 PM: Quality Gates</h4>
+        <p><strong>Machbarkeit:</strong></p>
+        <ul>
+          <li>≥ 20 Fehlerdatensätze aus ≥ 5h Datenaufzeichnung</li>
+          <li>≥ 2 Wochen Daten aus „Gesund-Perioden"</li>
+          <li>Kunde stellt ≥ 4h/Woche Mitarbeiterzeit bereit</li>
+        </ul>
+        <p style="margin-top:6px"><strong>QG 1:</strong> Abtastrate ausreichend · &lt; 20% Datenablehnung</p>
+        <p><strong>QG 2:</strong> Modellgenauigkeit &gt; 15% über Naive Prediction</p>
+        <p><strong>QG 3:</strong> Jeder Bediener hat ein Gerät (Tablet/Smartphone) für Push-Benachrichtigungen · Kunde auf SaaS/Cloud umgestellt</p>
+      </div>
+      <div class="use-case-card">
+        <h4>📦 Sales Forecast: Quality Gates</h4>
+        <p><strong>Machbarkeit:</strong></p>
+        <ul>
+          <li>≥ 5 Jahre Verkaufsdaten von ≥ 30% der Endkunden</li>
+          <li>Daten können automatisch eingelesen werden</li>
+        </ul>
+        <p style="margin-top:6px"><strong>QG 1:</strong> Erste Modelle erreichen mindestens Naive-Prediction-Genauigkeit</p>
+        <p><strong>QG 2:</strong> Finales Modell ≥ 15% besser als Naive Prediction</p>
+        <p><strong>QG 3:</strong> Software-Infrastruktur angepasst, sodass Modellergebnisse für Routenplanung nutzbar sind (z.B. Dashboard)</p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         6. DATA UNDERSTANDING
+    =================================================== -->
+    <h2 class="section-title" id="data-understanding-phase">🔍 Phase 2: Data Understanding</h2>
+
+    <p>Ziel: Die Daten kennenlernen und verstehen. Diese Phase liefert vier konkrete Berichte:</p>
+
+    <ul class="deliverable-list">
+      <li><span class="dl-name">📥 Initial Data Collection Report</span><span class="dl-desc">Initiale Datenakquise &amp; Laden in Tools · Auflistung der Datenquellen · Erhebungsmethoden · Probleme &amp; Lösungen</span></li>
+      <li><span class="dl-name">📋 Data Description Report</span><span class="dl-desc">Oberflächliche Untersuchung: Datenformat · Umfang (Samples/Keys) · Beschreibung der Spalten/Features</span></li>
+      <li><span class="dl-name">🔍 Data Exploration Report</span><span class="dl-desc">Univariate Analysen (Verteilungen, Aggregationen) · Paarweise Maße (Korrelation, lineare Regression, Hypothesentests) · Visualisierungen · Interpretation der Erkenntnisse</span></li>
+      <li><span class="dl-name">✅ Data Quality Report</span><span class="dl-desc">Sind die Daten vollständig? Fehler und Häufigkeit? Missing Values — Ort, Form, Häufigkeit? Lösungsvorschläge für Qualitätsprobleme</span></li>
+    </ul>
+
+    <p>→ <strong>Modul 06 &amp; 07</strong> dieser Lernplattform behandeln genau diese Phase praktisch mit NumPy, Pandas und Visualisierungen.</p>
+
+    <!-- ===================================================
+         7. DATA PREPARATION
+    =================================================== -->
+    <h2 class="section-title" id="data-prep-phase">🛠️ Phase 3: Data Preparation</h2>
+
+    <p>Ziel: Die Daten so aufbereiten, dass ein Modell trainiert werden kann. Auch hier gibt es ein konkretes Deliverable: <strong>Dataset + Dataset Description</strong>.</p>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">🎯 Select Data</div>
+        <div class="st-out">Kriterien für Einschluss/Ausschluss: Relevanz für Data Mining Goals, Qualität, technische Einschränkungen. <strong>Begründung dokumentieren!</strong></div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🧹 Clean Data</div>
+        <div class="st-out">Teilmengenselektion, Interpolation, Ausreißer-Entfernung. Zielqualitätsniveau = Modelltraining möglich.</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🏗️ Construct Data</div>
+        <div class="st-out">Abgeleitete Features (Encoding, Skalierung, Feature Engineering), transformierte Werte, neu generierte Samples</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🔗 Integrate Data</div>
+        <div class="st-out">Zusammenführen verschiedener Datentabellen inkl. tabellenübergreifender Aggregationen</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🔄 Format Data</div>
+        <div class="st-out">Daten in das Format bringen, das das Modell versteht: Label/ID-Spalten, Reihenfolge, Shuffling, Trimmung, Trennzeichen</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📦 Output: Dataset</div>
+        <div class="st-out">Das aufbereitete Dataset selbst + die dazugehörige Dataset Description sind Deliverables!</div>
+      </div>
+    </div>
+
+    <p>→ <strong>Modul 08</strong> behandelt Data Preparation &amp; Feature Engineering praktisch.</p>
+
+    <!-- ===================================================
+         8. MODELING, EVALUATION, DEPLOYMENT
+    =================================================== -->
+    <h2 class="section-title" id="modeling-phase">🤖 Phase 4–6: Modeling, Evaluation &amp; Deployment</h2>
+
+    <h3 class="subsection-title">Phase 4: Modeling</h3>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">🧠 Select Modeling Technique</div>
+        <div class="st-out">Modell auswählen &amp; dokumentieren · Modellannahmen festhalten (Verteilungsannahmen, keine Missing Values, …)</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🧪 Generate Test Design</div>
+        <div class="st-out">Prozess zur Überprüfung der Modellqualität: Train/Test/Validation-Split, Qualitätsmetriken</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🔨 Build Model</div>
+        <div class="st-out">Modelltraining ausführen · Optimale Hyperparameter dokumentieren · Modelle selbst können Deliverables sein</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📊 Assess Model</div>
+        <div class="st-out">Ergebnisse zusammenfassen · Modellqualitätsmetriken · Ranking der Modelle · Weiteres Hyperparameter-Tuning</div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">🔁</div>
+      <div class="content">
+        <strong>Build Model ↔ Assess Model werden iteriert</strong>
+        <p>Diese beiden Schritte werden so lange wiederholt, bis das optimale Modell gefunden ist. Die Bewertung hier bezieht sich auf <strong>methodische Qualität</strong> — nicht auf Business Success Criteria (das kommt in Phase 5).</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Phase 5: Evaluation</h3>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">✅ Evaluate Results</div>
+        <div class="st-out">Modellqualität gegen <strong>Business Goals / Success Criteria</strong> prüfen — nicht nur technische Metriken! Gibt es geschäftliche Gründe, warum Modelle ungeeignet sind?</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🔍 Review Process</div>
+        <div class="st-out">Wurden Aufgaben übersehen? Wurde das Modell korrekt trainiert? Sollten Schritte wiederholt werden? Ergebnisse zusammenfassen.</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">🗺️ Determine Next Steps</div>
+        <div class="st-out">Projekt abschließen? Bereit für Deployment? Weitere Iterationen nötig? Neue Data-Science-Projekte? Ressourcen- &amp; Budgetbewertung.</div>
+      </div>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Evaluation ≠ Assess Model</strong>
+        <p><strong>Assess Model (Phase 4)</strong> = methodische Qualität (Accuracy, RMSE, R²…)<br>
+        <strong>Evaluation (Phase 5)</strong> = Business-Qualität — Erfüllt das Modell die vereinbarten Business Success Criteria?</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Phase 6: Deployment</h3>
+
+    <div class="subtask-grid">
+      <div class="subtask-card">
+        <div class="st-title">🚀 Plan Deployment</div>
+        <div class="st-out">Wie kommen die Modellergebnisse zum Operator? Architektur- und Integrationsentscheidungen (API, Dashboard, SaaS…)</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📡 Plan Monitoring &amp; Maintenance</div>
+        <div class="st-out">Modellgenauigkeit ändert sich über die Zeit: <strong>Model Life Cycle Management</strong> — wie wird die Modellqualität überwacht?</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📄 Produce Final Report</div>
+        <div class="st-out">Abschlussbericht aller Ergebnisse und Deliverables — ggf. inklusive Abschlusspräsentation beim Kunden</div>
+      </div>
+      <div class="subtask-card">
+        <div class="st-title">📚 Review Project</div>
+        <div class="st-out">Was lief gut? Was lief schlecht? Was sollte verbessert werden? → <strong>Experience Documentation</strong> für zukünftige Projekte</div>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Model Life Cycle Management</strong>
+        <p>Modelle sind keine „Set and Forget"-Lösungen. Verteilungen in den Daten ändern sich (Concept Drift), Infrastruktur ändert sich, neue Daten werden verfügbar. Deployment bedeutet auch: planen, wie das Modell langfristig aktuell bleibt.</p>
+      </div>
+    </div>
+
+    <!-- ===================================================
+         QUIZ
+    =================================================== -->
+    <h2 class="section-title" id="quiz">🎯 Selbsttest</h2>
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Data Science Prozess</div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">1. Was ist die erste Phase von CRISP-DM?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Data Understanding</div>
+          <div class="quiz-option" data-correct="true">Business Understanding</div>
+          <div class="quiz-option" data-correct="false">Modeling</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">2. Ein Unternehmen will vorhersagen, ob ein Kunde sein Abonnement kündigt (Ja/Nein). Was für eine ML-Aufgabe ist das?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Regression</div>
+          <div class="quiz-option" data-correct="true">Klassifikation</div>
+          <div class="quiz-option" data-correct="false">Clustering</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">3. CRISP-DM ist ein linearer Prozess — man durchläuft die Phasen genau einmal.</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Richtig — jede Phase wird exakt einmal durchlaufen</div>
+          <div class="quiz-option" data-correct="true">Falsch — es ist ein iterativer Prozess, Phasen werden oft mehrfach durchlaufen</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">4. Was beschreibt Occam's Razor im Kontext von Data Science?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Komplexere Modelle sind immer besser</div>
+          <div class="quiz-option" data-correct="true">Von mehreren ausreichenden Erklärungen ist die einfachste zu bevorzugen</div>
+          <div class="quiz-option" data-correct="false">Daten müssen immer normalisiert werden</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">5. Was ist eine Störvariable (Confounding Variable)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Eine Variable, die das Modell nicht kennt</div>
+          <div class="quiz-option" data-correct="false">Die Zielvariable des Modells</div>
+          <div class="quiz-option" data-correct="true">Eine Variable, die sowohl AV als auch UV beeinflusst, ohne kontrolliert zu werden</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">6. Was ist der Unterschied zwischen „Assess Model" (Phase 4) und „Evaluation" (Phase 5)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Kein Unterschied — beide messen die Modellgenauigkeit</div>
+          <div class="quiz-option" data-correct="true">Assess Model = methodische Qualität (Accuracy, RMSE); Evaluation = Business Success Criteria</div>
+          <div class="quiz-option" data-correct="false">Evaluation kommt vor Assess Model</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">7. Warum muss man beim Predictive-Maintenance-Projekt auch Daten aus „Gesund-Perioden" liefern?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Weil das Modell sonst zu langsam ist</div>
+          <div class="quiz-option" data-correct="true">Damit das Modell zwischen normalen und fehlerhaften Zuständen unterscheiden kann</div>
+          <div class="quiz-option" data-correct="false">Weil Pandas sonst einen Fehler wirft</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">8. Was ist Model Life Cycle Management?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Das einmalige Deployment eines Modells in die Produktion</div>
+          <div class="quiz-option" data-correct="false">Das Training aller möglichen Modellvarianten</div>
+          <div class="quiz-option" data-correct="true">Die langfristige Überwachung und Aktualisierung eines Modells, da sich Datenverteilungen über Zeit ändern</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m05"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="04-funktionen-packages.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Funktionen &amp; Packages</span>
+      </a>
+      <a class="page-nav-btn next" href="06-data-understanding-single.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Data Understanding I</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

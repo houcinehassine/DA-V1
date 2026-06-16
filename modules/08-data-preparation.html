@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Preparation – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item active mod-dp" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 9 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Modul 08 – Data Preparation</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-dp" style="--mc:var(--color-dp)">
+        <span>🛠️</span> Modul 08 · Data Preparation
+      </div>
+      <h1 class="page-title">Data Preparation & Feature Engineering</h1>
+      <p class="page-subtitle">Rohe Daten in modellfertige Features umwandeln: Encoding, Feature Extraction, Selection und Scaling — der Schlüssel zu guten ML-Modellen.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#encoding" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Label- & One-Hot-Encoding</a>
+        <a href="#hashing" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Feature Hashing</a>
+        <a href="#bow" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Bag of Words</a>
+        <a href="#selection" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Feature Selection</a>
+        <a href="#scaling" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Feature Scaling</a>
+        <a href="#quantisierung" style="font-size:13px;color:var(--color-dp);font-weight:600">→ Quantisierung</a>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Warum Data Preparation?</strong>
+        <p>ML-Algorithmen verstehen nur Zahlen. Kategorische Daten müssen encodiert, Texte vektorisiert und alle Features auf vergleichbare Skalen gebracht werden. "Garbage in → Garbage out."</p>
+      </div>
+    </div>
+
+    <!-- ===== ENCODING ===== -->
+    <h2 class="section-title" id="encoding">🏷️ Feature Extraction: Encoding</h2>
+    <p>Kategorische Variablen (z.B. <code>'apple'</code>, <code>'banana'</code>) müssen in Zahlen umgewandelt werden, damit ML-Modelle damit rechnen können.</p>
+
+    <h3 class="subsection-title">Label-Encoding</h3>
+    <p>Jede Kategorie bekommt eine eindeutige ganze Zahl. Gut für <strong>ordinale</strong> Daten (z.B. klein=0, mittel=1, groß=2).</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.preprocessing import LabelEncoder
+import numpy as np
+
+categories = np.array(['apple', 'apple', 'milk', 'banana', 'coffee'])
+
+le = LabelEncoder()
+label_encoded = le.fit_transform(categories)
+print(label_encoded)   # → [0 0 3 1 2]
+print(le.classes_)     # → ['apple' 'banana' 'coffee' 'milk']</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>[0 0 3 1 2]</code></div>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Problem mit Label-Encoding bei nominalen Daten</strong>
+        <p>Das Modell könnte annehmen: <code>banana (1) &lt; coffee (2)</code> — das ist falsch bei gleichwertigen Kategorien! Lösung: One-Hot-Encoding.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">One-Hot-Encoding</h3>
+    <p>Jede Kategorie bekommt eine eigene Spalte (0 oder 1). Für <strong>nominale</strong> Daten ohne Reihenfolge.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.preprocessing import OneHotEncoder
+
+categories = np.array(['apple', 'milk', 'banana', 'coffee']).reshape(-1, 1)
+
+ohe = OneHotEncoder(sparse_output=False)
+one_hot = ohe.fit_transform(categories)
+print(one_hot)
+
+# apple  banana  coffee  milk
+# [1,    0,      0,      0]   ← apple
+# [0,    0,      0,      1]   ← milk
+# [0,    1,      0,      0]   ← banana
+# [0,    0,      1,      0]   ← coffee
+
+# Mit Pandas (einfacher):
+pd.get_dummies(df['kategorie_spalte'])</code></pre>
+    </div>
+
+    <div style="overflow-x:auto;margin:14px 0">
+      <table style="border-collapse:collapse;font-size:12px;min-width:400px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:8px 12px;border:1px solid var(--border)">Original</th>
+          <th style="padding:8px 12px;border:1px solid var(--border)">Label</th>
+          <th style="padding:8px 12px;border:1px solid var(--border)">apple</th>
+          <th style="padding:8px 12px;border:1px solid var(--border)">banana</th>
+          <th style="padding:8px 12px;border:1px solid var(--border)">coffee</th>
+          <th style="padding:8px 12px;border:1px solid var(--border)">milk</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:6px 12px;border:1px solid var(--border)">apple</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center;background:#d1fae5;font-weight:700">1</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:6px 12px;border:1px solid var(--border)">banana</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">1</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center;background:#d1fae5;font-weight:700">1</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td></tr>
+          <tr><td style="padding:6px 12px;border:1px solid var(--border)">coffee</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">2</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center;background:#d1fae5;font-weight:700">1</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:6px 12px;border:1px solid var(--border)">milk</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">3</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center">0</td><td style="padding:6px 12px;border:1px solid var(--border);text-align:center;background:#d1fae5;font-weight:700">1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== FEATURE HASHING ===== -->
+    <h2 class="section-title" id="hashing">🔨 Feature Hashing</h2>
+    <p>Bei sehr vielen Kategorien (z.B. Millionen von Webseiten) wird One-Hot-Encoding zu groß. <strong>Feature Hashing</strong> (Hashing Trick) bildet Kategorien auf einen festen Vektorraum ab — ohne alle Kategorien zu kennen.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.feature_extraction import FeatureHasher
+
+data = [{'animal': 'dog'}, {'animal': 'cat'}, {'animal': 'horse'}]
+
+hasher = FeatureHasher(n_features=8, input_type='dict')
+hashed = hasher.transform(data).toarray()
+print(hashed.shape)   # → (3, 8)  — 3 Samples, 8 Features</code></pre>
+    </div>
+
+    <!-- ===== BAG OF WORDS ===== -->
+    <h2 class="section-title" id="bow">📝 Bag of Words (Text → Zahlen)</h2>
+    <p>Texte müssen in Zahlenvektoren umgewandelt werden. <strong>Bag of Words</strong> zählt, wie oft jedes Wort in einem Text vorkommt.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+    'Data Science is great',
+    'Python is great for data',
+    'Machine learning and data science'
+]
+
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(corpus)
+
+print(vectorizer.get_feature_names_out())
+# ['and', 'data', 'for', 'great', 'is', 'learning', 'machine', 'python', 'science']
+
+print(X.toarray())
+# [[0, 1, 0, 1, 1, 0, 0, 0, 1],  ← "Data Science is great"
+#  [0, 1, 1, 1, 1, 0, 0, 1, 0],  ← "Python is great for data"
+#  [1, 1, 0, 0, 0, 1, 1, 0, 1]]  ← "Machine learning and data science"</code></pre>
+    </div>
+
+    <!-- ===== FEATURE SELECTION ===== -->
+    <h2 class="section-title" id="selection">🎯 Feature Selection</h2>
+    <p>Nicht alle Features sind nützlich — irrelevante Features können ein Modell sogar verschlechtern. Feature Selection wählt die relevantesten aus.</p>
+
+    <h3 class="subsection-title">Einfache Feature Selection (manuelle Auswahl)</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Nur bestimmte Spalten behalten
+X = df[['feature_1', 'feature_3', 'feature_5']]
+
+# Korrelation mit Zielvariable — wenig korrelierte Features entfernen
+corr = df.corr()['target'].abs().sort_values(ascending=False)
+print(corr)</code></pre>
+    </div>
+
+    <h3 class="subsection-title">SelectKBest — automatisch die besten k Features</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.feature_selection import SelectKBest, f_classif
+
+# Die besten 5 Features für Klassifikation
+selector = SelectKBest(score_func=f_classif, k=5)
+X_selected = selector.fit_transform(X, y)
+
+print(X_selected.shape)           # → (n_samples, 5)
+print(selector.get_support())     # → [True, False, True, ...]  welche Features</code></pre>
+    </div>
+
+    <!-- ===== FEATURE SCALING ===== -->
+    <h2 class="section-title" id="scaling">⚖️ Feature Scaling</h2>
+    <p>Viele ML-Algorithmen (z.B. kNN, SVM, Gradient Descent) sind empfindlich gegenüber unterschiedlichen Skalen. Alter (0–100) und Gehalt (0–100.000) müssen normiert werden.</p>
+
+    <h3 class="subsection-title">MinMax-Transformation (Normalisierung)</h3>
+    <p>Skaliert alle Werte auf den Bereich [0, 1].</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Formel: x_neu = (x - x_min) / (x_max - x_min)
+# Ergebnis: alle Werte zwischen 0 und 1</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Standardisierung (Z-Score Normalisierung)</h3>
+    <p>Transformiert auf Mittelwert = 0 und Standardabweichung = 1. Robuster bei Ausreißern.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Formel: x_neu = (x - mean) / std
+# Ergebnis: Mittelwert ≈ 0, Std ≈ 1</code></pre>
+    </div>
+
+    <h3 class="subsection-title" id="quantisierung">Quantisierung — Zahlen in Klassen einteilen</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import pandas as pd
+
+# Feste Klassengrößen
+pd.cut(df['alter'], bins=[0, 18, 35, 60, 100],
+       labels=['Kind', 'Jung', 'Mittel', 'Senior'])
+
+# Adaptive Klassengrößen (gleich viele Elemente je Klasse)
+pd.qcut(df['alter'], q=4,
+        labels=['Q1', 'Q2', 'Q3', 'Q4'])</code></pre>
+    </div>
+
+    <!-- Vergleichstabelle Scaling -->
+    <div style="overflow-x:auto;margin:16px 0">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Methode</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Ergebnis</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Wann nutzen?</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:7px 12px;border:1px solid var(--border)"><strong>MinMax</strong></td><td style="padding:7px 12px;border:1px solid var(--border)">[0, 1]</td><td style="padding:7px 12px;border:1px solid var(--border)">Wenn keine starken Ausreißer</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Standard (Z-Score)</strong></td><td style="padding:7px 12px;border:1px solid var(--border)">μ=0, σ=1</td><td style="padding:7px 12px;border:1px solid var(--border)">Standard für die meisten Algorithmen</td></tr>
+          <tr><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Power Transform</strong></td><td style="padding:7px 12px;border:1px solid var(--border)">Annähern an Normalverteilung</td><td style="padding:7px 12px;border:1px solid var(--border)">Bei stark schiefen Verteilungen</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Quantisierung (cut/qcut)</strong></td><td style="padding:7px 12px;border:1px solid var(--border)">Kategorien</td><td style="padding:7px 12px;border:1px solid var(--border)">Zahlen in Gruppen einteilen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>fit_transform vs. transform</strong>
+        <p>Wichtig: <code>fit_transform(X_train)</code> auf Trainingsdaten anwenden — das lernt die Parameter (min, max, mean, std). Auf Testdaten nur <code>transform(X_test)</code> — sonst "schummelt" man mit Testdaten-Wissen!</p>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title">🎯 Selbsttest</h2>
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Data Preparation</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Wann ist One-Hot-Encoding besser als Label-Encoding?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Immer — One-Hot ist immer besser</div>
+          <div class="quiz-option" data-correct="true">Bei nominalen Kategorien ohne Reihenfolge (z.B. Farben, Länder) — Label-Encoding würde falsche Ordnung suggerieren</div>
+          <div class="quiz-option" data-correct="false">Bei sehr vielen Kategorien (über 1000)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was macht <code>StandardScaler</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Skaliert alle Werte auf [0, 1]</div>
+          <div class="quiz-option" data-correct="true">Transformiert auf Mittelwert = 0 und Standardabweichung = 1 (Z-Score)</div>
+          <div class="quiz-option" data-correct="false">Entfernt Ausreißer aus den Daten</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Warum soll man auf Testdaten nur <code>.transform()</code> und nicht <code>.fit_transform()</code> aufrufen?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Weil transform() schneller ist</div>
+          <div class="quiz-option" data-correct="true">Damit keine Information aus den Testdaten in das Scaling-Modell fließt (Data Leakage vermeiden)</div>
+          <div class="quiz-option" data-correct="false">fit_transform() funktioniert nur auf Trainingsdaten technisch</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">4. Was ist Bag of Words?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Eine Methode zum Encodieren von Kategorien in Zahlen</div>
+          <div class="quiz-option" data-correct="true">Eine Methode, die Texte in Wortzähl-Vektoren umwandelt</div>
+          <div class="quiz-option" data-correct="false">Ein Feature-Scaling-Verfahren für Textdaten</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m07"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="07-data-understanding-multivariate.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Data Understanding II</span>
+      </a>
+      <a class="page-nav-btn next" href="09-machine-learning.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Machine Learning Intro</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

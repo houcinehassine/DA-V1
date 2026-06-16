@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item active mod-start" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup & Tools<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Modul 01 – Setup &amp; Tools</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-start" style="--mc:var(--color-start)">
+        <span>🚀</span> Modul 01 · Setup &amp; Tools
+      </div>
+      <h1 class="page-title">Setup &amp; Tools</h1>
+      <p class="page-subtitle">Anaconda, Virtual Environments, JupyterLab, Spyder, PyCharm und Google Colab — alles was du zum Starten brauchst.</p>
+    </div>
+
+    <!-- ===== ANACONDA ===== -->
+    <h2 class="section-title" id="anaconda">🐍 Anaconda installieren</h2>
+
+    <p>Für diesen Kurs nutzen wir <strong>Anaconda</strong> — eine fertige Python-Umgebung mit allen wichtigen Paketen (NumPy, Pandas, Matplotlib u.v.m.) bereits vorinstalliert.</p>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Was ist Anaconda?</strong>
+        <p>Anaconda ist eine Open-Source-Distribution für Python (und R). Sie vereinfacht die Installation und Nutzung von Tools und Packages erheblich — ein „Single Point of Truth" für alle Python-Aktivitäten.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Schritt-für-Schritt Installation</h3>
+    <ol class="content-list" style="list-style:decimal;padding-left:20px">
+      <li><strong>Download:</strong> <code>anaconda.com/products/individual</code> → Version für dein Betriebssystem wählen</li>
+      <li><strong>Installer starten:</strong> Setup-Assistenten folgen, Standard-Optionen belassen</li>
+      <li><strong>Prüfen:</strong> Anaconda Prompt öffnen und eingeben:</li>
+    </ol>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">BASH</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code>python --version
+# Erwartet: Python 3.x.x
+
+conda --version
+# Erwartet: conda 23.x.x</code></pre>
+    </div>
+
+    <!-- ===== VIRTUAL ENVIRONMENTS ===== -->
+    <h2 class="section-title" id="virtualenv">🔒 Virtual Environments</h2>
+
+    <p>Ein <strong>Virtual Environment (VE)</strong> ist eine abgeschlossene, isolierte Python-Umgebung. Es macht Sinn, VEs projekt- oder aufgabenbasiert zu erzeugen — so gibt es kein Chaos zwischen verschiedenen Projekten.</p>
+
+    <div class="info-box tip">
+      <div class="icon">✅</div>
+      <div class="content">
+        <strong>Warum Virtual Environments?</strong>
+        <p>Verschiedene Projekte brauchen manchmal verschiedene Package-Versionen. Ein VE hält diese sauber getrennt — Änderungen in einem Projekt beeinflussen keine anderen.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">VE mit Anaconda Navigator erstellen</h3>
+    <ol class="content-list" style="list-style:decimal;padding-left:20px">
+      <li>Anaconda Navigator öffnen</li>
+      <li>Links auf <strong>„Environments"</strong> klicken</li>
+      <li><strong>„Create"</strong> → Name: <code>data-science-mit-python</code> → Python-Version wählen → OK</li>
+      <li>Das VE ist nach Erzeugung aktiv (grüner Pfeil neben VE)</li>
+      <li>In diesem VE jetzt <strong>Spyder</strong> und <strong>JupyterLab</strong> installieren</li>
+    </ol>
+
+    <h3 class="subsection-title">Packages im VE über das Terminal installieren</h3>
+    <p>Das Anaconda Prompt (Terminal) liegt dem VE zugrunde. Hierüber können Python-Erweiterungen – sogenannte Packages – mittels <code>pip</code> installiert werden:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">BASH</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code># VE aktivieren (falls nicht schon aktiv):
+conda activate data-science-mit-python
+
+# Einzelnes Package installieren:
+pip install numpy
+
+# Mehrere Packages auf einmal:
+pip install pandas matplotlib seaborn plotly scikit-learn</code></pre>
+    </div>
+
+    <!-- ===== JUPYTERLAB ===== -->
+    <h2 class="section-title" id="jupyter">📓 JupyterLab &amp; Jupyter Notebooks</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div class="info-box info" style="margin:0">
+        <div class="icon">📔</div>
+        <div class="content">
+          <strong>Jupyter Notebook</strong>
+          <p>Die klassische webbasierte Umgebung für interaktive Notebooks. Einfache, übersichtliche Oberfläche.</p>
+        </div>
+      </div>
+      <div class="info-box tip" style="margin:0">
+        <div class="icon">🧪</div>
+        <div class="content">
+          <strong>JupyterLab</strong>
+          <p>Die neuere, leistungsfähigere Umgebung — wir nutzen hauptsächlich JupyterLab. Mehr Features, gleiche Notebooks.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Ein Jupyter-Notebook-Dokument ist ein <strong>JSON-Dokument</strong> mit einer Liste von Ein- und Ausgabezellen, die Code, Text und Plots enthalten können.</p>
+
+    <h3 class="subsection-title">JupyterLab starten</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">BASH</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code># Im Anaconda Prompt:
+jupyter lab
+
+# Öffnet den Browser automatisch unter:
+# http://localhost:8888</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Das Interface</h3>
+    <p>Nach dem Start sehen wir den <strong>Launcher</strong>. Hier können neue Notebooks erzeugt werden. Die wichtigsten Interface-Elemente:</p>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Element</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Funktion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Launcher</td><td style="padding:7px 12px;border:1px solid var(--border)">Startseite — neues Notebook erstellen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">File Browser</td><td style="padding:7px 12px;border:1px solid var(--border)">Ordner und Dateien ansehen, Notebooks öffnen</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Run Cell ▶</td><td style="padding:7px 12px;border:1px solid var(--border)">Aktuelle Zelle ausführen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Run Notebook ⏭</td><td style="padding:7px 12px;border:1px solid var(--border)">Alle Zellen der Reihe nach ausführen</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Stop ⏹</td><td style="padding:7px 12px;border:1px solid var(--border)">Ausführung abbrechen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Restart Kernel 🔄</td><td style="padding:7px 12px;border:1px solid var(--border)">Python-Prozess neu starten, alle Variablen löschen</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">Die drei Zell-Typen</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid var(--color-start)">
+        <div style="font-weight:700;margin-bottom:6px">💻 Code</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Python-Code wird hier geschrieben und ist direkt ausführbar. Der Output erscheint direkt darunter.</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid var(--color-py1)">
+        <div style="font-weight:700;margin-bottom:6px">📝 Markdown</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Text, Überschriften, Listen, Formeln (LaTeX). Zum Dokumentieren und Strukturieren des Notebooks.</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid #6b7280">
+        <div style="font-weight:700;margin-bottom:6px">📄 Raw</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Roher Text ohne Formatierung. Wird kaum benötigt.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Wichtige Tastenkürzel</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Kürzel</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Aktion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>Shift + Enter</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Zelle ausführen &amp; nächste wählen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>Ctrl + Enter</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Zelle ausführen (Cursor bleibt)</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>A</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Neue Zelle <em>oberhalb</em> einfügen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>B</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Neue Zelle <em>unterhalb</em> einfügen</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>DD</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Zelle löschen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>M</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Zelle zu Markdown umwandeln</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>Y</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Zelle zu Code umwandeln</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><kbd>0 + 0</kbd></td><td style="padding:7px 12px;border:1px solid var(--border)">Kernel neu starten</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== ERSTES PROGRAMM ===== -->
+    <h2 class="section-title" id="erstes-programm">👋 Das erste Programm</h2>
+
+    <p>Das klassische erste Programm in Python — <code>Hello World!</code>:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">PYTHON</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code>message = "Hello World!"
+print(message)</code></pre>
+      <div class="code-output">
+        <div class="output-label">Output</div>
+        <code>Hello World!</code>
+      </div>
+    </div>
+
+    <p>Was passiert hier?</p>
+    <ul class="content-list">
+      <li><strong><code>message</code></strong> — eine <em>Variable</em>: ein benannter Speicherplatz für einen Wert</li>
+      <li><strong><code>"Hello World!"</code></strong> — ein <em>String</em> (Text), erkennbar an den Anführungszeichen</li>
+      <li><strong><code>print()</code></strong> — eine eingebaute <em>Funktion</em>, die etwas auf dem Bildschirm ausgibt</li>
+    </ul>
+
+    <!-- ===== KERNEL ===== -->
+    <h2 class="section-title" id="kernel">⚙️ Kernel &amp; Ausführungsreihenfolge</h2>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Wichtig: Reihenfolge der Zellen</strong>
+        <p>Jupyter merkt sich alle Variablen im <em>Kernel</em>. Wenn du Zellen in falscher Reihenfolge ausführst, kann es zu Fehlern kommen. Bei Problemen: <strong>Kernel → Restart &amp; Run All</strong>.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">PYTHON</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code># Fehler: Variable heißt "mesage" statt "message" (Tippfehler)
+message = "Hello World!"
+print(mesage)   # NameError!</code></pre>
+      <div class="code-output" style="border-top-color:rgba(239,68,68,0.3)">
+        <div class="output-label" style="color:#ef4444">Fehler</div>
+        <code style="color:#fca5a5">NameError: name 'mesage' is not defined</code>
+      </div>
+    </div>
+
+    <div class="info-box error">
+      <div class="icon">🔴</div>
+      <div class="content">
+        <strong>NameError</strong>
+        <p>Einer der häufigsten Fehler! Python kennt die Variable nicht — meistens ein Tippfehler. Python unterscheidet Groß-/Kleinschreibung: <code>message</code> ≠ <code>Message</code>.</p>
+      </div>
+    </div>
+
+    <!-- ===== KOMMENTARE ===== -->
+    <h2 class="section-title" id="kommentare">💬 Kommentare</h2>
+
+    <p>Kommentare erklären den Code — sie werden von Python ignoriert.</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">PYTHON</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code># Einzeiliger Kommentar mit dem #-Zeichen
+my_variable = 5
+
+def my_function(x):
+    '''
+    Mehrzeiliger Kommentar (Docstring).
+    Wird für Funktionsbeschreibungen genutzt.
+    '''
+    return x ** 2</code></pre>
+    </div>
+
+    <!-- ===== DATEITYPEN ===== -->
+    <h2 class="section-title" id="dateitypen">📁 Dateitypen: .py und .ipynb</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid var(--color-start)">
+        <div style="font-size:18px;margin-bottom:8px">📔 <strong>.ipynb</strong></div>
+        <p style="font-size:13px;margin:0 0 8px;color:var(--text-secondary)">Jupyter Notebook Dateien. Gespeichert im <strong>JSON-Format</strong> — aufgebaut wie ein Dictionary in Python.</p>
+        <ul style="font-size:13px;margin:0;padding-left:18px;color:var(--text-secondary)">
+          <li>Enthält Code, Outputs und Text gemischt</li>
+          <li>Von normalen IDEs oft nicht direkt lesbar</li>
+          <li>Hauptformat für diesen Kurs</li>
+        </ul>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid var(--color-py1)">
+        <div style="font-size:18px;margin-bottom:8px">🐍 <strong>.py</strong></div>
+        <p style="font-size:13px;margin:0 0 8px;color:var(--text-secondary)">Python-Skript-Dateien. Die <strong>originäre Dateiendung</strong> für Python-Programme.</p>
+        <ul style="font-size:13px;margin:0;padding-left:18px;color:var(--text-secondary)">
+          <li>Reiner Python-Code, kein Output gespeichert</li>
+          <li>Von allen Python-IDEs lesbar</li>
+          <li>Für größere Software-Projekte (z.B. in PyCharm)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== WEITERE TOOLS ===== -->
+    <h2 class="section-title" id="tools">🛠️ Weitere Tools: Spyder, PyCharm, Google Colab</h2>
+
+    <p>Neben JupyterLab gibt es weitere Tools — wichtig zu wissen, wann man welches nutzt:</p>
+
+    <div class="info-box tip">
+      <div class="icon">📌</div>
+      <div class="content">
+        <strong>Empfehlung des Professors</strong>
+        <p>Wir nutzen hauptsächlich <strong>JupyterLab</strong>. Für größere Programme steigen wir auf <strong>PyCharm</strong> um. Spyder kann als „zur Vollständigkeit erwähnt" betrachtet werden.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+        <div style="font-weight:700;margin-bottom:6px;font-size:14px">🔬 Spyder</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Wissenschaftliche Python-IDE. Ähnlich wie MATLAB. Gut für direktes Debugging. Wird in diesem Kurs nur selten genutzt.</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+        <div style="font-weight:700;margin-bottom:6px;font-size:14px">⌨️ PyCharm</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Professionelle IDE für Python-Softwareentwicklung. Ideal wenn längere Programme geschrieben werden (z.B. Webapps, APIs).</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px">
+        <div style="font-weight:700;margin-bottom:6px;font-size:14px">☁️ Google Colab</div>
+        <p style="font-size:13px;margin:0;color:var(--text-secondary)">Jupyter Notebooks direkt im Browser — kostenlose Rechenressourcen. <strong>Fallback-Lösung</strong> wenn die lokale Installation Probleme macht.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Was für was?</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Aufgabe</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Tool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Datenanalyse, Exploration, Visualisierung</td><td style="padding:7px 12px;border:1px solid var(--border)"><strong>JupyterLab</strong> ← Haupttool im Kurs</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Größere Python-Programme / Softwareentwicklung</td><td style="padding:7px 12px;border:1px solid var(--border)"><strong>PyCharm</strong></td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Direktes Debugging, Scientific Computing</td><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Spyder</strong></td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Keine lokale Installation möglich</td><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Google Colab</strong> (Fallback)</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title">🎯 Selbsttest</h2>
+
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Setup &amp; Tools</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Welches Tastenkürzel führt eine Zelle aus und springt zur nächsten?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Ctrl + Enter</div>
+          <div class="quiz-option" data-correct="true">Shift + Enter</div>
+          <div class="quiz-option" data-correct="false">Alt + Enter</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was ist ein <strong>Virtual Environment</strong>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Eine virtuelle Maschine für Python</div>
+          <div class="quiz-option" data-correct="true">Eine abgeschlossene, isolierte Python-Umgebung für ein Projekt</div>
+          <div class="quiz-option" data-correct="false">Ein anderer Name für Jupyter Notebooks</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Welcher Zell-Typ in Jupyter wird zum Schreiben von Text, Überschriften und LaTeX-Formeln genutzt?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Code</div>
+          <div class="quiz-option" data-correct="true">Markdown</div>
+          <div class="quiz-option" data-correct="false">Raw</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">4. Welches Tool nutzen wir, wenn wir <strong>größere Python-Programme</strong> entwickeln?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Google Colab</div>
+          <div class="quiz-option" data-correct="false">Spyder</div>
+          <div class="quiz-option" data-correct="true">PyCharm</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">5. Welche Dateiendung haben Jupyter Notebooks?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">.py</div>
+          <div class="quiz-option" data-correct="true">.ipynb</div>
+          <div class="quiz-option" data-correct="false">.json</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m01"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="../index.html">
+        <span class="pnb-label">← Zurück</span>
+        <span class="pnb-title">Dashboard</span>
+      </a>
+      <a class="page-nav-btn next" href="01b-python-einfuehrung.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">01b · Python Einführung</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

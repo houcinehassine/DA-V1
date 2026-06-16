@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Understanding I – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item active mod-du1" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 9 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Modul 06 – Data Understanding I</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-du1" style="--mc:var(--color-du1)">
+        <span>📈</span> Modul 06 · Data Understanding
+      </div>
+      <h1 class="page-title">Data Understanding I: Einzelne Variablen</h1>
+      <p class="page-subtitle">NumPy Arrays, Pandas DataFrames, Daten laden und erkunden — Histogramme, Boxplots und deskriptive Statistik für einzelne Merkmale.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#daten-typen" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Wie können Daten vorliegen?</a>
+        <a href="#numpy" style="font-size:13px;color:var(--color-du1);font-weight:600">→ NumPy Arrays</a>
+        <a href="#pandas" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Pandas DataFrames</a>
+        <a href="#indexing" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Indexing & Slicing</a>
+        <a href="#histogramm" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Histogramme</a>
+        <a href="#boxplot" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Boxplots & Quantile</a>
+        <a href="#statistik" style="font-size:13px;color:var(--color-du1);font-weight:600">→ Deskriptive Statistik</a>
+      </div>
+    </div>
+
+    <!-- ===== DATEN-TYPEN ===== -->
+    <h2 class="section-title" id="daten-typen">📂 Wie können Daten vorliegen?</h2>
+
+    <p>Daten kommen in vielen Formen. Die mathematische Repräsentation ist entscheidend für die Wahl der Analyse.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+      <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">🔢</div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;color:#059669">Numerisch</div>
+        <div style="font-size:12px;color:#065f46">Metrisch oder diskret.<br>Beispiel: Alter, Preis, Temperatur</div>
+      </div>
+      <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">🏷️</div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;color:#1d4ed8">Kategorisch</div>
+        <div style="font-size:12px;color:#1e3a8a">Endliche Klassen.<br>Beispiel: Farbe, Land, Produkttyp</div>
+      </div>
+      <div style="background:#fdf4ff;border:1.5px solid #d8b4fe;border-radius:10px;padding:14px">
+        <div style="font-size:18px;margin-bottom:6px">📅</div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px;color:#9333ea">Zeitreihe</div>
+        <div style="font-size:12px;color:#581c87">Werte mit Zeitbezug.<br>Beispiel: Aktienkurs, Sensordaten</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px;margin:16px 0">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">Mathematische Repräsentation</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:12px">
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-weight:700">Vektor</div>
+          <div style="color:var(--text-secondary)">1 Variable,<br>n Beobachtungen</div>
+          <div style="font-size:10px;margin-top:4px;color:var(--color-du1)">[x₁, x₂, ..., xₙ]</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-weight:700">Matrix</div>
+          <div style="color:var(--text-secondary)">n Beobachtungen,<br>m Variablen</div>
+          <div style="font-size:10px;margin-top:4px;color:var(--color-du1)">n × m</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:8px;text-align:center">
+          <div style="font-weight:700">Tensor</div>
+          <div style="color:var(--text-secondary)">3D+ Daten<br>(z.B. Bilder)</div>
+          <div style="font-size:10px;margin-top:4px;color:var(--color-du1)">n × m × k</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NUMPY ===== -->
+    <h2 class="section-title" id="numpy">🔢 NumPy Arrays (ndarray)</h2>
+
+    <p>NumPy ist das Fundament für numerische Berechnungen in Python. Der zentrale Datentyp ist der <strong>ndarray</strong> (n-dimensionales Array).</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import numpy as np
+
+# Array erstellen
+a = np.array([1, 2, 3, 4, 5])
+print(a)          # → [1 2 3 4 5]
+print(a.shape)    # → (5,)   = 5 Elemente, 1D
+print(a.dtype)    # → int64
+
+# 2D-Array (Matrix)
+matrix = np.array([[1, 2, 3],
+                   [4, 5, 6]])
+print(matrix.shape)   # → (2, 3)  = 2 Zeilen, 3 Spalten
+
+# Nützliche Erstellungsfunktionen
+np.zeros((3, 3))       # 3×3 Matrix mit Nullen
+np.ones((2, 4))        # 2×4 Matrix mit Einsen
+np.arange(0, 10, 2)   # [0, 2, 4, 6, 8]
+np.linspace(0, 1, 5)  # [0.0, 0.25, 0.5, 0.75, 1.0]</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Mathematische Operationen mit Arrays</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>a = np.array([1, 2, 3, 4])
+
+a + 10          # → [11, 12, 13, 14]  (elementweise)
+a * 2           # → [2, 4, 6, 8]
+a ** 2          # → [1, 4, 9, 16]
+
+# Aggregation
+np.sum(a)       # → 10
+np.mean(a)      # → 2.5
+np.std(a)       # → 1.118...
+np.min(a)       # → 1
+np.max(a)       # → 4
+
+# Reshape
+a.reshape(2, 2)     # → [[1, 2], [3, 4]]
+a.reshape(-1, 1)    # → [[1], [2], [3], [4]]  (Spaltenvektor)</code></pre>
+    </div>
+
+    <!-- Coding Yoga NumPy -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: NumPy Arrays</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was ist die Form (<code>.shape</code>) des Ergebnis-Arrays nach <code>reshape</code>?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>a = np.arange(20)
+b = a.reshape(4, -1)
+print(b.shape)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># arange(20) → [0, 1, ..., 19]  → 20 Elemente
+# reshape(4, -1) → 4 Zeilen, -1 bedeutet: "berechne selbst"
+# 20 / 4 = 5 Spalten
+# b.shape → (4, 5)</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANDAS ===== -->
+    <h2 class="section-title" id="pandas">🐼 Pandas DataFrames</h2>
+
+    <p>Pandas ist die Bibliothek für tabellarische Daten. Ein <strong>DataFrame</strong> ist eine Tabelle mit benannten Spalten (wie Excel, aber programmierbar).</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import pandas as pd
+
+# DataFrame aus Dictionary erstellen
+data = {
+    'name':  ['Alice', 'Bob', 'Charlie'],
+    'alter': [25, 30, 35],
+    'stadt': ['München', 'Berlin', 'Hamburg']
+}
+df = pd.DataFrame(data)
+
+# CSV laden (häufigster Anwendungsfall)
+df = pd.read_csv('meine_datei.csv')
+
+# Erste Einblicke
+df.head()        # erste 5 Zeilen
+df.tail(3)       # letzte 3 Zeilen
+df.shape         # (n_zeilen, n_spalten)
+df.info()        # Datentypen, fehlende Werte
+df.describe()    # deskriptive Statistik aller Zahlenspaltens</code></pre>
+    </div>
+
+    <!-- ===== INDEXING ===== -->
+    <h2 class="section-title" id="indexing">🎯 Indexing & Slicing</h2>
+
+    <h3 class="subsection-title">NumPy: Array-Indexing</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>a = np.array([10, 20, 30, 40, 50])
+
+a[0]        # → 10        (erstes Element)
+a[-1]       # → 50        (letztes Element)
+a[1:4]      # → [20,30,40]
+a[::2]      # → [10,30,50] (jedes 2.)
+
+# 2D-Matrix
+m = np.array([[1,2,3],[4,5,6],[7,8,9]])
+m[0, :]     # → [1,2,3]   (erste Zeile)
+m[:, 1]     # → [2,5,8]   (zweite Spalte)
+m[0:2, 0:2] # → [[1,2],[4,5]]  (Teilmatrix)</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Pandas: DataFrame-Indexing</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>df = pd.DataFrame({'A': [1,2,3], 'B': [4,5,6], 'C': [7,8,9]})
+
+# Spalte auswählen
+df['A']             # → Series mit Werten [1,2,3]
+df[['A', 'C']]      # → DataFrame mit Spalten A und C
+
+# .loc: Label-basiert (Name)
+df.loc[0]           # → erste Zeile (Index-Label 0)
+df.loc[0:2, 'A':'B'] # → Zeilen 0–2, Spalten A–B
+
+# .iloc: Position-basiert (Nummer)
+df.iloc[0]          # → erste Zeile
+df.iloc[0:2, 0:2]   # → erste 2 Zeilen, erste 2 Spalten
+
+# Boolean Filtering
+df[df['A'] > 1]     # → nur Zeilen, wo A > 1</code></pre>
+    </div>
+
+    <!-- ===== HISTOGRAMM ===== -->
+    <h2 class="section-title" id="histogramm">📊 Histogramme</h2>
+
+    <p>Ein <strong>Histogramm</strong> zeigt die Verteilung einer numerischen Variable. Die x-Achse zeigt den Wertebereich (in Bins aufgeteilt), die y-Achse die Häufigkeit.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.random.normal(loc=0, scale=1, size=1000)
+
+# Matplotlib
+plt.hist(data, bins=30, color='steelblue', edgecolor='white')
+plt.title('Verteilung der Daten')
+plt.xlabel('Wert')
+plt.ylabel('Häufigkeit')
+plt.show()
+
+# Pandas (noch kürzer)
+df['spalte'].hist(bins=30)</code></pre>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0">
+      <div style="font-weight:700;font-size:13px;margin-bottom:10px">Was erkenne ich im Histogramm?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
+        <div style="background:var(--bg);border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px">⛰️ Normalverteilung</div>
+          <div style="color:var(--text-secondary)">Glockenform, symmetrisch um den Mittelwert</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px">↗️ Rechtsschiefe</div>
+          <div style="color:var(--text-secondary)">Spitze links, langer Schweif rechts (z.B. Einkommen)</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px">🏔️🏔️ Bimodal</div>
+          <div style="color:var(--text-secondary)">Zwei Spitzen — könnten zwei Gruppen sein</div>
+        </div>
+        <div style="background:var(--bg);border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px">➡️ Gleichverteilt</div>
+          <div style="color:var(--text-secondary)">Alle Werte etwa gleich häufig (z.B. Würfel)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BOXPLOT ===== -->
+    <h2 class="section-title" id="boxplot">📦 Boxplots & Quantile</h2>
+
+    <p>Ein <strong>Boxplot</strong> zeigt auf einen Blick: Median, Quartile und Ausreißer einer Variable.</p>
+
+    <!-- Boxplot Erklärung visuell -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px;margin:16px 0">
+      <div style="font-weight:700;font-size:13px;margin-bottom:14px;text-align:center">Aufbau eines Boxplots</div>
+      <svg viewBox="0 0 520 140" style="width:100%;max-width:520px;display:block;margin:0 auto">
+        <!-- Whiskers -->
+        <line x1="60" y1="70" x2="130" y2="70" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="60" y1="55" x2="60" y2="85" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="360" y1="70" x2="460" y2="70" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="460" y1="55" x2="460" y2="85" stroke="#94a3b8" stroke-width="2"/>
+        <!-- Box -->
+        <rect x="130" y="40" width="230" height="60" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+        <!-- Median -->
+        <line x1="255" y1="40" x2="255" y2="100" stroke="#1d4ed8" stroke-width="3"/>
+        <!-- Ausreißer -->
+        <circle cx="500" cy="70" r="5" fill="none" stroke="#ef4444" stroke-width="2"/>
+        <!-- Labels -->
+        <text x="60" y="120" text-anchor="middle" font-size="11" fill="#64748b">Min</text>
+        <text x="130" y="120" text-anchor="middle" font-size="11" fill="#64748b">Q1 (25%)</text>
+        <text x="255" y="120" text-anchor="middle" font-size="11" fill="#1d4ed8" font-weight="700">Median (Q2)</text>
+        <text x="360" y="120" text-anchor="middle" font-size="11" fill="#64748b">Q3 (75%)</text>
+        <text x="460" y="120" text-anchor="middle" font-size="11" fill="#64748b">Max</text>
+        <text x="500" y="120" text-anchor="middle" font-size="11" fill="#ef4444">Ausreißer</text>
+        <!-- IQR Label -->
+        <text x="245" y="28" text-anchor="middle" font-size="11" fill="#3b82f6">← IQR (Interquartilsabstand) →</text>
+      </svg>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import pandas as pd
+
+# Quantile berechnen
+data = pd.Series([3, 7, 8, 5, 12, 14, 21, 13, 18])
+
+q1 = data.quantile(0.25)   # erstes Quartil (25%)
+q2 = data.quantile(0.50)   # Median (50%)
+q3 = data.quantile(0.75)   # drittes Quartil (75%)
+iqr = q3 - q1              # Interquartilsabstand
+
+print(f"Q1: {q1}, Median: {q2}, Q3: {q3}, IQR: {iqr}")
+
+# Boxplot zeichnen
+import matplotlib.pyplot as plt
+plt.boxplot(data)
+plt.show()
+
+# Für DataFrame (mehrere Spalten)
+df.boxplot(column=['spalte1', 'spalte2'])</code></pre>
+    </div>
+
+    <!-- ===== DESKRIPTIVE STATISTIK ===== -->
+    <h2 class="section-title" id="statistik">📐 Deskriptive Statistik</h2>
+
+    <p>Die <code>describe()</code>-Methode liefert die wichtigsten Kennzahlen auf einen Schlag.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>df.describe()
+
+#        spalte1    spalte2
+# count    100.0      100.0    ← Anzahl Werte
+# mean      55.3       12.1    ← Mittelwert
+# std       18.2        5.4    ← Standardabweichung
+# min        5.0        2.0    ← Minimum
+# 25%       42.0        8.0    ← 1. Quartil
+# 50%       56.0       11.5    ← Median
+# 75%       69.0       16.0    ← 3. Quartil
+# max      100.0       25.0    ← Maximum</code></pre>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px">Lagemaße</div>
+        <ul style="padding-left:16px;font-size:12px;color:var(--text-secondary)">
+          <li><strong>Mittelwert (mean)</strong> — Durchschnitt aller Werte</li>
+          <li><strong>Median (50%)</strong> — Mittlerer Wert (robust gegenüber Ausreißern)</li>
+          <li><strong>Modus</strong> — häufigster Wert</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px">Streuungsmaße</div>
+        <ul style="padding-left:16px;font-size:12px;color:var(--text-secondary)">
+          <li><strong>Standardabweichung (std)</strong> — durchschnittl. Abstand vom Mittelwert</li>
+          <li><strong>Varianz</strong> — std² (quadratisch)</li>
+          <li><strong>IQR</strong> — Abstand Q3−Q1 (robust)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Mittelwert vs. Median</strong>
+        <p>Bei schiefen Verteilungen oder Ausreißern ist der <strong>Median</strong> aussagekräftiger. Beispiel: Durchschnittseinkommen wird durch wenige Superreiche verzerrt — der Median zeigt besser, was "typisch" ist.</p>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title">🎯 Selbsttest</h2>
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Data Understanding I</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Was gibt <code>df.shape</code> zurück?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Die Anzahl der Spalten</div>
+          <div class="quiz-option" data-correct="true">Ein Tuple (Anzahl Zeilen, Anzahl Spalten)</div>
+          <div class="quiz-option" data-correct="false">Die Datentypen jeder Spalte</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was ist der Unterschied zwischen <code>.loc</code> und <code>.iloc</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Kein Unterschied</div>
+          <div class="quiz-option" data-correct="true"><code>.loc</code> nutzt Label-Namen, <code>.iloc</code> nutzt numerische Position</div>
+          <div class="quiz-option" data-correct="false"><code>.iloc</code> nutzt Label-Namen, <code>.loc</code> nutzt Position</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Ein Boxplot zeigt einen sehr langen rechten Whisker. Was deutet das an?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Die Daten sind normalverteilt</div>
+          <div class="quiz-option" data-correct="true">Es gibt Ausreißer oder eine rechtsschiefe Verteilung (hohe Extremwerte)</div>
+          <div class="quiz-option" data-correct="false">Der Median ist sehr groß</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">4. Warum ist der Median bei Einkommensdaten aussagekräftiger als der Mittelwert?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Weil er einfacher zu berechnen ist</div>
+          <div class="quiz-option" data-correct="true">Weil er robust gegenüber Ausreißern ist — wenige Superreiche verzerren den Mittelwert stark</div>
+          <div class="quiz-option" data-correct="false">Weil er immer größer als der Mittelwert ist</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m06a"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="05-data-science-prozess.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Data Science Prozess</span>
+      </a>
+      <a class="page-nav-btn next" href="07-data-understanding-multivariate.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Data Understanding II</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

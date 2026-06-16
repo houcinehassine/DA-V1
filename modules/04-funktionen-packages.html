@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funktionen & Packages – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active mod-py3" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Modul 04 – Funktionen & Packages</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-py3" style="--mc:var(--color-py3)">
+        <span>⚙️</span> Modul 04 · Python Crashkurs
+      </div>
+      <h1 class="page-title">Funktionen & Packages</h1>
+      <p class="page-subtitle">Eigene Funktionen schreiben, Lambda-Funktionen und den Einsatz von Paketen wie NumPy und Pandas — die Werkzeuge der Datenwissenschaft.</p>
+    </div>
+
+    <!-- Inhaltsübersicht -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte dieses Moduls</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#warum" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Warum Funktionen?</a>
+        <a href="#def" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Funktionen definieren (def)</a>
+        <a href="#vier-formen" style="font-size:13px;color:var(--color-py3);font-weight:600">→ 4 Formen von Funktionen</a>
+        <a href="#argumente" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Positional / Keyword / Default</a>
+        <a href="#return" style="font-size:13px;color:var(--color-py3);font-weight:600">→ return & mehrere Rückgabewerte</a>
+        <a href="#topdown" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Top-Down Prinzip</a>
+        <a href="#lambda" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Lambda-Funktionen</a>
+        <a href="#filter-map" style="font-size:13px;color:var(--color-py3);font-weight:600">→ filter() & map()</a>
+        <a href="#packages" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Module & Packages</a>
+        <a href="#quiz" style="font-size:13px;color:var(--color-py3);font-weight:600">→ Selbsttest</a>
+      </div>
+    </div>
+
+    <!-- ===== WARUM FUNKTIONEN? ===== -->
+    <h2 class="section-title" id="warum">💡 Warum Funktionen?</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">𝑦 = 𝑓(𝑥)</div>
+        <div style="font-size:12px;color:var(--text-muted)">Mathematisch:<br>x = Eingabewert, f = Funktion, y = Ausgabewert</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px;text-align:center">
+        <div style="font-size:13px;font-weight:600;color:var(--color-py3);margin-bottom:8px">In Python:</div>
+        <div style="font-family:monospace;font-size:13px;color:var(--text-primary)">input → <strong>function</strong> → output</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:6px"><code>result = my_function(argument)</code></div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">⭐</div>
+      <div class="content">
+        <strong>Store and Reuse — einmal schreiben, immer wieder nutzen</strong>
+        <p>
+          <em>"Wenn man öfter denselben Code schreibt → Funktion."</em><br>
+          <em>"Sobald du etwas mehr als drei mal schreiben musst → mache eine Funktion daraus."</em><br>
+          <em>"Functions make your program easier to write, read, test and fix."</em>
+        </p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Built-in vs. selbst definierte Funktionen</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:6px">Built-in Funktionen (bereits in Python)</div>
+        <div style="font-size:12px;color:var(--text-secondary);font-family:monospace;line-height:1.8">
+          print() &nbsp; input() &nbsp; int()<br>
+          float() &nbsp; str() &nbsp; len()<br>
+          max() &nbsp; min() &nbsp; sum() &nbsp; type()
+        </div>
+        <div style="font-size:11px;color:#dc2626;margin-top:8px;font-weight:600">⚠️ Diese Namen NICHT für eigene Funktionen verwenden — sie sind reserved words!</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:6px">Selbst definierte Funktionen</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span></div>
+          <pre><code>def my_function(x):
+    return x ** 2
+
+my_function(5)   # → 25</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DEF ===== -->
+    <h2 class="section-title" id="def">🔧 Funktionen definieren — def</h2>
+
+    <p>Mit dem Schlüsselwort <strong><code>def</code></strong> definiert man eine eigene Funktion. Funktionsaufrufe nennt man auch <strong>Calls</strong> oder <strong>Invokes</strong> — sie werden durch runde Klammern <code>()</code> bewirkt.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>def greet_user(user_name):
+    """Diese Funktion begrüßt den Nutzer."""
+    print(f"Hallo {user_name.title()}, wie geht es Dir?")
+
+greet_user("markus")   # ← dies ist ein "Call" (Funktionsaufruf)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Hallo Markus, wie geht es Dir?</code></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--color-py3);margin-bottom:5px">def</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Schlüsselwort: "definiere eine Funktion"</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--color-py3);margin-bottom:5px">Parameter</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Eingabewerte in den Klammern</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--color-py3);margin-bottom:5px">Docstring</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Beschreibung in <code>"""..."""</code> — guter Stil!</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Professioneller Docstring-Stil</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>def some_function(input_argument_1, input_argument_2):
+    """
+    Hier beschreibt man kurz den Sinn und Zweck der Funktion.
+    :param input_argument_1: Was dieser Parameter bedeutet.
+    :param input_argument_2: Was dieser Parameter bedeutet.
+    :return: Was die Funktion zurückgibt.
+    """
+    return_value = input_argument_1 ** input_argument_2
+    return return_value
+
+result = some_function(2, 3)
+print(result)   # → 8</code></pre>
+    </div>
+
+    <!-- ===== 4 FORMEN ===== -->
+    <h2 class="section-title" id="vier-formen">📋 Die 4 Möglichkeiten von Funktionen</h2>
+
+    <p>Funktionen können mit oder ohne Eingabe- und Ausgabeparameter definiert werden. Alle 4 Kombinationen sind gültig:</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+
+      <div style="background:var(--surface);border:1.5px solid var(--color-py3);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py3);margin-bottom:8px">① Mit Ein- UND Ausgabeargumenten</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def square(x):
+    return x ** 2
+
+result = square(5)   # → 25</code></pre>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px">② Mit Eingabe, OHNE Ausgabe (kein return)</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def greet(name):
+    print(f"Hallo {name}!")
+    # kein return → gibt None zurück
+
+greet("Max")   # → Hallo Max!</code></pre>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px">③ OHNE Eingabe, MIT Ausgabe</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+def simulate_dice():
+    return np.random.randint(1, 7)
+
+wurf = simulate_dice()   # → z.B. 4</code></pre>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px">④ OHNE Ein- UND Ausgabeargumente</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def hello_world():
+    print("Hello world!")
+
+hello_world()   # → Hello world!</code></pre>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== ARGUMENTE ===== -->
+    <h2 class="section-title" id="argumente">📌 Argumenttypen</h2>
+
+    <h3 class="subsection-title">1. Positional Arguments — Reihenfolge zählt</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>def describe_pet(animal_type, pet_name):
+    print(f"I have a {animal_type}.")
+    print(f"My {animal_type}'s name is {pet_name}.")
+
+describe_pet('hamster', 'Larry')   # ✅ Richtig
+describe_pet('Larry', 'hamster')   # ⚠️ Falsche Reihenfolge!</code></pre>
+      <div class="code-output"><div class="output-label">Output (1. Aufruf)</div><code>I have a hamster.
+My hamster's name is Larry.</code></div>
+    </div>
+
+    <h3 class="subsection-title">2. Keyword Arguments — Name egal, Position egal</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>describe_pet(animal_type='fish', pet_name='Nemo')
+describe_pet(pet_name='Nemo', animal_type='fish')   # gleicher Output</code></pre>
+    </div>
+
+    <h3 class="subsection-title">3. Default Values — optionale Parameter</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>def describe_pet(pet_name, animal_type='dog'):   # 'dog' ist der Standard
+    print(f"I have a {animal_type}.")
+    print(f"My {animal_type}'s name is {pet_name}.")
+
+describe_pet('Larry')             # → I have a dog. My dog's name is Larry.
+describe_pet('Larry', 'hamster')  # → I have a hamster. ...</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Reihenfolge der Parameter</strong>
+        <p>Parameter <strong>ohne</strong> Default-Wert müssen <strong>vor</strong> Parametern <strong>mit</strong> Default-Wert stehen: <code>def f(a, b, c=1, d=2)</code><br>
+        Aufruf <code>f(10, c, d)</code> mit <code>c=11, d=12</code>: <code>a=10, b=11, c=12, d=2</code> → gibt <code>10 11 12 2</code> aus.</p>
+      </div>
+    </div>
+
+    <!-- ===== RETURN ===== -->
+    <h2 class="section-title" id="return">↩️ return & mehrere Rückgabewerte</h2>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>def some_descriptive_statistics(values):
+    """Berechnet Mittelwert und Varianz einer Werteliste."""
+    mean = sum(values) / len(values)
+    variance = sum((v - mean) ** 2 for v in values) / len(values)
+    return mean, variance   # gibt ZWEI Werte zurück (als Tuple)
+
+# Mehrere Rückgabewerte entpacken:
+mean, var = some_descriptive_statistics([1, 3, 5, 3, 2, 5, 7, 8])
+print(f"Mittelwert: {mean}")
+print(f"Varianz:    {var}")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Mittelwert: 4.25
+Varianz:    4.1875</code></div>
+    </div>
+
+    <!-- Coding Yoga Funktionen 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Funktionen I — verschachtelte Aufrufe</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(magic(magic(1, 2), magic(2, 2)))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def magic(x, y):
+    return x ** y + 1
+
+print(magic(magic(1, 2), magic(2, 2)))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># magic(1, 2) = 1**2 + 1 = 2
+# magic(2, 2) = 2**2 + 1 = 5
+# magic(2, 5) = 2**5 + 1 = 33
+# Ergebnis: 33</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga Funktionen 2 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Funktionen II — while + pop()</span>
+        <span class="yoga-badge">Fortgeschritten</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(crazy([1, 2, 3, 4, 5], False))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def crazy(some_list, true):
+    while true - 1:
+        some_list.pop()
+        if len(some_list) == 2:
+            true = True
+    return sum(some_list)
+
+print(crazy([1, 2, 3, 4, 5], False))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># true=False → False-1 = -1 (truthy) → Schleife läuft
+# pop() → [1,2,3,4], len=4 ≠ 2 → weiter
+# pop() → [1,2,3],   len=3 ≠ 2 → weiter
+# pop() → [1,2],     len=2 == 2 → true = True
+# while True-1 = 0 (falsy) → STOP
+# return sum([1, 2]) = 3
+# Ergebnis: 3</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga Funktionen 3 — func_dict -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Funktionen III — Funktionen als Werte</span>
+        <span class="yoga-badge">Fortgeschritten</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(a + b + c)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def add(a, b): return a + b
+def mult(a, b): return a * b
+
+func_dict = {0: add, 1: mult}   # Funktionen als Dictionary-Werte!
+
+a = func_dict[0](1, 2)
+b = func_dict[1](2, 3)
+c = func_dict[0](a, b)
+print(a + b + c)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># func_dict[0] = add, func_dict[1] = mult
+# a = add(1, 2) = 3
+# b = mult(2, 3) = 6
+# c = add(3, 6) = 9
+# a + b + c = 3 + 6 + 9 = 18
+# Ergebnis: 18
+#
+# Wichtig: In Python sind Funktionen "First-Class Objects" —
+# sie können in Listen, Dictionaries und als Argumente übergeben werden!</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TOP-DOWN ===== -->
+    <h2 class="section-title" id="topdown">🏗️ Top-Down Prinzip & Code-Organisation</h2>
+
+    <div class="info-box info">
+      <div class="icon">📐</div>
+      <div class="content">
+        <strong>Top-Down Prinzip</strong>
+        <p>Wenn Code zu lang oder zu komplex wird: in kleinste, logische Teile herunterbrechen und für jeden Teil eine Funktion schreiben. Strukturiere deinen Code in Paragraphen — dabei helfen Kommentare und Funktionen.</p>
+      </div>
+    </div>
+
+    <ul class="content-list">
+      <li>Wenn man öfter denselben Code schreibt → <strong>Funktion</strong></li>
+      <li>Sobald etwas mehr als <strong>3 Mal</strong> geschrieben wird → Funktion daraus machen</li>
+      <li>Lange Funktionen (>20 Zeilen) → in kleinere Funktionen aufteilen</li>
+      <li>Viele Funktionen → in <strong>Modules</strong> (= .py-Dateien) organisieren</li>
+      <li>Viele Modules → in <strong>Packages</strong> (= Ordner) organisieren</li>
+    </ul>
+
+    <!-- ===== LAMBDA ===== -->
+    <h2 class="section-title" id="lambda">⚡ Lambda-Funktionen</h2>
+
+    <p>Eine <strong>Lambda-Funktion</strong> ist eine anonyme (namenlose) Einzeilen-Funktion. Lambda-Funktionen werden normalerweise als Argument für <strong>Higher-Order Functions</strong> (wie <code>filter()</code>, <code>map()</code>, <code>sorted()</code>) verwendet.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px">Normale Funktion</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>def quad(x):
+    return x ** 2
+
+quad(5)   # → 25</code></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:6px">⭐ Lambda</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>quad = lambda x: x ** 2
+
+quad(5)   # → 25</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">📐</div>
+      <div class="content">
+        <strong>Syntax: <code>lambda parameter: ausdruck</code></strong>
+        <p>Kein <code>def</code>, kein <code>return</code>, kein Funktionsname nötig. Lambda gibt den Ausdruck automatisch zurück. Für mehrere Parameter: <code>lambda x, y: x + y</code></p>
+      </div>
+    </div>
+
+    <!-- ===== FILTER & MAP ===== -->
+    <h2 class="section-title" id="filter-map">🔍 filter() & map()</h2>
+
+    <p>Diese eingebauten Higher-Order Functions arbeiten perfekt mit Lambdas zusammen, um Listen zu verarbeiten.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>my_list = [1, 5, 4, 6, 8, 11, 3, 12]
+
+# filter(): Behalte nur Elemente, für die die Funktion True zurückgibt
+even = list(filter(lambda x: x % 2 == 0, my_list))
+print(even)    # → [4, 6, 8, 12]
+
+# map(): Wende Funktion auf jedes Element an → neue Liste
+doubled = list(map(lambda x: x * 2, my_list))
+print(doubled) # → [2, 10, 8, 12, 16, 22, 6, 24]</code></pre>
+    </div>
+
+    <!-- Coding Yoga Lambda 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Lambda + filter + map</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sick)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>i_feel_cold = [100, 112, 114]
+sick = list(filter(lambda x: x > 39,
+                   map(lambda x: x / 2 - 16, i_feel_cold)))
+print(sick)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># map(lambda x: x/2 - 16, [100, 112, 114])
+#   → [34.0, 40.0, 41.0]   (ungefähre Fahrenheit→Celsius Formel)
+# filter(lambda x: x > 39, [34.0, 40.0, 41.0])
+#   → [40.0, 41.0]   (Fieber!)
+# Ergebnis: [40.0, 41.0]</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga Lambda 2 — weird_list -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Lambda in einer Liste</span>
+        <span class="yoga-badge">Fortgeschritten</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sum(my_list))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>weird_list = [
+    lambda x: (x % 2 == 0),
+    lambda x: x % 3
+]
+not_so_weird_list = [1, 2, 3, 4, 5]
+my_list = []
+for strange in weird_list:
+    for item in filter(strange, not_so_weird_list):
+        my_list.append(item)
+print(sum(my_list))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># Lambda 1: x % 2 == 0  → gerade Zahlen
+#   filter über [1,2,3,4,5] → [2, 4]  → my_list += [2, 4]
+# Lambda 2: x % 3       → Zahlen bei denen Rest ≠ 0 (truthy)
+#   filter über [1,2,3,4,5] → [1, 2, 4, 5]  → my_list += [1,2,4,5]
+# my_list = [2, 4, 1, 2, 4, 5]
+# sum([2, 4, 1, 2, 4, 5]) = 18
+# Ergebnis: 18</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PACKAGES ===== -->
+    <h2 class="section-title" id="packages">📦 Module & Packages</h2>
+
+    <h3 class="subsection-title">Definitionen</h3>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:14px 0">
+      <p style="font-size:13px;margin:0 0 10px 0"><strong>Module</strong> — jede Python-Datei ist ein Modul:</p>
+      <p style="font-size:12px;color:var(--text-secondary);font-style:italic;margin:0 0 12px 0">"Any Python file is a module, its name being the file's base name without the .py extension."</p>
+      <p style="font-size:13px;margin:0 0 10px 0"><strong>Package</strong> — ein Ordner mit Modulen:</p>
+      <p style="font-size:12px;color:var(--text-secondary);font-style:italic;margin:0">"A package is a collection of Python modules: while a module is a single Python file, a package is a directory of Python modules containing an additional <code>__init__.py</code> file."</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py3);margin-bottom:5px">Funktionen</div>
+        <div style="font-size:11px;color:var(--text-secondary)">viele Funktionen → in .py-Datei</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py3);margin-bottom:5px">Modul (.py)</div>
+        <div style="font-size:11px;color:var(--text-secondary)">viele Module → in Ordner</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--color-py3);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py3);margin-bottom:5px">Package (Ordner)</div>
+        <div style="font-size:11px;color:var(--text-secondary)">+ <code>__init__.py</code></div>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">📁</div>
+      <div class="content">
+        <strong>Module-Pfade: Punkte statt Slashes</strong>
+        <p>Module entsprechen der Ordnerstruktur — nur mit Punkten statt Slashes:<br>
+        <code>numpy.random.randint</code> = <code>numpy/random/randint</code><br>
+        <code>import numpy.random as rand</code> → importiert das Untermodul <code>random</code> aus dem Package <code>numpy</code></p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">pip & PyPI — Packages installieren</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">TERMINAL</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Im Terminal: pip greift auf PyPI (Python Package Index) zu
+pip install numpy pandas matplotlib seaborn plotly scikit-learn
+
+# Im Jupyter Notebook: mit ! vorangestellt (Shell-Befehl)
+!pip install seaborn</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>PyPI — Python Package Index</strong>
+        <p><code>pip</code> lädt Packages aus dem <strong>PyPI</strong> (pypi.org) herunter — dem offiziellen Repository für Python-Packages. Über 500.000 Packages sind dort verfügbar. Das <code>!</code> im Notebook sagt Jupyter: "führe dies als Shell-Befehl aus".</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">4 Import-Stile</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Stil 1: Ganzes Paket importieren (langer Name)
+import numpy
+numpy.random.randint(1, 6)
+
+# Stil 2: Mit Alias ⭐ (empfohlen — Standard in Data Science)
+import numpy as np
+import pandas as pd
+np.random.randint(1, 6)
+
+# Stil 3: Nur bestimmte Funktion importieren
+from numpy import random
+random.randint(1, 6)
+
+# Stil 4: Paket-Untermodul mit Alias
+import numpy.random as rand
+rand.randint(1, 6)</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">⭐</div>
+      <div class="content">
+        <strong>Standard-Aliases in Data Science</strong>
+        <p>Diese Kürzel sind Konvention — alle Data Scientists weltweit nutzen sie so:</p>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Paket</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Import</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Verwendung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><strong>NumPy</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>import numpy as np</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Arrays, Matrizen, Mathematik</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Pandas</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>import pandas as pd</code></td><td style="padding:7px 12px;border:1px solid var(--border)">DataFrames, CSV laden, Datenanalyse</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Matplotlib</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>import matplotlib.pyplot as plt</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Grundlegende Plots</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Seaborn</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>import seaborn as sns</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Statistische Visualisierungen</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Plotly</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>import plotly.express as px</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Interaktive Visualisierungen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><strong>Scikit-learn</strong></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>from sklearn.xxx import Yyy</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Machine Learning Modelle</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title" id="quiz">🎯 Selbsttest</h2>
+
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Funktionen & Packages</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Was gibt <code>func(10, c, d)</code> aus, wenn <code>c=11, d=12</code> und <code>def func(a, b, c=1, d=2)</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">10 11 12 12</div>
+          <div class="quiz-option" data-correct="true">10 11 12 2</div>
+          <div class="quiz-option" data-correct="false">10 12 11 2</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was ist der Standard-Alias für Pandas?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">import pandas as p</div>
+          <div class="quiz-option" data-correct="true">import pandas as pd</div>
+          <div class="quiz-option" data-correct="false">import pandas as pan</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Was macht <code>filter()</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Wendet eine Funktion auf jedes Element an und gibt neue Werte zurück</div>
+          <div class="quiz-option" data-correct="true">Behält nur Elemente, für die die Funktion True zurückgibt</div>
+          <div class="quiz-option" data-correct="false">Sortiert eine Liste nach einem Kriterium</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">4. Was ist der Unterschied zwischen <code>lambda x: x*2</code> und einer normalen Funktion?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Lambda ist schneller als def</div>
+          <div class="quiz-option" data-correct="false">Lambda kann mehrere return-Werte haben</div>
+          <div class="quiz-option" data-correct="true">Lambda ist anonym und auf einen Ausdruck beschränkt — kein Name, kein return nötig</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">5. Was ist ein Python Package?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Eine einzelne .py-Datei mit Funktionen</div>
+          <div class="quiz-option" data-correct="true">Ein Ordner mit Python-Modulen und einer __init__.py Datei</div>
+          <div class="quiz-option" data-correct="false">Eine Funktion die andere Funktionen enthält</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">6. Welches Package fehlt in der Standard-Alias-Liste: np, pd, plt, sns, px?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">scipy (als sc)</div>
+          <div class="quiz-option" data-correct="true">Plotly (als px — import plotly.express as px)</div>
+          <div class="quiz-option" data-correct="false">sklearn (als sk)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">7. Wie installiert man ein Package direkt im Jupyter Notebook?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">install seaborn</div>
+          <div class="quiz-option" data-correct="false">pip install seaborn</div>
+          <div class="quiz-option" data-correct="true">!pip install seaborn (mit ! für Shell-Befehl)</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- Erledigt-Button -->
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m04"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="03-loops-conditions.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Loops & Conditions</span>
+      </a>
+      <a class="page-nav-btn next" href="05-data-science-prozess.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Data Science Prozess</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Einführung – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active mod-start" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Modul 01b – Python Einführung</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-start" style="--mc:var(--color-start)">
+        <span>🐍</span> Modul 01b · Python Einführung
+      </div>
+      <h1 class="page-title">Was ist Data Science? Warum Python?</h1>
+      <p class="page-subtitle">Hintergrundwissen zu Python, Data Science, Coding-Prinzipien und empfohlene Literatur.</p>
+    </div>
+
+    <!-- ===== WAS IST DATA SCIENCE ===== -->
+    <h2 class="section-title" id="datascience">🔭 Was ist Data Science?</h2>
+
+    <p>Data Science ist kein reines Programmier-Fach. Um echte Probleme zu lösen, braucht man fundiertes Wissen in <strong>drei Bereichen</strong>:</p>
+
+    <!-- Venn-Diagramm als SVG -->
+    <div style="text-align:center;margin:24px 0">
+      <svg viewBox="0 0 420 280" width="100%" style="max-width:420px" xmlns="http://www.w3.org/2000/svg">
+        <!-- Kreis 1: Programmierung -->
+        <circle cx="160" cy="130" r="110" fill="#3b82f6" fill-opacity="0.18" stroke="#3b82f6" stroke-width="2"/>
+        <!-- Kreis 2: Mathematik/Statistik -->
+        <circle cx="260" cy="130" r="110" fill="#8b5cf6" fill-opacity="0.18" stroke="#8b5cf6" stroke-width="2"/>
+        <!-- Kreis 3: Domäne -->
+        <circle cx="210" cy="195" r="110" fill="#10b981" fill-opacity="0.18" stroke="#10b981" stroke-width="2"/>
+        <!-- Labels -->
+        <text x="100" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#1d4ed8">Programmierung</text>
+        <text x="320" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">Mathematik /</text>
+        <text x="320" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">Statistik</text>
+        <text x="210" y="268" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">Domänenwissen</text>
+        <!-- Mitte: Data Science -->
+        <text x="210" y="152" text-anchor="middle" font-size="14" font-weight="900" fill="#1e293b">Data</text>
+        <text x="210" y="168" text-anchor="middle" font-size="14" font-weight="900" fill="#1e293b">Science</text>
+      </svg>
+    </div>
+
+    <ul class="content-list">
+      <li><strong>Programmierung</strong> — Code schreiben, Daten verarbeiten, Modelle implementieren</li>
+      <li><strong>Mathematik / Statistik</strong> — Algorithmen verstehen, Ergebnisse korrekt interpretieren</li>
+      <li><strong>Domänenwissen</strong> — Wissen was die Zahlen <em>bedeuten</em>, richtige Fragen stellen</li>
+    </ul>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Um vom BuzzWord-Bingo wegzukommen</strong>
+        <p>Data Science ohne alle drei Bereiche führt zu falschen Schlüssen. Nur wer alle drei kombiniert, kann echten Mehrwert schaffen.</p>
+      </div>
+    </div>
+
+    <!-- ===== WARUM PYTHON ===== -->
+    <h2 class="section-title" id="warum-python">🤔 Why Python?</h2>
+
+    <p>Python ist die meistgenutzte Programmiersprache im Data Science Bereich — aber warum?</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #3b82f6">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">🌍 Sehr populär</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Unter den Top-3 Programmiersprachen weltweit. Riesige Community — „StackOverflow your problem".</p>
+      </div>
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #8b5cf6">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">⚡ Sehr effizient</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">„Do more in fewer lines of code" — Python ist deutlich kürzer als Java oder C++.</p>
+      </div>
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #10b981">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">✍️ Clean Code</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">„Easy to read, debug, extend" — Python-Code liest sich fast wie Englisch.</p>
+      </div>
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #f59e0b">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">📦 Riesiges Ökosystem</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Zu (fast) jedem Thema gibt es ein Package: NumPy, Pandas, TensorFlow, FastAPI, Django …</p>
+      </div>
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #ef4444">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">🎓 Leicht zu lernen</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Ideal als erste Programmiersprache. Einfache Syntax, keine komplizierten Typendeklarationen.</p>
+      </div>
+      <div style="padding:14px;border:1px solid var(--border);border-radius:8px;border-left:3px solid #06b6d4">
+        <div style="font-weight:700;margin-bottom:4px;font-size:13px">🖥️ Cross-Platform &amp; Open Source</div>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Läuft auf Windows, Mac und Linux gleich. Kostenlos, keine Lizenz nötig.</p>
+      </div>
+    </div>
+
+    <!-- ===== PYTHON GESCHICHTE ===== -->
+    <h2 class="section-title" id="geschichte">📅 Python: Ein kurzer Blick zurück</h2>
+
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:0;margin:16px 0">
+      <div style="display:flex;flex-direction:column;align-items:center;margin-right:16px">
+        <div style="width:12px;height:12px;border-radius:50%;background:#3b82f6;margin-top:4px"></div>
+        <div style="width:2px;flex:1;background:var(--border)"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#8b5cf6;margin-top:0"></div>
+        <div style="width:2px;flex:1;background:var(--border)"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;margin-top:0"></div>
+        <div style="width:2px;flex:1;background:var(--border)"></div>
+        <div style="width:12px;height:12px;border-radius:50%;background:#10b981;margin-top:0"></div>
+      </div>
+      <div>
+        <div style="padding:12px 0 16px">
+          <div style="font-weight:700;font-size:13px">🐣 1989 / 1991 — Entstehung</div>
+          <p style="font-size:13px;margin:4px 0 0;color:var(--text-secondary)">Guido van Rossum entwickelt Python in den Niederlanden. Ziele: Einfachheit, Lesbarkeit, General Purpose.</p>
+        </div>
+        <div style="padding:12px 0 16px">
+          <div style="font-weight:700;font-size:13px">🔀 Python 2 vs. Python 3</div>
+          <p style="font-size:13px;margin:4px 0 0;color:var(--text-secondary)">Lange Zeit existierten zwei Versionen parallel. Python 2.x und Python 3.x waren <em>nicht vollständig kompatibel</em>.</p>
+        </div>
+        <div style="padding:12px 0 16px">
+          <div style="font-weight:700;font-size:13px">⚰️ 01.01.2020 — Python 2 End of Life</div>
+          <p style="font-size:13px;margin:4px 0 0;color:var(--text-secondary)">Python 2 wird nicht mehr gepflegt. Wir nutzen ausschließlich <strong>Python 3</strong>.</p>
+        </div>
+        <div style="padding:12px 0 0">
+          <div style="font-weight:700;font-size:13px">🚀 Heute — Standard im Data Science</div>
+          <p style="font-size:13px;margin:4px 0 0;color:var(--text-secondary)">Python ist die dominierende Sprache für ML, AI und Data Science. Wir nutzen Python 3.x.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Python ist flexibel — nutzbar als Scripting-Sprache, prozedurale Sprache und objektorientierte Sprache. Es ist eine <strong>Very-High-Level Programmiersprache</strong>.</p>
+
+    <!-- ===== ZEN OF PYTHON ===== -->
+    <h2 class="section-title" id="zen">🧘 Zen of Python</h2>
+
+    <p>Der „Zen of Python" ist eine Sammlung von <strong>19 Designprinzipien</strong> für Python-Programmierung. Du kannst ihn direkt in Python ausgeben:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">PYTHON</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code>import this</code></pre>
+      <div class="code-output">
+        <div class="output-label">Output (Auszug)</div>
+        <code style="white-space:pre-line">Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Readability counts.
+There should be one obvious way to do it.
+If the implementation is hard to explain, it's a bad idea.</code>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">🌟</div>
+      <div class="content">
+        <strong>Was bedeutet das für uns?</strong>
+        <p>Python-Code soll lesbar, einfach und explizit sein. Vermeide unnötige Komplexität. Ein guter Python-Programmierer schreibt Code, der sich <em>fast wie Englisch</em> liest.</p>
+      </div>
+    </div>
+
+    <!-- ===== PEP8 ===== -->
+    <h2 class="section-title" id="pep8">📏 PEP 8 — Style Guide für Python</h2>
+
+    <p><strong>PEP 8</strong> ist der offizielle Style Guide für Python-Code. Er definiert, wie Code <em>aussehen soll</em> — nicht was er tun soll.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div>
+        <div style="font-size:12px;color:#ef4444;font-weight:700;margin-bottom:4px">❌ Schlecht (nicht PEP 8)</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header" style="padding:4px 10px">
+            <span class="code-lang" style="font-size:10px">PYTHON</span>
+          </div>
+          <pre style="margin:0"><code>x=5
+def myFunction( y,z ):
+    return y+z
+myList=[1,2,3]</code></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:#10b981;font-weight:700;margin-bottom:4px">✅ Gut (PEP 8 konform)</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header" style="padding:4px 10px">
+            <span class="code-lang" style="font-size:10px">PYTHON</span>
+          </div>
+          <pre style="margin:0"><code>x = 5
+def my_function(y, z):
+    return y + z
+my_list = [1, 2, 3]</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Die wichtigsten PEP 8 Regeln</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Regel</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Beispiel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Variablen: <code>snake_case</code></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>student_name</code>, nicht <code>studentName</code></td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Konstanten: <code>UPPER_CASE</code></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>MAX_SIZE = 100</code></td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Leerzeichen um Operatoren</td><td style="padding:7px 12px;border:1px solid var(--border)"><code>x = 5 + 3</code>, nicht <code>x=5+3</code></td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Einrückung: 4 Leerzeichen</td><td style="padding:7px 12px;border:1px solid var(--border)">Kein Tab, 4 Spaces</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Zeilen max. 79 Zeichen</td><td style="padding:7px 12px;border:1px solid var(--border)">Lange Zeilen umbrechen</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== INDENTATION ===== -->
+    <h2 class="section-title" id="indentation">↔️ Indentation (Einrückung)</h2>
+
+    <p>Python nutzt <strong>Einrückung (Indentation)</strong>, um die Zugehörigkeit von Code-Zeilen zu bestimmen — anders als die meisten anderen Sprachen, die geschweifte Klammern <code>{}</code> verwenden.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div>
+        <div style="font-size:12px;color:#ef4444;font-weight:700;margin-bottom:4px">❌ Falsche Einrückung</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header" style="padding:4px 10px">
+            <span class="code-lang" style="font-size:10px">PYTHON</span>
+          </div>
+          <pre style="margin:0"><code>def my_function():
+return 42   # IndentationError!</code></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:#10b981;font-weight:700;margin-bottom:4px">✅ Korrekte Einrückung</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header" style="padding:4px 10px">
+            <span class="code-lang" style="font-size:10px">PYTHON</span>
+          </div>
+          <pre style="margin:0"><code>def my_function():
+    return 42  # 4 Spaces!</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Warum ist das gut?</strong>
+        <p>Indentation zwingt Programmierer zu sauberem, lesbarem Code. In Python sieht man sofort, was zu einer Funktion, Schleife oder Bedingung gehört — ohne Klammern zählen zu müssen.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">PYTHON</span>
+        <button class="code-copy-btn">Kopieren</button>
+      </div>
+      <pre><code># Die Einrückung zeigt, welcher Code "innerhalb" der if-Bedingung liegt:
+x = 10
+
+if x > 5:
+    print("x ist größer als 5")   # ← gehört zum if-Block
+    print("das gilt noch")         # ← auch im if-Block
+
+print("das gilt immer")            # ← außerhalb des if-Blocks</code></pre>
+      <div class="code-output">
+        <div class="output-label">Output</div>
+        <code style="white-space:pre-line">x ist größer als 5
+das gilt noch
+das gilt immer</code>
+      </div>
+    </div>
+
+    <!-- ===== LITERATUR ===== -->
+    <h2 class="section-title" id="literatur">📚 Empfohlene Literatur &amp; Ressourcen</h2>
+
+    <div class="info-box tip">
+      <div class="icon">🌐</div>
+      <div class="content">
+        <strong>Alles Open Source!</strong>
+        <p>Im Data Science Bereich ist vieles frei verfügbar — die unten genannten Bücher sind alle kostenlos auf GitHub zu finden.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid #3b82f6">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px">📘 Python Data Science Handbook</div>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px">Jake VanderPlas, O'Reilly 2016</p>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Das Standardwerk für Data Science mit Python. Kapitel 1 ist Pflichtlektüre zu diesem Termin.</p>
+        <p style="font-size:11px;margin:6px 0 0;color:#3b82f6">→ github.com/jakevdp/PythonDataScienceHandbook</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid #8b5cf6">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px">📗 Think Python</div>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px">Allen B. Downey, O'Reilly 2015</p>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">„How to Think Like a Computer Scientist" — ideales Begleitbuch für Python-Einsteiger. Kapitel 1.</p>
+        <p style="font-size:11px;margin:6px 0 0;color:#8b5cf6">→ github.com/AllenDowney/ThinkPython2</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid #10b981">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px">📙 Think Stats</div>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px">Allen B. Downey, O'Reilly 2014</p>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Exploratory Data Analysis — Statistik mit Python erklärt. Für spätere Kursabschnitte.</p>
+        <p style="font-size:11px;margin:6px 0 0;color:#10b981">→ github.com/AllenDowney/ThinkStats2</p>
+      </div>
+      <div style="padding:16px;border:1px solid var(--border);border-radius:8px;border-top:3px solid #f59e0b">
+        <div style="font-weight:700;font-size:13px;margin-bottom:6px">🎯 Kaggle Python Tutorial</div>
+        <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px">Kostenloser Online-Kurs</p>
+        <p style="font-size:12px;margin:0;color:var(--text-secondary)">Klare Empfehlung: Arbeite das erste Kapitel des Kaggle Python Tutorials durch!</p>
+        <p style="font-size:11px;margin:6px 0 0;color:#f59e0b">→ kaggle.com/learn/overview</p>
+      </div>
+    </div>
+
+    <!-- ===== KURSSTRUKTUR ===== -->
+    <h2 class="section-title" id="kursstruktur">🗓️ Aufbau dieses Kurses</h2>
+
+    <p>Der Kurs hat <strong>5 ECTS</strong> und umfasst:</p>
+    <ul class="content-list">
+      <li><strong>Präsenzzeit:</strong> 14 Wochen × 4 SWS = 42 Stunden</li>
+      <li><strong>Eigenstudium:</strong> 108 Stunden → ca. <strong>7,7 Stunden pro Woche</strong></li>
+    </ul>
+
+    <p>Aufteilung des Eigenstudiums:</p>
+    <ul class="content-list">
+      <li>Bearbeitung der <strong>wöchentlichen Übungsaufgaben</strong> (als Jupyter Notebook)</li>
+      <li>Bearbeitung der <strong>Tutorials</strong> (Kaggle, Videos)</li>
+      <li>Lesen empfohlener <strong>Literatur</strong></li>
+    </ul>
+
+    <div class="info-box warn">
+      <div class="icon">📝</div>
+      <div class="content">
+        <strong>Prüfung</strong>
+        <p>Am Ende des Semesters gibt es eine Prüfung im CIP-Pool. Dauer: <strong>90 Minuten</strong> + 30 Minuten Treffen vorab. Hilfsmittel: Spickzettel (SHM) + Vorlesungsunterlagen.</p>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title">🎯 Selbsttest</h2>
+
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Python Einführung</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Welche drei Bereiche muss ein Data Scientist beherrschen (Venn-Diagramm)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Python, SQL, Tableau</div>
+          <div class="quiz-option" data-correct="true">Programmierung, Mathematik/Statistik, Domänenwissen</div>
+          <div class="quiz-option" data-correct="false">Machine Learning, Deep Learning, NLP</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was passiert wenn du <code>import this</code> in Python ausführst?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Python importiert alle installierten Packages</div>
+          <div class="quiz-option" data-correct="true">Der Zen of Python wird ausgegeben — 19 Designprinzipien</div>
+          <div class="quiz-option" data-correct="false">Es entsteht ein ImportError</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Wie schreibt man Variablennamen korrekt nach <strong>PEP 8</strong>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">camelCase: <code>studentName</code></div>
+          <div class="quiz-option" data-correct="false">PascalCase: <code>StudentName</code></div>
+          <div class="quiz-option" data-correct="true">snake_case: <code>student_name</code></div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">4. Wann wurde <strong>Python 2</strong> eingestellt (End of Life)?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">01.01.2015</div>
+          <div class="quiz-option" data-correct="true">01.01.2020</div>
+          <div class="quiz-option" data-correct="false">01.01.2023</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">5. Wieviele Stunden Eigenstudium pro Woche sind für diesen 5-ECTS-Kurs vorgesehen?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">ca. 3 Stunden</div>
+          <div class="quiz-option" data-correct="true">ca. 7–8 Stunden</div>
+          <div class="quiz-option" data-correct="false">ca. 15 Stunden</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m01b"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="01-getting-started.html">
+        <span class="pnb-label">← Zurück</span>
+        <span class="pnb-title">01 · Setup &amp; Tools</span>
+      </a>
+      <a class="page-nav-btn next" href="02-variablen-datentypen.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">02 · Variablen &amp; Datentypen</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

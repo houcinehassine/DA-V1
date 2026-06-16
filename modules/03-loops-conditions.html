@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loops & Conditions – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active mod-py2" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Modul 03 – Loops & Conditions</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-py2" style="--mc:var(--color-py2)">
+        <span>🔄</span> Modul 03 · Python Crashkurs
+      </div>
+      <h1 class="page-title">Loops & Conditions</h1>
+      <p class="page-subtitle">Wie wiederholt man Aktionen automatisch? Wie trifft man Entscheidungen im Code? for-Loops, while-Loops, if/elif/else und List Comprehensions.</p>
+    </div>
+
+    <!-- Inhaltsübersicht -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte dieses Moduls</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#for" style="font-size:13px;color:var(--color-py2);font-weight:600">→ for-Loop</a>
+        <a href="#range" style="font-size:13px;color:var(--color-py2);font-weight:600">→ range() & Indentation</a>
+        <a href="#parallel" style="font-size:13px;color:var(--color-py2);font-weight:600">→ Parallele Listen + Index</a>
+        <a href="#while" style="font-size:13px;color:var(--color-py2);font-weight:600">→ while-Loop</a>
+        <a href="#for-vs-while" style="font-size:13px;color:var(--color-py2);font-weight:600">→ for vs. while</a>
+        <a href="#if" style="font-size:13px;color:var(--color-py2);font-weight:600">→ if / elif / else</a>
+        <a href="#multiple-if" style="font-size:13px;color:var(--color-py2);font-weight:600">→ Mehrere if-Statements</a>
+        <a href="#break" style="font-size:13px;color:var(--color-py2);font-weight:600">→ break & continue</a>
+        <a href="#comprehension" style="font-size:13px;color:var(--color-py2);font-weight:600">→ List Comprehensions</a>
+        <a href="#quiz" style="font-size:13px;color:var(--color-py2);font-weight:600">→ Selbsttest</a>
+      </div>
+    </div>
+
+    <!-- ===== FOR-LOOP ===== -->
+    <h2 class="section-title" id="for">🔁 for-Loop</h2>
+
+    <div class="info-box info">
+      <div class="icon">📐</div>
+      <div class="content">
+        <strong>Formale Definition</strong>
+        <p><strong>Abgeschlossene Loops (for-Loops)</strong> haben explizite, vordefinierte Iterationsvariablen, die sich mit jeder Iteration verändern. Sie bewegen sich durch das Iterable, um das der Loop definiert ist.<br><br>
+        <strong>Iterable</strong> = ein Objekt, über das iteriert werden kann: Listen, Strings, range(), Dictionaries…<br>
+        <em>"An iterable is an object, which can be iterated over."</em></p>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Warum Loops? — Repetitive Aufgaben automatisieren</strong>
+        <p>Looping ist eines der wichtigsten Konzepte des Programmierens — es ist <em>der</em> Weg um repetitive Aufgaben zu automatisieren. Stell dir vor: 100 Excel-Dateien nacheinander laden, 100-mal denselben Copy-Paste-Vorgang. Mit einem for-Loop geht das in wenigen Zeilen:</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Ohne Loop: 100× copy-paste
+# print("Datei my_document1.xls wird geladen")
+# print("Datei my_document2.xls wird geladen")
+# ...
+
+# Mit Loop: 3 Zeilen reichen!
+for number_of_file in [1, 2, 3, 4, 5]:
+    print(f"Datei my_document{number_of_file}.xls wird geladen")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Datei my_document1.xls wird geladen
+Datei my_document2.xls wird geladen
+Datei my_document3.xls wird geladen
+Datei my_document4.xls wird geladen
+Datei my_document5.xls wird geladen</code></div>
+    </div>
+
+    <p>Der <strong>for-Loop</strong> wiederholt einen Codeblock für jedes Element in einer Sequenz.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>groceries = ['Bananen', 'Äpfel', 'Zucker', 'Butter', 'Salat']
+
+for item in groceries:
+    print(f"Heute muss ich noch {item} einkaufen.")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Heute muss ich noch Bananen einkaufen.
+Heute muss ich noch Äpfel einkaufen.
+Heute muss ich noch Zucker einkaufen.
+Heute muss ich noch Butter einkaufen.
+Heute muss ich noch Salat einkaufen.</code></div>
+    </div>
+
+    <h3 class="subsection-title">Loop-Systematik: das allgemeine Muster</h3>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:14px 0">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="text-align:center">
+          <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">① Vor dem Loop</div>
+          <div style="font-size:12px;color:var(--text-secondary)">Variablen initialisieren:<br>leere Liste, Zähler = 0</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">② Im Loop</div>
+          <div style="font-size:12px;color:var(--text-secondary)">Iterationsvariable verarbeiten, Ergebnisse sammeln</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">③ Nach dem Loop</div>
+          <div style="font-size:12px;color:var(--text-secondary)">Ergebnisse nutzen: ausgeben, weiterverarbeiten</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># ① Vor dem Loop: Initialisierungen
+count = 0
+total = 0
+values = [9, 41, 12, 3, 74, 15]
+
+# ② Im Loop: verarbeiten
+for v in values:
+    count += 1
+    total += v
+
+# ③ Nach dem Loop: Ergebnisse nutzen
+print(f"Anzahl: {count}, Summe: {total}, Mittelwert: {total/count}")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Anzahl: 6, Summe: 154, Mittelwert: 25.666666666666668</code></div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">📌</div>
+      <div class="content">
+        <strong>Naming-Convention: Einzahl vs. Mehrzahl</strong>
+        <p>Der Name der Iterationsvariablen sollte ein <strong>Element</strong> des Iterables repräsentieren:</p>
+        <p><code>for <strong>car</strong> in <strong>cars</strong></code> ✅ — car = ein Auto, cars = viele Autos<br>
+        <code>for <strong>item</strong> in <strong>groceries</strong></code> ✅ — item = ein Artikel<br>
+        <code>for <strong>x</strong> in <strong>cars</strong></code> ⚠️ — was ist x? unklar</p>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Iterationsvariable bleibt nach dem Loop verfügbar!</strong>
+        <p>Nach dem Loop-Ende steht die Iterationsvariable auf dem <em>letzten Wert</em> und kann weiter verwendet werden:</p>
+        <pre style="margin:6px 0 0 0;background:var(--bg);padding:8px;border-radius:6px;font-size:12px">for number in [1, 2, 3, 4, 5]:
+    pass   # nichts tun
+print(number)   # → 5   (letzter Wert!)</pre>
+      </div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">📐</div>
+      <div class="content">
+        <strong>Einrückung (Indentation) ist Pflicht!</strong>
+        <p>Alles was zum Loop gehört, muss mit <strong>4 Leerzeichen</strong> (oder 1 Tab) eingerückt sein. Python erkennt damit den "Körper" des Loops. Falsches Einrücken führt zu einem <code>IndentationError</code>.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Mehrere Zeilen im Loop-Body</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Der Loop-Body kann beliebig lang sein:
+for number in [1, 2, 3, 4, 5]:
+    squared = number ** 2
+    print(f"Das Quadrat von {number} ist {squared}")
+    print(f"Und wenn ich 1 abziehe, kommt {squared - 1} raus.")
+
+print("Außerhalb des Loops!")  # ← wird nur 1× ausgeführt</code></pre>
+    </div>
+
+    <h3 class="subsection-title" id="range">Die range()-Funktion</h3>
+
+    <p><code>range()</code> erzeugt eine Zahlenfolge — perfekt für Loops mit Zähler.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>range(5)          # → 0, 1, 2, 3, 4         (stop=5, start=0)
+range(1, 6)       # → 1, 2, 3, 4, 5         (start=1, stop=6)
+range(1, 10, 2)   # → 1, 3, 5, 7, 9         (start, stop, schritt)
+range(6, 1, -1)   # → 6, 5, 4, 3, 2         (rückwärts)
+
+# Praxis: Liste durchlaufen mit Index
+my_garage = ['bmw', 'audi', 'toyota', 'skoda', 'vw']
+for i in range(len(my_garage)):
+    print(f"Auto {i+1}: {my_garage[i]}")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Auto 1: bmw
+Auto 2: audi
+Auto 3: toyota
+Auto 4: skoda
+Auto 5: vw</code></div>
+    </div>
+
+    <h3 class="subsection-title">Laufender Zähler im Loop</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>count = 0
+groceries = ['Bananen', 'Äpfel', 'Zucker', 'Butter', 'Salat']
+
+for item in groceries:
+    count = count + 1     # Zähler hochzählen
+
+print(f"Insgesamt {count} Lebensmittel.")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Insgesamt 5 Lebensmittel.</code></div>
+    </div>
+
+    <h3 class="subsection-title" id="parallel">Zwei parallele Listen mit Index</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Zwei Listen mit gleichem Index zusammen verarbeiten
+list_of_number_of_students = [793, 699, 937, 2014]
+oth_faculties = ['ANK', 'Architektur', 'Bauingenieurwesen', 'Betriebswirtschaft']
+
+for i in range(len(oth_faculties)):
+    print(f"Fakultät {oth_faculties[i]}: {list_of_number_of_students[i]} Studierende")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Fakultät ANK: 793 Studierende
+Fakultät Architektur: 699 Studierende
+Fakultät Bauingenieurwesen: 937 Studierende
+Fakultät Betriebswirtschaft: 2014 Studierende</code></div>
+    </div>
+
+    <!-- Coding Yoga for 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: for-Loop I — Dictionary + String</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sentence)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_dictionary = {
+    0: ' ', 3: 'eat', 2: 'apple',
+    4: 's', 1: 'Bob', 5: '.'
+}
+words = [1, 0, 3, 4, 0, 2, 4, 5]
+sentence = ''
+for w in words:
+    sentence += my_dictionary[w]
+print(sentence)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># w=1→'Bob', w=0→' ', w=3→'eat', w=4→'s'
+# w=0→' ', w=2→'apple', w=4→'s', w=5→'.'
+# Ergebnis: "Bob eats apples."</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga for 2 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: for-Loop II — Dictionary + range()</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(a_number)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_dict = {
+    'dictionaries': ['are', 'funny'],
+    'because': ['they', 'contain', 'lists']
+}
+a_number = len(my_dict)
+for i in range(len(my_dict['dictionaries'])):
+    a_number = a_number + len(my_dict['because'][i])
+print(a_number)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># len(my_dict) = 2  → a_number = 2
+# range(len(['are','funny'])) = range(2) = [0, 1]
+# i=0: len(my_dict['because'][0]) = len('they') = 4
+#      a_number = 2 + 4 = 6
+# i=1: len(my_dict['because'][1]) = len('contain') = 7
+#      a_number = 6 + 7 = 13
+# Ergebnis: 13</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga for 3 — Caesar Cipher -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: for-Loop III — Caesar-Verschlüsselung</span>
+        <span class="yoga-badge">Fortgeschritten</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(encrypted)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>alphabet = 'abcdefghijklmnopqrstuvwyz'
+to_be_encrypted = 'hello world'
+encrypted = ''
+
+for letter in to_be_encrypted:
+    new_index = alphabet.find(letter) - 1
+    if new_index > 0:
+        encrypted += alphabet[new_index]
+    else:
+        encrypted += letter
+
+print(encrypted)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># Jeder Buchstabe wird durch den Buchstaben davor ersetzt:
+# h → g, e → d, l → k, l → k, o → n
+# ' ' → .find(' ') = -1, -1 > 0 ist False → Leerzeichen bleibt
+# w → v, o → n, r → q, l → k, d → c
+# Ergebnis: 'gdkkn vnqkc'</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WHILE-LOOP ===== -->
+    <h2 class="section-title" id="while">⏳ while-Loop</h2>
+
+    <p>Der <strong>while-Loop</strong> läuft solange eine Bedingung <code>True</code> ist. Wenn man nicht weiß, wie viele Durchläufe nötig sind → while statt for.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>n = 0
+while n < 5:
+    print(n)
+    n = n + 1   # WICHTIG: Zähler erhöhen, sonst Endlosloop!</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>0
+1
+2
+3
+4</code></div>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Vorsicht: Endlosloop!</strong>
+        <p><code>while True:</code> läuft für immer, falls kein <code>break</code> vorhanden ist. Im Jupyter Notebook: Kernel-Button (■) klicken zum Stoppen.</p>
+      </div>
+    </div>
+
+    <!-- Coding Yoga while 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: while-Loop I</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(a_number)</code> am Ende aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_list = [2, 1]
+a_number = 3
+while my_list != []:
+    this_one = my_list.pop()
+    a_number = a_number + this_one * len(my_list)
+print(a_number)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># Durchlauf 1: pop()→1, my_list=[2], len=1
+#   a_number = 3 + 1 * 1 = 4
+# Durchlauf 2: pop()→2, my_list=[], len=0
+#   a_number = 4 + 2 * 0 = 4
+# Ergebnis: 4</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga while 2 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: while-Loop II — Bedingung + append()</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sum(another_list))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>i = 2
+another_list = []
+while i % 3:
+    i = i + 2
+    another_list.append(i * (len(another_list) + 1))
+print(sum(another_list))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># Start: i=2, 2%3=2 (truthy) → Schleife läuft
+# Durchlauf 1: i=4, len=0 → append(4*(0+1)) = append(4)
+#   another_list=[4], 4%3=1 (truthy) → weiter
+# Durchlauf 2: i=6, len=1 → append(6*(1+1)) = append(12)
+#   another_list=[4,12], 6%3=0 (falsy) → STOP
+# sum([4, 12]) = 16
+# Ergebnis: 16</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOR vs. WHILE ===== -->
+    <h2 class="section-title" id="for-vs-while">⚖️ for vs. while — wann was?</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--color-py2);border-radius:8px;padding:14px">
+        <div style="font-size:13px;font-weight:700;color:var(--color-py2);margin-bottom:8px">🔁 for-Loop</div>
+        <ul style="margin:0;padding-left:16px;font-size:13px;color:var(--text-secondary);line-height:1.7">
+          <li>Iteriert über ein <strong>Iterable</strong></li>
+          <li>Läuft für jedes Element <strong>genau einmal</strong></li>
+          <li>Man weiß <strong>vorher</strong>, wie viele Durchläufe</li>
+          <li><code>for item in my_list</code></li>
+        </ul>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--color-py2);border-radius:8px;padding:14px">
+        <div style="font-size:13px;font-weight:700;color:var(--color-py2);margin-bottom:8px">⏳ while-Loop</div>
+        <ul style="margin:0;padding-left:16px;font-size:13px;color:var(--text-secondary);line-height:1.7">
+          <li>Läuft solange eine <strong>Bedingung True</strong> ist</li>
+          <li>Anzahl der Durchläufe <strong>variabel</strong></li>
+          <li>Man weiß <strong>nicht vorher</strong>, wie oft</li>
+          <li><code>while condition == True</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># for → wenn Iterable bekannt
+for item in ['a', 'b', 'c']:
+    print(item)
+
+# while → wenn Abbruchbedingung unbekannt
+import random
+count = 0
+while random.randint(1, 6) != 6:   # würfeln bis 6
+    count += 1
+print(f"Gebraucht: {count} Versuche")</code></pre>
+    </div>
+
+    <!-- ===== IF / ELIF / ELSE ===== -->
+    <h2 class="section-title" id="if">🤔 if / elif / else</h2>
+
+    <p>Mit <strong>if-Statements</strong> führt Python Code nur aus, wenn eine Bedingung erfüllt ist.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>my_age = 20
+
+if my_age < 4:
+    print("Eintritt: 5 EUR")
+elif my_age < 18:
+    print("Eintritt: 10 EUR")
+else:
+    print("Eintritt: 15 EUR")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Eintritt: 15 EUR</code></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">if</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Erste Bedingung — wird immer geprüft</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">elif</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Weitere Bedingung — <strong>nur wenn if False</strong></div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py2);margin-bottom:6px">else</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Fallback — wenn alle anderen False</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Verschachtelte Indentation (Ebenen)</h3>
+
+    <p>Wenn man <code>if</code> innerhalb eines <code>for</code>-Loops nutzt, entstehen mehrere Einrück-Ebenen:</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>cars = ['audi', 'bmw', 'toyota', 'mercedes']
+
+for car in cars:               # Indentation-Ebene 0
+    print(car)                 # Indentation-Ebene 1 (im for)
+    if car == 'bmw':           # Indentation-Ebene 1 (im for)
+        print(car.upper())     # Indentation-Ebene 2 (im for+if)
+    else:                      # Indentation-Ebene 1
+        print(car.title())     # Indentation-Ebene 2
+
+print("Alle Autos verarbeitet.")   # Ebene 0 (außerhalb for)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>audi
+Audi
+bmw
+BMW
+toyota
+Toyota
+mercedes
+Mercedes
+Alle Autos verarbeitet.</code></div>
+    </div>
+
+    <h3 class="subsection-title">if mit <code>in</code>-Operator</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># in-Operator prüft ob Element in einer Liste oder String ist
+requested_toppings = ['Tomaten', 'Käse', 'Pilze']
+
+if 'Tomaten' in requested_toppings:
+    print("Tomate drauf!")
+
+if 'Ananas' in requested_toppings:
+    print("Ananas drauf!")
+else:
+    print("Keine Ananas.")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Tomate drauf!
+Keine Ananas.</code></div>
+    </div>
+
+    <h3 class="subsection-title">if zum Suchen in einer Liste</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>found = False
+values = [9, 41, 12, 3, 74, 15]
+
+for value in values:
+    if value == 3:
+        found = True
+    print(f"{found}  →  Wert: {value}")
+
+print(f"Gefunden: {found}")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>False  →  Wert: 9
+False  →  Wert: 41
+False  →  Wert: 12
+True   →  Wert: 3
+True   →  Wert: 74
+True   →  Wert: 15
+Gefunden: True</code></div>
+    </div>
+
+    <!-- ===== MEHRERE IF-STATEMENTS ===== -->
+    <h2 class="section-title" id="multiple-if">🔀 Mehrere if-Statements hintereinander</h2>
+
+    <div class="info-box info">
+      <div class="icon">📌</div>
+      <div class="content">
+        <strong>Wichtiger Unterschied: if-elif-else vs. mehrere ifs</strong>
+        <p>Bei <code>if-elif-else</code> stoppt Python nach dem <strong>ersten True</strong> und führt den Rest nicht mehr aus.<br>
+        Bei <strong>mehreren getrennten if-Blöcken</strong> werden <strong>alle</strong> Bedingungen unabhängig voneinander geprüft!</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px">if-elif-else: stoppt beim ersten True</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>x = 5
+if x > 0:
+    print("positiv")   # ← True!
+elif x > 3:
+    print(">3")        # ← wird NICHT geprüft
+else:
+    print("sonst")</code></pre>
+          <div class="code-output"><div class="output-label">Output</div><code>positiv</code></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:6px">Mehrere ifs: ALLE werden geprüft</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>x = 5
+if x > 0:
+    print("positiv")   # ← ausgeführt
+if x > 3:
+    print(">3")        # ← AUCH ausgeführt
+if x > 10:
+    print(">10")       # ← nicht ausgeführt</code></pre>
+          <div class="code-output"><div class="output-label">Output</div><code>positiv
+>3</code></div>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Praxisbeispiel: Pizza-Bestellung</strong> — alle Zutaten sollen unabhängig geprüft werden:</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>requested_toppings = ['Tomaten', 'Käse']
+
+if 'Tomaten' in requested_toppings:
+    print("Tomaten werden aufgelegt.")         # ← wird ausgeführt
+
+if 'Salami' in requested_toppings:
+    print("Salami wird aufgelegt.")            # ← wird AUCH geprüft (False → kein Print)
+
+if 'Käse' in requested_toppings:
+    print("Käse wird draufgestreut.")          # ← wird ausgeführt
+
+print("Pizza ist fertig!")</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Tomaten werden aufgelegt.
+Käse wird draufgestreut.
+Pizza ist fertig!</code></div>
+    </div>
+
+    <h3 class="subsection-title">Kettenvergleiche & Short-Circuit Evaluation</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Kettenvergleiche: Python erlaubt mathematische Schreibweise
+a = 1 < 2 < 3 < 4 < 5   # → True  (prüft jedes Paar!)
+b = 1 < 3 > 2            # → True
+
+# Short-Circuit Evaluation: Python wertet von links nach rechts aus
+# Bei 'or': wenn das erste True ist → zweites wird NICHT mehr ausgewertet
+x = True
+if x or undefined_variable:   # → kein NameError, weil x=True genügt
+    print("OK")
+
+# Bei 'and': wenn das erste False ist → zweites wird NICHT ausgewertet
+if False and undefined_variable:   # → kein NameError!
+    print("Nie")</code></pre>
+    </div>
+
+    <!-- Coding Yoga if 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: if + for I</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(message)</code> am Ende aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_list = [1, 2, 3, 4, 5]
+running_index = 0
+for item in my_list:
+    if running_index == 0:
+        message = 'Are you serious'
+    else:
+        if my_list[running_index] % my_list[running_index - 1]:
+            message += '!'
+        else:
+            message += '?'
+    running_index += 1
+print(message)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># Index 0: message = 'Are you serious'
+# Index 1: 2 % 1 = 0 → Falsy → '?'  → 'Are you serious?'
+# Index 2: 3 % 2 = 1 → Truthy → '!' → 'Are you serious?!'
+# Index 3: 4 % 3 = 1 → Truthy → '!' → 'Are you serious?!!'
+# Index 4: 5 % 4 = 1 → Truthy → '!' → 'Are you serious?!!!'
+# Ergebnis: "Are you serious?!!!"</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga if 2 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: if + for II — komplexe Bedingungen</span>
+        <span class="yoga-badge">Fortgeschritten</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was wird bei jedem Schritt geprinted? Was ist der Endwert von <code>mixed_stuff</code>?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>reverse_it = list(range(6, 1, -1))
+mixed_stuff = 4
+for number in reverse_it:
+    if number % 2:
+        mixed_stuff += 4
+    elif number % 3:
+        mixed_stuff -= 3
+    elif number % 4:
+        mixed_stuff /= 2
+    else:
+        mixed_stuff *= -1
+    print(mixed_stuff)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># reverse_it = [6, 5, 4, 3, 2]
+# number=6: 6%2=0, 6%3=0, 6%4=2→/2 → mixed=2.0 → print(2.0)
+# number=5: 5%2=1→+4         → mixed=6.0 → print(6.0)
+# number=4: 4%2=0, 4%3=1→-3  → mixed=3.0 → print(3.0)
+# number=3: 3%2=1→+4         → mixed=7.0 → print(7.0)
+# number=2: 2%2=0, 2%3=2→-3  → mixed=4.0 → print(4.0)
+# Endwert: 4.0</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BREAK & CONTINUE ===== -->
+    <h2 class="section-title" id="break">⏸️ break & continue</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div>
+        <h3 class="subsection-title" style="margin-top:0">break — Loop sofort beenden</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>while True:
+    line = input('> ')
+    if line == 'done':
+        break          # beendet den Loop
+    print(line)
+print('Done!')</code></pre>
+        </div>
+      </div>
+      <div>
+        <h3 class="subsection-title" style="margin-top:0">continue — Durchlauf überspringen</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>while True:
+    line = input('> ')
+    if line[0] == '#':
+        continue       # Zeile ignorieren
+    if line == 'done':
+        break
+    print(line)</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">reversed() — Liste rückwärts durchlaufen</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># reversed() gibt einen Iterator in umgekehrter Reihenfolge zurück
+my_list = [1, 2, 3, 4, 5]
+
+for item in reversed(my_list):
+    print(item)   # → 5, 4, 3, 2, 1
+
+# Als Liste:
+list(reversed(my_list))           # → [5, 4, 3, 2, 1]
+
+# Kombiniert mit range:
+list(reversed(list(range(6, 1, -1))))   # → [2, 3, 4, 5, 6]</code></pre>
+    </div>
+
+    <!-- ===== LIST COMPREHENSION ===== -->
+    <h2 class="section-title" id="comprehension">⚡ List Comprehensions</h2>
+
+    <p>Eine <strong>List Comprehension</strong> ist eine kompakte Schreibweise für einen for-Loop, der eine neue Liste erzeugt. Spart Platz und ist pythonischer.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:6px">Langer Weg</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>new_list = []
+for x in range(10):
+    if x % 2:
+        new_list.append(x ** 2)
+print(new_list)</code></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:6px">⭐ Comprehension</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>new_list = [x ** 2
+            for x in range(10)
+            if x % 2]
+print(new_list)</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-output" style="border-radius:8px;margin-bottom:14px">
+      <div class="output-label">Output (beide identisch)</div>
+      <code>[1, 9, 25, 49, 81]</code>
+    </div>
+
+    <h3 class="subsection-title">Syntax-Erklärung</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>#  [  ausdruck   for  variable  in  sequenz   if  bedingung  ]
+   [  x ** 2    for  x         in  range(10)  if  x % 2     ]
+
+# Mit if-else OHNE Filter (ternärer Ausdruck):
+[x ** 2 if x % 2 else x * 2 for x in range(5)]
+# → [0, 1, 4, 9, 8]
+
+# String-Beispiel:
+' '.join([x.lower() for x in ['I', 'AM', 'NOT', 'SHOUTING']])
+# → 'i am not shouting'</code></pre>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title" id="quiz">🎯 Selbsttest</h2>
+
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Loops & Conditions</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Was erzeugt <code>list(range(2, 8, 2))</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">[2, 3, 4, 5, 6, 7]</div>
+          <div class="quiz-option" data-correct="true">[2, 4, 6]</div>
+          <div class="quiz-option" data-correct="false">[2, 4, 6, 8]</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was passiert bei <code>if x % 2:</code> wenn x = 4?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Der Block wird ausgeführt, weil 4 gerade ist</div>
+          <div class="quiz-option" data-correct="true">Der Block wird NICHT ausgeführt (4 % 2 = 0 → Falsy)</div>
+          <div class="quiz-option" data-correct="false">Es gibt einen Fehler</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Was ist der Unterschied zwischen <code>break</code> und <code>continue</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Kein Unterschied, beide beenden den Loop</div>
+          <div class="quiz-option" data-correct="true"><code>break</code> beendet den Loop komplett, <code>continue</code> springt zum nächsten Durchlauf</div>
+          <div class="quiz-option" data-correct="false"><code>continue</code> beendet den Loop, <code>break</code> springt weiter</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">4. Was ist das Ergebnis von <code>[x*2 for x in [1,2,3]]</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">[1, 2, 3, 1, 2, 3]</div>
+          <div class="quiz-option" data-correct="true">[2, 4, 6]</div>
+          <div class="quiz-option" data-correct="false">6</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">5. Wann nutzt man mehrere getrennte <code>if</code>-Blöcke statt <code>if-elif-else</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Immer — mehrere ifs sind übersichtlicher</div>
+          <div class="quiz-option" data-correct="true">Wenn alle Bedingungen unabhängig voneinander geprüft werden sollen</div>
+          <div class="quiz-option" data-correct="false">Wenn nur eine Bedingung True sein kann</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">6. Was gibt <code>list(reversed([1, 2, 3]))</code> zurück?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">[1, 2, 3]</div>
+          <div class="quiz-option" data-correct="true">[3, 2, 1]</div>
+          <div class="quiz-option" data-correct="false">reversed([1, 2, 3])</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">7. Was ist ein "Iterable" in Python?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Eine Variable die sich automatisch erhöht</div>
+          <div class="quiz-option" data-correct="true">Ein Objekt, über das iteriert werden kann (Liste, String, range, …)</div>
+          <div class="quiz-option" data-correct="false">Eine Schleife mit break-Anweisung</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- Erledigt-Button -->
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m03"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="02-variablen-datentypen.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Variablen & Datentypen</span>
+      </a>
+      <a class="page-nav-btn next" href="04-funktionen-packages.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Funktionen & Packages</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

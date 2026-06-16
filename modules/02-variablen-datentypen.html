@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variablen & Datentypen – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active mod-py1" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 10 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Modul 02 – Variablen & Datentypen</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-py1" style="--mc:var(--color-py1)">
+        <span>🔢</span> Modul 02 · Python Crashkurs
+      </div>
+      <h1 class="page-title">Variablen & Datentypen</h1>
+      <p class="page-subtitle">Das Fundament jedes Python-Programms: Wie speichern wir Daten? Welche Typen gibt es? Wie arbeiten wir mit Texten, Zahlen, Listen und Wörterbüchern?</p>
+    </div>
+
+    <!-- Inhaltsübersicht -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte dieses Moduls</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#variablen" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Variablen & Regeln</a>
+        <a href="#zahlen" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Zahlen (int, float)</a>
+        <a href="#boolean" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Boolean & Vergleiche</a>
+        <a href="#strings" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Strings & Methoden</a>
+        <a href="#listen" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Listen</a>
+        <a href="#tuples" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Tuples</a>
+        <a href="#sets" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Sets</a>
+        <a href="#dictionaries" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Dictionaries</a>
+        <a href="#konvertierung" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Typkonvertierung</a>
+        <a href="#stil" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Stil & Fehler lesen</a>
+        <a href="#quiz" style="font-size:13px;color:var(--color-py1);font-weight:600">→ Selbsttest</a>
+      </div>
+    </div>
+
+    <!-- ===== 1. VARIABLEN ===== -->
+    <h2 class="section-title" id="variablen">📦 Variablen</h2>
+
+    <p>Eine <strong>Variable</strong> ist ein benannter Speicherplatz für einen Wert. Der Name wird mit dem <code>=</code>-Zeichen zugewiesen.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>message = "Hello World!"
+print(message)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Hello World!</code></div>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">📐</div>
+      <div class="content">
+        <strong>Statement vs. Expression — zwei wichtige Begriffe</strong>
+        <p>Ein <strong>Statement</strong> ist eine vollständige Anweisung, die eine Aktion ausführt — z.B. <code>print("Hallo")</code> oder eine Zuweisung mit <code>=</code>.<br>
+        Eine <strong>Expression</strong> ist ein Ausdruck wie <code>2 + 3</code> oder <code>x &gt; 5</code>, der immer auf <em>einen einzelnen Wert</em> reduziert werden kann. Deshalb kann man Expressions überall einsetzen, wo Python einen Wert erwartet — z.B. direkt in einem f-String: <code>f"Ergebnis: {2 + 3}"</code>.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Regeln für Variablennamen</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:8px">✅ Gut</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>name = "Max"
+student_name = "Max"
+name_length = len(name)</code></pre>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:8px">⚠️ Weniger gut</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>n = "Max"        # zu kurz
+s_n = "Max"      # unklar
+laenge_des_namens = ...  # zu lang</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <ul class="content-list">
+      <li>Nur Buchstaben, Zahlen und <code>_</code> erlaubt — <strong>kein Leerzeichen</strong></li>
+      <li>Muss mit einem Buchstaben oder <code>_</code> beginnen (nicht mit einer Zahl)</li>
+      <li>Python unterscheidet Groß-/Kleinschreibung: <code>name</code> ≠ <code>Name</code></li>
+      <li>Konvention: <code>snake_case</code> für Variablen, <code>GROSSBUCHSTABEN</code> für Konstanten</li>
+      <li>Keine deutschen Umlaute oder Sonderzeichen (ä, ö, ü, ß) in Variablennamen</li>
+    </ul>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>MY_CONSTANT = 300          # Konstante (ändert sich nicht)
+x, y, z = 1, 2, 3         # Mehrfachzuweisung
+print(x, y, z)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>1 2 3</code></div>
+    </div>
+
+    <h3 class="subsection-title" id="reserved">Reserved Words — Verbotene Namen</h3>
+
+    <p>Diese Schlüsselwörter hat Python schon "belegt" — sie dürfen <strong>nicht</strong> als Variablennamen verwendet werden:</p>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-family:monospace;font-size:13px;line-height:2">
+      <span style="color:#dc2626;font-weight:700">False</span> &nbsp;
+      <span style="color:#dc2626;font-weight:700">None</span> &nbsp;
+      <span style="color:#dc2626;font-weight:700">True</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">and</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">as</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">assert</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">break</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">class</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">continue</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">def</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">del</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">elif</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">else</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">except</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">finally</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">for</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">from</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">global</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">if</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">import</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">in</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">is</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">lambda</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">nonlocal</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">not</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">or</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">pass</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">raise</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">return</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">try</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">while</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">with</span> &nbsp;
+      <span style="color:#7c3aed;font-weight:700">yield</span>
+    </div>
+
+    <!-- Coding Yoga Variablen -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Variablen</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(another_number)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>a_number = '42'.replace(str(5 - 1), '3')
+another_number = int(a_number[0]) + int(a_number[-2]) - 2
+print(another_number)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># str(5-1) = str(4) = '4'
+# '42'.replace('4', '3') = '32'
+# a_number = '32'
+# int(a_number[0]) = int('3') = 3
+# int(a_number[-2]) = int(a_number[0]) = int('3') = 3
+# another_number = 3 + 3 - 2 = 4
+# Ergebnis: 4</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 2. ZAHLEN ===== -->
+    <h2 class="section-title" id="zahlen">🔢 Zahlen: int & float</h2>
+
+    <p>Python kennt zwei grundlegende Zahlentypen: <strong>int</strong> (ganze Zahlen) und <strong>float</strong> (Kommazahlen).</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>2 + 3       # Addition       → 5
+2 * 3       # Multiplikation → 6
+2 - 3       # Subtraktion    → -1
+2 / 3       # Division       → 0.666...  (immer float!)
+4 ** 4      # Potenz         → 256
+10 % 3      # Modulo (Rest)  → 1
+2 * 3.0     # int × float    → 6.0 (float)</code></pre>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Fließkomma-Ungenauigkeit</strong>
+        <p><code>0.1 + 0.2</code> ergibt <code>0.30000000000000004</code> — das ist kein Bug, sondern wie Computer Dezimalzahlen intern speichern (IEEE 754). Für präzise Berechnungen: <code>round()</code> oder das <code>decimal</code>-Modul nutzen.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>0.1 + 0.1   # → 0.2    ✓
+0.1 + 0.2   # → 0.30000000000000004  ⚠️</code></pre>
+    </div>
+
+    <!-- ===== 3. BOOLEAN ===== -->
+    <h2 class="section-title" id="boolean">✅ Boolean & Vergleichsoperatoren</h2>
+
+    <p>Ein <strong>Boolean</strong> hat nur zwei mögliche Werte: <code>True</code> oder <code>False</code>. Vergleiche erzeugen immer einen Boolean.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>1 < 2     # True   – kleiner als
+1 <= 2    # True   – kleiner oder gleich
+1 > 2     # False  – größer als
+1 >= 2    # False  – größer oder gleich
+1 == 2    # False  – gleich (doppeltes =!)
+1 != 2    # True   – ungleich</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Logische Operatoren: and, or, not</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>x = 5
+# and: beide Bedingungen müssen True sein
+(x > 3) and (x < 10)   # True
+(x > 3) &  (x < 10)    # True  (Kurzschreibweise)
+
+# or: mindestens eine Bedingung muss True sein
+(x == 3) or (x < 10)   # True
+(x == 3) | (x < 10)    # True  (Kurzschreibweise)
+
+# not: kehrt den Wahrheitswert um
+not True                # → False
+not False               # → True
+not (x > 10)            # → True  (da x=5, ist x>10 False → not False = True)
+
+# Boolean ist intern eine Zahl (True=1, False=0)
+1 + True    # → 2</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Kettenvergleiche in Python</strong>
+        <p>Python erlaubt mathematische Kettenvergleiche: <code>1 &lt; 2 &lt; 3 &lt; 4 &lt; 5</code> ist <code>True</code> — das prüft jedes Paar nacheinander!</p>
+      </div>
+    </div>
+
+    <!-- ===== 4. STRINGS ===== -->
+    <h2 class="section-title" id="strings">💬 Strings (Zeichenketten)</h2>
+
+    <p>Ein <strong>String</strong> ist Text — immer in einfachen (<code>'...'</code>) oder doppelten (<code>"..."</code>) Anführungszeichen.</p>
+
+    <div class="info-box info">
+      <div class="icon">📌</div>
+      <div class="content">
+        <strong>Was sind Methoden?</strong>
+        <p><strong>Methoden</strong> sind Aktionen, die auf ein Objekt angewendet werden. Der Punkt <code>.</code> sagt Python, dass die Methode auf das vorhergehende Objekt angewendet werden soll. Die Klammern <code>()</code> rufen sie auf und in ihnen können sich Eingabeargumente befinden.<br>
+        Beispiel: <code>"hello".<strong>upper()</strong></code> → die Methode <code>upper</code> wird auf den String <code>"hello"</code> angewendet.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">Strings & Variablen verknüpfen (f-Strings ⭐)</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>first_name = "Chuck"
+last_name  = "Norris"
+
+# Methode 1: %-Formatierung (alt)
+full_name = "Mein Name ist %s %s" % (first_name, last_name)
+
+# Methode 2: .format() (modern)
+full_name = "Mein Name ist {} {}".format(first_name, last_name)
+
+# Methode 3: f-String ⭐ (empfohlen)
+full_name = f"Mein Name ist {first_name} {last_name}"
+print(full_name)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>Mein Name ist Chuck Norris</code></div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">⭐</div>
+      <div class="content">
+        <strong>f-Strings: Berechnungen direkt im String</strong>
+        <p>Im f-String können direkt Ausdrücke stehen: <code>f"Das Ergebnis ist {7 * 6}"</code> → <code>Das Ergebnis ist 42</code></p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">String-Operationen & Methoden</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>lang = "python 3.8"
+
+# Verkettung
+"python" + " " + "3.8"    # → "python 3.8"
+
+# Einzelne Zeichen (Indexing)
+lang[0]     # → "p"   (erstes Zeichen, Index 0)
+lang[-2]    # → "."   (vorletztes Zeichen)
+
+# Teilstring (Slicing) [start:stop:schritt]
+lang[0:3]   # → "pyt"
+lang[3:]    # → "hon 3.8"
+lang[:5]    # → "pytho"
+
+# Länge
+len(lang)   # → 10
+
+# Suchen & Ersetzen
+lang.find("3.8")              # → 7  (Position), -1 wenn nicht gefunden
+lang.replace("python", "R")  # → "R 3.8"
+
+# Groß/Kleinschreibung
+"hello".upper()   # → "HELLO"
+"HELLO".lower()   # → "hello"
+
+# Whitespace entfernen
+"  python  ".strip()    # → "python"
+"  python  ".lstrip()   # → "python  "
+"  python  ".rstrip()   # → "  python"</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Zugehörigkeit prüfen: <code>in</code></h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>my_string = "I love learning Python and data science"
+
+# in: prüft ob ein Teilstring enthalten ist
+"Python" in my_string     # → True
+"nana" in my_string       # → False
+"data" in my_string       # → True
+
+# not in: das Gegenteil
+"Java" not in my_string   # → True</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>True
+False
+True
+True</code></div>
+    </div>
+
+    <h3 class="subsection-title">Strings & Listen</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>message = "Strings and lists are best friends"
+
+# String → Liste
+parts = message.split()          # trennt bei Leerzeichen
+print(parts)
+
+# Liste → String
+new_msg = " ".join(parts)
+print(new_msg)</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>['Strings', 'and', 'lists', 'are', 'best', 'friends']
+Strings and lists are best friends</code></div>
+    </div>
+
+    <!-- ===== 5. LISTEN ===== -->
+    <h2 class="section-title" id="listen">📋 Listen</h2>
+
+    <p>Eine <strong>Liste</strong> speichert mehrere Werte in einer bestimmten Reihenfolge. Listen sind <em>veränderbar</em> (mutable) und erlauben gemischte Typen.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>oth_faculties = [
+    'Angewandte Natur- und Kulturwissenschaften',
+    'Architektur',
+    'Bauingenieurwesen',
+    'Betriebswirtschaft',
+    'Elektro- und Informationstechnik',
+    'Informatik und Mathematik',
+    'Maschinenbau',
+    'Angewandte Sozial- und Gesundheitswissenschaften'
+]
+
+# Listen können gemischte Typen enthalten
+mixed = ["Text", 42, [1, 2, 3], True]</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Indexing & Slicing</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>fruits = ['banana', 'apple', 'sugar', 'butter', 'salad']
+
+fruits[0]       # → 'banana'   (erstes Element)
+fruits[3]       # → 'butter'   (4. Element)
+fruits[-1]      # → 'salad'    (letztes Element)
+len(fruits)     # → 5
+
+fruits[1:4]     # → ['apple', 'sugar', 'butter']
+fruits[:3]      # → ['banana', 'apple', 'sugar']
+fruits[3:]      # → ['butter', 'salad']
+fruits[::2]     # → ['banana', 'sugar', 'salad']  (jedes 2.)</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Liste verändern: hinzufügen, entfernen, sortieren</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>groceries = ['banana', 'apple', 'sugar']
+
+# Hinzufügen
+groceries.append('butter')         # ans Ende anhängen
+groceries.insert(1, 'milk')        # an Position 1 einfügen
+
+# Entfernen
+del groceries[0]                   # erstes Element löschen
+groceries.pop()                    # letztes Element entfernen (& zurückgeben)
+groceries.pop(2)                   # Element an Index 2 entfernen
+groceries.remove('apple')          # Element nach Wert entfernen
+
+# Sortieren
+groceries.sort()                   # Liste direkt sortieren (in-place)
+sorted_copy = sorted(groceries)    # gibt neue sortierte Liste zurück
+
+# Prüfen (in-Operator)
+'milk' in groceries                # True oder False
+
+# Nützliche Funktionen
+max([2, 5, 1, 3])   # → 5
+min([2, 5, 1, 3])   # → 1
+sum([2, 5, 1, 3])   # → 11
+
+# Verketten
+list1 + list2       # neue Liste aus beiden</code></pre>
+    </div>
+
+    <h3 class="subsection-title">List Repetition mit <code>*</code></h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>[1, 2, 3] * 3
+# → [1, 2, 3, 1, 2, 3, 1, 2, 3]
+
+["hallo"] * 4
+# → ['hallo', 'hallo', 'hallo', 'hallo']
+
+# Nützlich zum Erstellen von Startlisten:
+zeros = [0] * 10
+# → [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</code></pre>
+    </div>
+
+    <!-- Coding Yoga 1 Listen -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Listen I</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sum(my_list))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_list = [1, 3, 5, 2, 3, 4, 7]
+i_dont_like_this_one = my_list.pop()   # entfernt 7
+and_this_one = my_list.pop()           # entfernt 4
+my_list[-3] = i_dont_like_this_one     # setzt 7 an Position -3
+print(sum(my_list))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># pop() → 7  → my_list = [1, 3, 5, 2, 3, 4]
+# pop() → 4  → my_list = [1, 3, 5, 2, 3]
+# my_list[-3] = 7  → Index -3 = Index 2 → [1, 3, 7, 2, 3]
+# sum([1, 3, 7, 2, 3]) = 16
+# Ergebnis: 16</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga 2 Listen -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Listen II — Slicing + Repetition</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sum(another_list))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>another_list = [1, 2, 3]
+another_list = another_list[-2:] + another_list[:3:2]
+another_list = another_list * another_list[0]
+print(sum(another_list))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># [1,2,3][-2:]    = [2, 3]
+# [1,2,3][:3:2]  = [1, 3]   (jedes 2. von 0 bis 3)
+# combined       = [2, 3, 1, 3]
+# another_list[0] = 2
+# [2,3,1,3] * 2  = [2, 3, 1, 3, 2, 3, 1, 3]
+# sum(...)       = 18
+# Ergebnis: 18</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 6. TUPLES ===== -->
+    <h2 class="section-title" id="tuples">🔒 Tuples</h2>
+
+    <p>Ein <strong>Tuple</strong> ist wie eine Liste, aber <em>unveränderbar</em> (immutable). Einmal erstellt kann man keine Elemente hinzufügen, entfernen oder ändern. Syntax: runde Klammern <code>()</code> statt eckiger.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>my_tuple = (1, 2, 3, 4, 5)
+
+# Zugriff wie bei Listen (Indexing + Slicing)
+my_tuple[0]     # → 1
+my_tuple[-1]    # → 5
+my_tuple[1:3]   # → (2, 3)
+len(my_tuple)   # → 5
+
+# Tuple ist immutable — dieser Code wirft einen TypeError:
+# my_tuple[0] = 99   ❌ TypeError!
+
+# Prüfen
+3 in my_tuple   # → True
+
+# Tuple entpacken (sehr nützlich!)
+x, y, z = (10, 20, 30)
+print(x, y, z)   # → 10 20 30</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>10 20 30</code></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py1);margin-bottom:6px">Wann List?</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Wenn sich die Daten ändern sollen — dynamische Sammlungen, Listen zum Befüllen im Loop</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--color-py1);margin-bottom:6px">Wann Tuple?</div>
+        <div style="font-size:12px;color:var(--text-secondary)">Wenn die Daten fest sind — Koordinaten, Funktions-Rückgabewerte, konstante Konfigurationen</div>
+      </div>
+    </div>
+
+    <!-- ===== 7. SETS ===== -->
+    <h2 class="section-title" id="sets">🎯 Sets (Mengen)</h2>
+
+    <p>Ein <strong>Set</strong> ist eine ungeordnete Sammlung <em>ohne Duplikate</em>. Syntax: geschweifte Klammern <code>{}</code>. Sets eignen sich perfekt zum Entfernen von doppelten Werten.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Duplikate werden automatisch entfernt!
+my_set = {1, 2, 3, 2, 1, 3}
+print(my_set)   # → {1, 2, 3}   (Reihenfolge nicht garantiert)
+
+# Elemente hinzufügen / entfernen
+my_set.add(4)
+my_set.remove(1)   # entfernt 1 (KeyError wenn nicht vorhanden)
+my_set.discard(9)  # entfernt 9 (kein Fehler wenn nicht vorhanden)
+
+# Zugehörigkeit prüfen — sehr schnell!
+3 in my_set     # → True
+
+# Mengenoperationen
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+
+set_a & set_b   # Schnittmenge  → {3, 4}
+set_a | set_b   # Vereinigung   → {1, 2, 3, 4, 5, 6}
+set_a - set_b   # Differenz     → {1, 2}
+
+# Liste → Set → zurück (Duplikate entfernen!)
+my_list = [1, 2, 2, 3, 3, 3, 4]
+unique  = list(set(my_list))   # → [1, 2, 3, 4]</code></pre>
+      <div class="code-output"><div class="output-label">Output</div><code>{1, 2, 3}
+[1, 2, 3, 4]</code></div>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:14px 0">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Die 4 Python-Datenstrukturen im Überblick</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="background:var(--bg)">
+            <th style="text-align:left;padding:7px 10px;border:1px solid var(--border)">Typ</th>
+            <th style="text-align:left;padding:7px 10px;border:1px solid var(--border)">Syntax</th>
+            <th style="text-align:left;padding:7px 10px;border:1px solid var(--border)">Geordnet?</th>
+            <th style="text-align:left;padding:7px 10px;border:1px solid var(--border)">Änderbar?</th>
+            <th style="text-align:left;padding:7px 10px;border:1px solid var(--border)">Duplikate?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:7px 10px;border:1px solid var(--border)"><strong>List</strong></td><td style="padding:7px 10px;border:1px solid var(--border)"><code>[1, 2, 3]</code></td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:7px 10px;border:1px solid var(--border)"><strong>Dict</strong></td><td style="padding:7px 10px;border:1px solid var(--border)"><code>{'k': 'v'}</code></td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja (ab 3.7)</td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td><td style="padding:7px 10px;border:1px solid var(--border)">⚠️ Keys: Nein</td></tr>
+          <tr><td style="padding:7px 10px;border:1px solid var(--border)"><strong>Tuple</strong></td><td style="padding:7px 10px;border:1px solid var(--border)"><code>(1, 2, 3)</code></td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td><td style="padding:7px 10px;border:1px solid var(--border)">❌ Nein</td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td></tr>
+          <tr style="background:var(--bg)"><td style="padding:7px 10px;border:1px solid var(--border)"><strong>Set</strong></td><td style="padding:7px 10px;border:1px solid var(--border)"><code>{1, 2, 3}</code></td><td style="padding:7px 10px;border:1px solid var(--border)">❌ Nein</td><td style="padding:7px 10px;border:1px solid var(--border)">✅ Ja</td><td style="padding:7px 10px;border:1px solid var(--border)">❌ Nein</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== 8. DICTIONARIES ===== -->
+    <h2 class="section-title" id="dictionaries">📖 Dictionaries</h2>
+
+    <p>Ein <strong>Dictionary</strong> speichert Daten als <em>Schlüssel-Wert-Paare</em> (<code>key: value</code>). Im Gegensatz zur Liste hat man keinen Index, sondern einen Namen (Key) für jeden Eintrag.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Erstellen
+me = {}
+me['height']     = 180
+me['hair_color'] = 'blonde'
+me['age']        = 36
+
+# Oder direkt:
+me = {'height': 180, 'hair_color': 'blonde', 'age': 36}
+
+# Zugriff
+print(me['height'])         # → 180
+
+# Wert ändern
+me['height'] = me['height'] + 10
+
+# Sicherer Zugriff (kein KeyError)
+me.get('weight', 0)         # gibt 0 zurück falls 'weight' nicht existiert
+
+# Löschen
+del me['age']
+
+# Alle Keys / Values / beides
+me.keys()     # → dict_keys(['height', 'hair_color'])
+me.values()   # → dict_values([190, 'blonde'])
+me.items()    # → dict_items([('height', 190), ('hair_color', 'blonde')])</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Verschachtelte Dictionaries</h3>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Dictionaries können beliebig tief verschachtelt sein
+sensor_data_dict = {
+    '1602914400000': {
+        'machine_state': 'starting',
+        'batch_data': [34, 36, 40, 41]
+    },
+    '1602921600000': {
+        'machine_state': 'running',
+        'batch_data': [55, 60, 54, 52]
+    }
+}
+
+# Zugriff auf verschachtelte Werte
+print(sensor_data_dict['1602921600000']['machine_state'])  # → 'running'
+print(sensor_data_dict['1602914400000']['batch_data'][2])  # → 40</code></pre>
+    </div>
+
+    <h3 class="subsection-title">Liste vs. Dictionary — Wann was?</h3>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead>
+        <tr style="background:var(--bg)">
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Liste</th>
+          <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Dictionary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Zugriff per <strong>Index</strong> (0, 1, 2, …)</td><td style="padding:7px 12px;border:1px solid var(--border)">Zugriff per <strong>Key</strong> (Name)</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)">Reihenfolge wichtig</td><td style="padding:7px 12px;border:1px solid var(--border)">Reihenfolge zweitrangig</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)">Gut für gleichartige Dinge</td><td style="padding:7px 12px;border:1px solid var(--border)">Gut für strukturierte Objekte</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><code>['Max', 'Anna', 'Tom']</code></td><td style="padding:7px 12px;border:1px solid var(--border)"><code>{'name': 'Max', 'age': 25}</code></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Coding Yoga Dicts 1 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Dictionaries I</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(sum(my_dict.values()))</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_dict = {'2': 1, '3': 3, '4': 5}
+keys_list = list(my_dict.keys())
+my_dict['5'] = int(keys_list[-2]) ** my_dict['3']
+print(sum(my_dict.values()))</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># keys_list = ['2', '3', '4']
+# keys_list[-2] = '3'  → int('3') = 3
+# my_dict['3'] = 3
+# my_dict['5'] = 3 ** 3 = 27
+# my_dict = {'2': 1, '3': 3, '4': 5, '5': 27}
+# sum([1, 3, 5, 27]) = 36
+# Ergebnis: 36</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coding Yoga Dicts 2 -->
+    <div class="yoga-box">
+      <div class="yoga-header">
+        <span class="yoga-emoji">🧘</span>
+        <span class="yoga-title">Coding Yoga: Dictionaries II — Verschachtelter Zugriff</span>
+        <span class="yoga-badge">Aufgabe</span>
+        <span class="yoga-arrow">▶</span>
+      </div>
+      <div class="yoga-body">
+        <p class="yoga-question">Was gibt <code>print(result)</code> aus?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_dict = {
+    'I_can_count': [1, 2, 3, 'a lot!'],
+    'python':      'is_like_a_good_cup_of_coffee'
+}
+list_of_keys = list(my_dict.keys())
+result = my_dict['I_can_count'][-1][-3]
+print(result)</code></pre>
+        </div>
+        <button class="yoga-reveal">👀 Lösung anzeigen</button>
+        <div class="yoga-solution">
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+            <pre><code># my_dict['I_can_count'] = [1, 2, 3, 'a lot!']
+# my_dict['I_can_count'][-1] = 'a lot!'   (letztes Element der Liste)
+# 'a lot!'[-3] = 'o'  (drittletztes Zeichen des Strings)
+# Ergebnis: 'o'</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 9. KONVERTIERUNG ===== -->
+    <h2 class="section-title" id="konvertierung">🔄 Typkonvertierung</h2>
+
+    <p>Manchmal muss man einen Typ in einen anderen umwandeln — z.B. wenn <code>input()</code> immer einen String zurückgibt, man aber eine Zahl braucht.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>str(36)         # → "36"      int → str
+int("36")       # → 36        str → int
+float(1)        # → 1.0       int → float
+int(3.9)        # → 3         float → int (KEIN Runden, schneidet ab!)
+int(True)       # → 1         bool → int
+bool(0)         # → False
+bool(1)         # → True
+
+# Typ prüfen
+type("Hallo")   # → &lt;class 'str'&gt;
+type(42)        # → &lt;class 'int'&gt;
+
+# Praxisbeispiel: Nutzereingabe verarbeiten
+my_age = input("Bitte Alter eingeben: ")   # gibt immer str zurück
+my_age = int(my_age)                        # in int umwandeln</code></pre>
+    </div>
+
+    <!-- ===== 10. STIL & TRACEBACK ===== -->
+    <h2 class="section-title" id="stil">✨ Stil & Fehler lesen</h2>
+
+    <h3 class="subsection-title">Style-Konventionen</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:8px">❌ Nicht so</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Deutsche Namen
+anzahl = 5
+größe = 10
+
+# Kommentar auf Deutsch
+# hier berechnen wir die größe</code></pre>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:14px">
+        <div style="font-size:12px;font-weight:700;color:#059669;margin-bottom:8px">✅ So besser</div>
+        <div class="code-block" style="margin:0">
+          <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># English names
+count = 5
+size = 10
+
+# calculate size
+# comment in English</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <ul class="content-list">
+      <li><strong>Variablennamen auf Englisch</strong> — internationaler Standard, keine deutschen Umlaute</li>
+      <li><strong>Kommentare auf Englisch</strong> schreiben — damit der Code für alle lesbar ist</li>
+      <li><strong>Dateinamen</strong>: keine Großbuchstaben, Sonderzeichen oder Leerzeichen — z.B. <code>meine_daten.csv</code> statt <code>Meine Daten!.csv</code></li>
+      <li><strong>snake_case</strong> für Variablen und Funktionen: <code>student_name</code>, <code>my_list</code></li>
+      <li><strong>UPPER_CASE</strong> für Konstanten: <code>MAX_STUDENTS = 30</code></li>
+    </ul>
+
+    <h3 class="subsection-title">Tracebacks lesen</h3>
+
+    <p>Wenn Python einen Fehler findet, gibt es einen <strong>Traceback</strong> aus. Das klingt einschüchternd — ist aber nur eine Fehlerbeschreibung!</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code># Dieser Code hat einen Fehler:
+student_count = 42
+print(studenCount)   # Tippfehler!</code></pre>
+      <div class="code-output"><div class="output-label">Traceback (Fehlermeldung)</div><code>Traceback (most recent call last):
+  File "mein_skript.py", line 3, in &lt;module&gt;
+    print(studenCount)
+NameError: name 'studenCount' is not defined</code></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:5px">1. Wo?</div>
+        <div style="font-size:12px;color:var(--text-secondary)"><code>File "...", line 3</code> — Datei und Zeilennummer des Fehlers</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:5px">2. Was?</div>
+        <div style="font-size:12px;color:var(--text-secondary)"><code>print(studenCount)</code> — die fehlerhafte Zeile wird gezeigt</div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:5px">3. Warum?</div>
+        <div style="font-size:12px;color:var(--text-secondary)"><code>NameError: name ... is not defined</code> — Fehlertyp und Beschreibung</div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Gewöhne dich an Fehler — sie sind normal!</strong>
+        <p>Alle Programmierer bekommen täglich Fehlermeldungen. <strong>Google und StackOverflow sind deine Freunde.</strong> Kopiere die Fehlermeldung einfach in die Suchmaschine — meistens findet sich sofort eine Lösung.</p>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title" id="quiz">🎯 Selbsttest</h2>
+
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Variablen & Datentypen</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Was gibt <code>type(3.0)</code> zurück?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">&lt;class 'int'&gt;</div>
+          <div class="quiz-option" data-correct="true">&lt;class 'float'&gt;</div>
+          <div class="quiz-option" data-correct="false">&lt;class 'str'&gt;</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was ist das Ergebnis von <code>"python"[1:4]</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">"pyt"</div>
+          <div class="quiz-option" data-correct="true">"yth"</div>
+          <div class="quiz-option" data-correct="false">"ytho"</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Wie fügt man ein Element ans Ende einer Liste hinzu?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">list.add("element")</div>
+          <div class="quiz-option" data-correct="false">list.push("element")</div>
+          <div class="quiz-option" data-correct="true">list.append("element")</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">4. Was ist der Unterschied zwischen <code>=</code> und <code>==</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Kein Unterschied, beide sind dasselbe</div>
+          <div class="quiz-option" data-correct="true"><code>=</code> weist zu, <code>==</code> vergleicht (gibt True/False)</div>
+          <div class="quiz-option" data-correct="false"><code>==</code> weist zu, <code>=</code> vergleicht</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">5. Welche Methode gibt <code>-1</code> zurück, wenn ein Text NICHT gefunden wird?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">.search()</div>
+          <div class="quiz-option" data-correct="true">.find()</div>
+          <div class="quiz-option" data-correct="false">.locate()</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">6. Was ergibt <code>[0] * 5</code>?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">0</div>
+          <div class="quiz-option" data-correct="true">[0, 0, 0, 0, 0]</div>
+          <div class="quiz-option" data-correct="false">[0, 5]</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">7. Welche Datenstruktur erlaubt KEINE Duplikate?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">List</div>
+          <div class="quiz-option" data-correct="false">Tuple</div>
+          <div class="quiz-option" data-correct="true">Set</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">8. Was gibt <code>not (3 &gt; 5)</code> zurück?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">False</div>
+          <div class="quiz-option" data-correct="true">True</div>
+          <div class="quiz-option" data-correct="false">None</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">9. Kann man ein Tuple nach der Erstellung verändern?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Ja, mit .append()</div>
+          <div class="quiz-option" data-correct="true">Nein — Tuples sind unveränderbar (immutable)</div>
+          <div class="quiz-option" data-correct="false">Ja, aber nur bei Integer-Werten</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <!-- Erledigt-Button -->
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m02"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <!-- Prev / Next -->
+    <div class="page-nav">
+      <a class="page-nav-btn" href="01b-python-einfuehrung.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Python Einführung</span>
+      </a>
+      <a class="page-nav-btn next" href="03-loops-conditions.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Loops & Conditions</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

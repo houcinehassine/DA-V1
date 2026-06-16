@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Understanding II – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen & Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops & Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen & Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item active mod-du2" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 9 Module</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Modul 07 – Data Understanding II</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-du2" style="--mc:var(--color-du2)">
+        <span>🔗</span> Modul 07 · Data Understanding
+      </div>
+      <h1 class="page-title">Data Understanding II: Paarweise & Multivariate Analysen</h1>
+      <p class="page-subtitle">Beziehungen zwischen Variablen verstehen — Scatter Plots, Korrelation, Pair Plots, Hypothesentests und die Warnung von Anscombe's Quartet.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px">Inhalte</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <a href="#scatter" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Scatter Plot</a>
+        <a href="#jointplot" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Joint Plots (hex, kde, reg)</a>
+        <a href="#korrelation" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Korrelationskoeffizient</a>
+        <a href="#pairplot" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Pair Plots</a>
+        <a href="#korrelationsmatrix" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Korrelationsmatrix</a>
+        <a href="#ttest" style="font-size:13px;color:var(--color-du2);font-weight:600">→ t-Test & Hypothesentest</a>
+        <a href="#anscombe" style="font-size:13px;color:var(--color-du2);font-weight:600">→ Anscombe's Quartet ⚠️</a>
+      </div>
+    </div>
+
+    <!-- ===== SCATTER ===== -->
+    <h2 class="section-title" id="scatter">🔵 Scatter Plot</h2>
+
+    <p>Ein <strong>Scatter Plot</strong> (Streudiagramm) zeigt die Beziehung zwischen zwei numerischen Variablen. Jeder Punkt = eine Beobachtung.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import plotly.express as px
+import matplotlib.pyplot as plt
+
+# Plotly (interaktiv)
+fig = px.scatter(df, x='variable_1', y='variable_2',
+                 opacity=0.75, title='Scatter Plot')
+fig.show()
+
+# Matplotlib (klassisch)
+plt.scatter(df['variable_1'], df['variable_2'], alpha=0.5)
+plt.xlabel('Variable 1')
+plt.ylabel('Variable 2')
+plt.show()</code></pre>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:20px;margin-bottom:4px">↗️</div>
+        <div style="font-weight:700;font-size:12px;color:#059669">Positiv korreliert</div>
+        <div style="font-size:11px;color:#065f46">x steigt → y steigt</div>
+      </div>
+      <div style="background:#fef2f2;border:1.5px solid #fca5a5;border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:20px;margin-bottom:4px">↘️</div>
+        <div style="font-weight:700;font-size:12px;color:#dc2626">Negativ korreliert</div>
+        <div style="font-size:11px;color:#991b1b">x steigt → y sinkt</div>
+      </div>
+      <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:20px;margin-bottom:4px">🌐</div>
+        <div style="font-weight:700;font-size:12px;color:var(--text-secondary)">Kein Zusammenhang</div>
+        <div style="font-size:11px;color:var(--text-muted)">Punkte zufällig verteilt</div>
+      </div>
+    </div>
+
+    <!-- ===== JOINT PLOTS ===== -->
+    <h2 class="section-title" id="jointplot">📊 Joint Plots</h2>
+
+    <p>Ein <strong>Joint Plot</strong> (Seaborn) kombiniert den Scatter Plot mit Randverteilungen — sehr praktisch für erste Datenexploration.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import seaborn as sns
+
+# scatter: klassischer Scatter mit Histogrammen am Rand
+sns.jointplot(data=df, x='var_1', y='var_2', kind='scatter')
+
+# hex: Hexbin für dichte Datenpunkte (verhindert Overplotting)
+sns.jointplot(data=df, x='var_1', y='var_2', kind='hex')
+
+# kde: Kernel Density Estimation (Wahrscheinlichkeitsdichte)
+sns.jointplot(data=df, x='var_1', y='var_2', kind='kde')
+
+# reg: Mit Regressionsgerade + Konfidenzintervall
+sns.jointplot(data=df, x='var_1', y='var_2', kind='reg', ci=95)</code></pre>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;font-size:13px;margin:12px 0">
+      <thead><tr style="background:var(--bg)">
+        <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">kind=</th>
+        <th style="text-align:left;padding:8px 12px;border:1px solid var(--border)">Wann nutzen?</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><code>'scatter'</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Wenige Datenpunkte (&lt; 1.000)</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><code>'hex'</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Viele Datenpunkte (Overplotting vermeiden)</td></tr>
+        <tr><td style="padding:7px 12px;border:1px solid var(--border)"><code>'kde'</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Kontinuierliche Wahrscheinlichkeitsdichte zeigen</td></tr>
+        <tr style="background:var(--bg)"><td style="padding:7px 12px;border:1px solid var(--border)"><code>'reg'</code></td><td style="padding:7px 12px;border:1px solid var(--border)">Linearen Zusammenhang modellieren und visualisieren</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ===== KORRELATION ===== -->
+    <h2 class="section-title" id="korrelation">📐 Korrelationskoeffizient (Pearson r)</h2>
+
+    <p>Der <strong>Pearson-Korrelationskoeffizient r</strong> misst die Stärke und Richtung des linearen Zusammenhangs zwischen zwei Variablen.</p>
+
+    <!-- Visuelle r-Skala -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:18px;margin:16px 0">
+      <div style="font-weight:700;font-size:13px;margin-bottom:12px;text-align:center">Interpretation von r</div>
+      <div style="display:flex;align-items:center;gap:0;border-radius:8px;overflow:hidden;margin-bottom:10px">
+        <div style="flex:1;background:#dc2626;padding:10px 4px;text-align:center;color:white;font-size:11px;font-weight:700">−1.0<br>Perfekt<br>negativ</div>
+        <div style="flex:1;background:#f87171;padding:10px 4px;text-align:center;color:white;font-size:11px;font-weight:700">−0.7<br>Stark<br>negativ</div>
+        <div style="flex:1;background:#fca5a5;padding:10px 4px;text-align:center;font-size:11px;font-weight:700">−0.3<br>Schwach<br>negativ</div>
+        <div style="flex:1;background:#e2e8f0;padding:10px 4px;text-align:center;font-size:11px;font-weight:700;color:var(--text-secondary)">0.0<br>Kein<br>Zusammenh.</div>
+        <div style="flex:1;background:#86efac;padding:10px 4px;text-align:center;font-size:11px;font-weight:700">+0.3<br>Schwach<br>positiv</div>
+        <div style="flex:1;background:#34d399;padding:10px 4px;text-align:center;font-size:11px;font-weight:700">+0.7<br>Stark<br>positiv</div>
+        <div style="flex:1;background:#059669;padding:10px 4px;text-align:center;color:white;font-size:11px;font-weight:700">+1.0<br>Perfekt<br>positiv</div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import numpy as np
+from scipy.stats import linregress
+
+# Korrelation zwischen zwei Variablen
+r = df['var_1'].corr(df['var_2'])
+print(f"r = {r:.3f}")
+
+# Mit scipy: r + p-Wert
+slope, intercept, r_value, p_value, std_err = linregress(X, y)
+print(f"r² = {r_value**2:.3f}")   # Bestimmtheitsmaß
+print(f"p  = {p_value:.4f}")      # Signifikanz
+
+# Korrelationsmatrix aller Spalten
+df.corr()
+
+# NumPy
+np.corrcoef(X.T, y.T)</code></pre>
+    </div>
+
+    <div class="info-box warn">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>Korrelation ≠ Kausalität!</strong>
+        <p>Nur weil zwei Variablen korreliert sind, bedeutet das nicht, dass eine die andere verursacht. Beispiel: Eisverkauf und Ertrinkungsunfälle korrelieren beide mit Sommerhitze.</p>
+      </div>
+    </div>
+
+    <!-- ===== PAIRPLOT ===== -->
+    <h2 class="section-title" id="pairplot">🔢 Pair Plots (Multivariate Analyse)</h2>
+
+    <p>Ein <strong>Pair Plot</strong> zeigt alle paarweisen Scatter Plots zwischen mehreren Variablen gleichzeitig — ideal für einen ersten Überblick über einen Datensatz.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import seaborn as sns
+
+# Einfacher Pair Plot
+sns.pairplot(data=df)
+
+# Mit Gruppenfärbung (hue)
+sns.pairplot(data=df, hue='label')   # färbt nach Klasse/Gruppe</code></pre>
+    </div>
+
+    <div class="info-box info">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Was zeigt die Diagonale?</strong>
+        <p>Auf der Diagonale eines Pair Plots steht die Verteilung jeder einzelnen Variable (Histogramm oder KDE). Die restlichen Felder zeigen paarweise Scatter Plots.</p>
+      </div>
+    </div>
+
+    <!-- ===== KORRELATIONSMATRIX ===== -->
+    <h2 class="section-title" id="korrelationsmatrix">🗺️ Korrelationsmatrix (Heatmap)</h2>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import matplotlib.pyplot as plt
+
+# Korrelationsmatrix berechnen
+corr_mat = df.corr()
+print(corr_mat)
+
+#             var_1    var_2    var_3
+# var_1     1.000   -0.183    0.904
+# var_2    -0.183    1.000   -0.453
+# var_3     0.904   -0.453    1.000
+
+# Als Heatmap visualisieren
+plt.imshow(corr_mat, cmap='RdBu', vmin=-1, vmax=1)
+plt.colorbar()
+plt.xticks(range(len(corr_mat)), corr_mat.columns, rotation=45)
+plt.yticks(range(len(corr_mat)), corr_mat.columns)
+plt.title('Korrelationsmatrix')
+plt.show()</code></pre>
+    </div>
+
+    <!-- ===== T-TEST ===== -->
+    <h2 class="section-title" id="ttest">🧪 Hypothesentest: t-Test</h2>
+
+    <p>Mit dem <strong>t-Test</strong> prüfen wir, ob der Unterschied zwischen zwei Gruppen statistisch signifikant ist — oder ob er zufällig entstanden sein könnte.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from scipy import stats
+
+data_a = [1, 2, 1, 2, 3, 1, 2]
+data_b = [4, 5, 4, 6, 3, 2, 1]
+
+result = stats.ttest_ind(data_a, data_b)
+print(result)
+# Ttest_indResult(statistic=-2.617, pvalue=0.022)</code></pre>
+    </div>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0">
+      <div style="font-weight:700;font-size:13px;margin-bottom:10px">Ergebnis interpretieren</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px">
+        <div style="background:#eff6ff;border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px;color:#1d4ed8">statistic</div>
+          <div style="color:var(--text-secondary)">Der t-Wert: Je weiter von 0, desto größer der Unterschied zwischen den Gruppen</div>
+        </div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:10px">
+          <div style="font-weight:700;margin-bottom:4px;color:#059669">p-value</div>
+          <div style="color:var(--text-secondary)">Wahrscheinlichkeit, dieses Ergebnis durch Zufall zu sehen. <strong>p &lt; 0.05 → signifikant</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0">
+      <div class="info-box tip" style="margin:0">
+        <div class="icon">✅</div>
+        <div class="content">
+          <strong>p &lt; 0.05</strong>
+          <p>Signifikant! Der Unterschied ist wahrscheinlich kein Zufall.</p>
+        </div>
+      </div>
+      <div class="info-box warn" style="margin:0">
+        <div class="icon">⚠️</div>
+        <div class="content">
+          <strong>p ≥ 0.05</strong>
+          <p>Nicht signifikant — kein ausreichender Beweis für einen Unterschied.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ANSCOMBE ===== -->
+    <h2 class="section-title" id="anscombe">⚠️ Anscombe's Quartet — Immer visualisieren!</h2>
+
+    <p>Anscombe's Quartet zeigt 4 Datensätze, die <strong>identische statistische Kennzahlen</strong> haben (gleicher Mittelwert, gleiche Varianz, gleiche Korrelation) — aber völlig <strong>unterschiedliche Verteilungen</strong>.</p>
+
+    <div style="background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:18px;margin:16px 0">
+      <div style="font-weight:700;font-size:14px;margin-bottom:12px;color:#92400e">🚨 Die 4 Datensätze haben alle:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;margin-bottom:12px">
+        <div>• Mittelwert x ≈ 9.0</div><div>• Mittelwert y ≈ 7.5</div>
+        <div>• Varianz x ≈ 11.0</div><div>• Varianz y ≈ 4.1</div>
+        <div>• Korrelation r ≈ 0.816</div><div>• Regressionsgerade identisch</div>
+      </div>
+      <div style="font-weight:700;color:#92400e">→ Aber im Plot sieht jeder Datensatz VÖLLIG anders aus!</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>import seaborn as sns
+
+# Anscombe-Datensatz laden
+df_anscombe = sns.load_dataset("anscombe")
+
+# Alle 4 Gruppen visualisieren
+sns.lmplot(x="x", y="y",
+           col="dataset",     # je Datensatz ein Plot
+           hue="dataset",
+           data=df_anscombe,
+           col_wrap=2, ci=None)</code></pre>
+    </div>
+
+    <div class="info-box error">
+      <div class="icon">🔴</div>
+      <div class="content">
+        <strong>Die Lektion: Immer zuerst visualisieren!</strong>
+        <p>Statistiken alleine reichen nicht — die Grafik zeigt, was die Zahlen verschweigen. Outlier, Kurvenformen, Clustern: Nur im Plot erkennbar.</p>
+      </div>
+    </div>
+
+    <!-- ===== QUIZ ===== -->
+    <h2 class="section-title">🎯 Selbsttest</h2>
+    <div class="quiz-box">
+      <div class="quiz-title">📋 Teste dein Wissen — Data Understanding II</div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">1. Was bedeutet r = −0.85?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Starker positiver Zusammenhang</div>
+          <div class="quiz-option" data-correct="true">Starker negativer Zusammenhang (x steigt → y sinkt)</div>
+          <div class="quiz-option" data-correct="false">Kein Zusammenhang</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">2. Was ist das Problem mit der Aussage "Eisverkauf verursacht Ertrinkungsunfälle, weil sie korrelieren"?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Die Korrelation ist falsch berechnet</div>
+          <div class="quiz-option" data-correct="true">Korrelation bedeutet nicht Kausalität — beide werden durch eine dritte Variable (Hitze) verursacht</div>
+          <div class="quiz-option" data-correct="false">Man müsste einen t-Test durchführen</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">3. Welches <code>kind</code> beim jointplot nutzt man bei sehr vielen Datenpunkten, um Overplotting zu vermeiden?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">'scatter'</div>
+          <div class="quiz-option" data-correct="true">'hex'</div>
+          <div class="quiz-option" data-correct="false">'reg'</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">4. Was lehrt uns Anscombe's Quartet?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Statistiken wie Mittelwert und Korrelation reichen aus, um Daten zu verstehen</div>
+          <div class="quiz-option" data-correct="true">Man sollte Daten immer visualisieren — gleiche Statistiken können völlig verschiedene Verteilungen verbergen</div>
+          <div class="quiz-option" data-correct="false">Der t-Test ist die wichtigste statistische Methode</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="m06b"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--text-primary);color:white;font-size:14px;font-weight:700;cursor:pointer">
+        ✓ Modul als erledigt markieren
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="06-data-understanding-single.html">
+        <span class="pnb-label">← Vorheriges Modul</span>
+        <span class="pnb-title">Data Understanding I</span>
+      </a>
+      <a class="page-nav-btn next" href="08-data-preparation.html">
+        <span class="pnb-label">Nächstes Modul →</span>
+        <span class="pnb-title">Data Preparation</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+</body>
+</html>

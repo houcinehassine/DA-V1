@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Analytics – Lernplattform</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-title">📊 Data Analytics</div>
+      <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+    </div>
+
+    <div class="sidebar-search">
+      <input
+        id="search-input"
+        class="search-input"
+        type="text"
+        placeholder="Suchen… (z.B. Liste, Pandas)"
+        autocomplete="off"
+      >
+      <div id="search-results" class="search-results"></div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item active" data-id="index" data-href="index.html" href="index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>
+        Dashboard
+        <span class="nav-check">✓</span>
+      </a>
+
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="modules/01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>
+        01 · Setup &amp; Tools
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="modules/02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>
+        02 · Variablen & Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="modules/03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>
+        03 · Loops & Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="modules/04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>
+        04 · Funktionen & Packages
+        <span class="nav-check">✓</span>
+      </a>
+
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="modules/05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>
+        05 · Data Science Prozess
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="modules/06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>
+        06 · Data Understanding I
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="modules/07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>
+        07 · Data Understanding II
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="modules/08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>
+        08 · Data Preparation
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="modules/09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>
+        09 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="progress-label">
+        <span>Fortschritt</span>
+        <span class="progress-count">0 / 10 Module</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== HAUPTBEREICH ===== -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-label">Sommersemester 2026</div>
+      <div class="hero-title">Data Analytics</div>
+      <div class="hero-sub">
+        Von Python-Grundlagen bis Machine Learning — alle Inhalte aus den Vorlesungsunterlagen, interaktiv aufbereitet.
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">10</div><div class="lbl">Module</div></div>
+        <div class="hero-stat"><div class="num">7</div><div class="lbl">Core Notebooks</div></div>
+        <div class="hero-stat"><div class="num">50+</div><div class="lbl">Code-Beispiele</div></div>
+        <div class="hero-stat"><div class="num">30+</div><div class="lbl">Coding Yoga Aufgaben</div></div>
+      </div>
+    </div>
+
+    <!-- Modul-Karten -->
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:4px">Alle Module</h2>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:0">Klicke auf ein Modul, um direkt zu starten.</p>
+
+    <div class="modules-grid">
+
+      <!-- Modul 01 -->
+      <a class="module-card mod-start" href="modules/01-getting-started.html" data-id="m01">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🚀</div>
+        <div class="card-num">Modul 01</div>
+        <div class="card-title">Getting Started</div>
+        <div class="card-desc">Python-Umgebung einrichten, Jupyter Notebooks kennenlernen, erste Schritte.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#ccfbf1;color:#0f766e">Anaconda</span>
+          <span class="card-topic" style="background:#ccfbf1;color:#0f766e">Jupyter</span>
+          <span class="card-topic" style="background:#ccfbf1;color:#0f766e">Setup</span>
+        </div>
+      </a>
+
+      <!-- Modul 02 -->
+      <a class="module-card mod-py1" href="modules/02-variablen-datentypen.html" data-id="m02">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🔢</div>
+        <div class="card-num">Modul 02</div>
+        <div class="card-title">Variablen & Datentypen</div>
+        <div class="card-desc">Zahlen, Strings, Boolean, Listen, Dictionaries und Typkonvertierung.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#dbeafe;color:#1d4ed8">int / float</span>
+          <span class="card-topic" style="background:#dbeafe;color:#1d4ed8">Strings</span>
+          <span class="card-topic" style="background:#dbeafe;color:#1d4ed8">Listen</span>
+          <span class="card-topic" style="background:#dbeafe;color:#1d4ed8">Dicts</span>
+        </div>
+      </a>
+
+      <!-- Modul 03 -->
+      <a class="module-card mod-py2" href="modules/03-loops-conditions.html" data-id="m03">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🔄</div>
+        <div class="card-num">Modul 03</div>
+        <div class="card-title">Loops & Conditions</div>
+        <div class="card-desc">for-Loops, while-Loops, if/elif/else und List Comprehensions.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#bfdbfe;color:#1e3a8a">for</span>
+          <span class="card-topic" style="background:#bfdbfe;color:#1e3a8a">while</span>
+          <span class="card-topic" style="background:#bfdbfe;color:#1e3a8a">if/else</span>
+          <span class="card-topic" style="background:#bfdbfe;color:#1e3a8a">Comprehension</span>
+        </div>
+      </a>
+
+      <!-- Modul 04 -->
+      <a class="module-card mod-py3" href="modules/04-funktionen-packages.html" data-id="m04">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">⚙️</div>
+        <div class="card-num">Modul 04</div>
+        <div class="card-title">Funktionen & Packages</div>
+        <div class="card-desc">Eigene Funktionen schreiben, Lambda, filter/map und Imports.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#ede9fe;color:#5b21b6">def</span>
+          <span class="card-topic" style="background:#ede9fe;color:#5b21b6">lambda</span>
+          <span class="card-topic" style="background:#ede9fe;color:#5b21b6">numpy</span>
+          <span class="card-topic" style="background:#ede9fe;color:#5b21b6">pandas</span>
+        </div>
+      </a>
+
+      <!-- Modul 05 -->
+      <a class="module-card mod-ds" href="modules/05-data-science-prozess.html" data-id="m05">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🗺️</div>
+        <div class="card-num">Modul 05</div>
+        <div class="card-title">Data Science Prozess</div>
+        <div class="card-desc">CRISP-DM Phasen, Business Understanding, Projektvorgehen.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#ede9fe;color:#4c1d95">CRISP-DM</span>
+          <span class="card-topic" style="background:#ede9fe;color:#4c1d95">Business</span>
+          <span class="card-topic" style="background:#ede9fe;color:#4c1d95">Prozess</span>
+        </div>
+      </a>
+
+      <!-- Modul 06 -->
+      <a class="module-card mod-du1" href="modules/06-data-understanding-single.html" data-id="m06a">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">📈</div>
+        <div class="card-num">Modul 06</div>
+        <div class="card-title">Data Understanding I</div>
+        <div class="card-desc">NumPy, Pandas, Histogramme, Boxplots, deskriptive Statistik.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#d1fae5;color:#065f46">NumPy</span>
+          <span class="card-topic" style="background:#d1fae5;color:#065f46">Pandas</span>
+          <span class="card-topic" style="background:#d1fae5;color:#065f46">Histogramm</span>
+          <span class="card-topic" style="background:#d1fae5;color:#065f46">Boxplot</span>
+        </div>
+      </a>
+
+      <!-- Modul 07 -->
+      <a class="module-card mod-du2" href="modules/07-data-understanding-multivariate.html" data-id="m06b">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🔗</div>
+        <div class="card-num">Modul 07</div>
+        <div class="card-title">Data Understanding II</div>
+        <div class="card-desc">Scatter Plots, Korrelation, Pair Plots, Hypothesentests.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#a7f3d0;color:#064e3b">Scatter</span>
+          <span class="card-topic" style="background:#a7f3d0;color:#064e3b">Korrelation</span>
+          <span class="card-topic" style="background:#a7f3d0;color:#064e3b">t-Test</span>
+        </div>
+      </a>
+
+      <!-- Modul 08 -->
+      <a class="module-card mod-dp" href="modules/08-data-preparation.html" data-id="m07">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🛠️</div>
+        <div class="card-num">Modul 08</div>
+        <div class="card-title">Data Preparation</div>
+        <div class="card-desc">Encoding, Feature Selection, MinMax-Scaling, Standardisierung.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#fef3c7;color:#78350f">Encoding</span>
+          <span class="card-topic" style="background:#fef3c7;color:#78350f">Scaling</span>
+          <span class="card-topic" style="background:#fef3c7;color:#78350f">Selection</span>
+        </div>
+      </a>
+
+      <!-- Modul 09 -->
+      <a class="module-card mod-ml" href="modules/09-machine-learning.html" data-id="m08">
+        <div class="card-done-badge">✓ Erledigt</div>
+        <div class="card-icon">🤖</div>
+        <div class="card-num">Modul 09</div>
+        <div class="card-title">Machine Learning Intro</div>
+        <div class="card-desc">sklearn-Prozess, Lineare & Polynomiale Regression, Overfitting.</div>
+        <div class="card-topics">
+          <span class="card-topic" style="background:#fce7f3;color:#831843">sklearn</span>
+          <span class="card-topic" style="background:#fce7f3;color:#831843">Regression</span>
+          <span class="card-topic" style="background:#fce7f3;color:#831843">Overfitting</span>
+        </div>
+      </a>
+
+    </div><!-- /modules-grid -->
+
+  </main><!-- /main -->
+
+</div><!-- /app -->
+
+<!-- Fuse.js (Suche, CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/search.js"></script>
+</body>
+</html>
