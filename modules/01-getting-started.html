@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Getting Started – Data Analytics</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
 </head>
 <body>
 <div class="app">
@@ -24,6 +25,14 @@
       <div class="nav-section-title">Übersicht</div>
       <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
         <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
       </a>
       <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
       <a class="nav-item active mod-start" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
@@ -56,6 +65,31 @@
       </a>
       <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
         <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
       </a>
     </nav>
     <div class="sidebar-footer">
@@ -469,7 +503,8 @@ def my_function(x):
   </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/search.js"></script>
 </body>

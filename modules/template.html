@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MODULNAME – Data Analytics</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
 </head>
 <body>
 <div class="app">
@@ -30,6 +31,14 @@
       <div class="nav-section-title">Übersicht</div>
       <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
         <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
         <span class="nav-check">✓</span>
       </a>
       <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
@@ -131,7 +140,8 @@
   </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/search.js"></script>
 </body>

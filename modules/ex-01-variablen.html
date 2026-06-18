@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Übungsblatt 01 – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" href="01b-python-einfuehrung.html"><span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex active" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 6 Aufgaben</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Übungsblatt 01 – Variablen &amp; Datentypen</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-ex" style="--mc:var(--color-ex)">
+        <span>✏️</span> Übungsblatt 01
+      </div>
+      <h1 class="page-title">Variablen, Datentypen &amp; Datenstrukturen</h1>
+      <p class="page-subtitle">Quiz und Aufgaben zu Variablen, Datentypen, Listen und Dictionaries aus dem Python Crashkurs.</p>
+    </div>
+
+    <!-- ===== QUIZ: VARIABLEN & DATENTYPEN ===== -->
+    <h2 class="section-title" id="quiz-var">📋 Quiz: Variablen &amp; Datentypen</h2>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F1</span>
+        Warum ist <code>my_favorite_number_is_42</code> gültig und <code>42_is_the_answer_to_everything</code> nicht?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Weil Zahlen keine gültigen Zeichen in Variablennamen sind</button>
+        <button class="quiz-option" data-correct="true">Weil Variablennamen nicht mit einer Zahl beginnen dürfen</button>
+        <button class="quiz-option" data-correct="false">Weil Unterstriche in Variablennamen verboten sind</button>
+        <button class="quiz-option" data-correct="false">Weil der Name zu viele Zeichen enthält</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#variablen-regeln">
+        Modul 02 · Regeln für Variablennamen
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F2</span>
+        Was sind Operatoren, was sind Werte? Ordne zu: <code>*</code>, <code>'hello'</code>, <code>-88.8</code>, <code>-</code>, <code>/</code>, <code>+</code>, <code>5</code>
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="true">Operatoren: <code>*</code> <code>-</code> <code>/</code> <code>+</code> — Werte: <code>'hello'</code> <code>-88.8</code> <code>5</code></button>
+        <button class="quiz-option" data-correct="false">Operatoren: <code>'hello'</code> <code>-88.8</code> <code>5</code> — Werte: <code>*</code> <code>-</code> <code>/</code> <code>+</code></button>
+        <button class="quiz-option" data-correct="false">Alle sind Werte</button>
+        <button class="quiz-option" data-correct="false">Alle sind Operatoren</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#zahlen">
+        Modul 02 · Zahlen, int &amp; float
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F3</span>
+        Was ist eine Variable, was ein String? <code>spam</code> vs. <code>'spam'</code>
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false"><code>spam</code> ist ein String, <code>'spam'</code> ist eine Variable</button>
+        <button class="quiz-option" data-correct="true"><code>spam</code> ist eine Variable (Name), <code>'spam'</code> ist ein String-Literal</button>
+        <button class="quiz-option" data-correct="false">Beide sind Strings</button>
+        <button class="quiz-option" data-correct="false">Beide sind Variablen</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#variablen">
+        Modul 02 · Variablen &amp; Zuweisung
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F4</span>
+        Nenne 3 Datentypen in Python.
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">number, text, boolean</button>
+        <button class="quiz-option" data-correct="false">Integer, Decimal, Word</button>
+        <button class="quiz-option" data-correct="true">int, float, str (+ bool, list, dict…)</button>
+        <button class="quiz-option" data-correct="false">var, const, let</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#zahlen">
+        Modul 02 · Datentypen: int, float, str
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F5</span>
+        Was ist der Unterschied zwischen einer Expression und einem Statement?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Es gibt keinen Unterschied</button>
+        <button class="quiz-option" data-correct="true">Eine Expression hat einen Rückgabewert, ein Statement führt eine Aktion aus</button>
+        <button class="quiz-option" data-correct="false">Ein Statement hat einen Rückgabewert, eine Expression führt eine Aktion aus</button>
+        <button class="quiz-option" data-correct="false">Expressions sind in Java, Statements in Python</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#variablen">
+        Modul 02 · Variablen &amp; Ausdrücke
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F6</span>
+        Unterschied <code>temperature = 35</code> vs. <code>temperature == 35</code>?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Beide sind gleich — nur Schreibweise unterscheidet sich</button>
+        <button class="quiz-option" data-correct="true"><code>=</code> weist einen Wert zu (Assignment), <code>==</code> vergleicht zwei Werte (Comparison)</button>
+        <button class="quiz-option" data-correct="false"><code>==</code> weist einen Wert zu, <code>=</code> vergleicht</button>
+        <button class="quiz-option" data-correct="false"><code>=</code> ist für floats, <code>==</code> für integers</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#boolean">
+        Modul 02 · Boolean &amp; Vergleichsoperatoren
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F7</span>
+        Was kommt raus? <code>n_iteration = 0; n_iteration = n_iteration + 1</code>
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">0</button>
+        <button class="quiz-option" data-correct="true">1 — der Wert wird inkrementiert</button>
+        <button class="quiz-option" data-correct="false">Error: n_iteration nicht definiert</button>
+        <button class="quiz-option" data-correct="false">None</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#variablen">
+        Modul 02 · Variablen &amp; Zuweisung
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F8</span>
+        Nenne 3 eingebaute Funktionen zur Typkonvertierung.
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="true"><code>int()</code>, <code>float()</code>, <code>str()</code></button>
+        <button class="quiz-option" data-correct="false"><code>convert()</code>, <code>cast()</code>, <code>parse()</code></button>
+        <button class="quiz-option" data-correct="false"><code>to_int()</code>, <code>to_float()</code>, <code>to_str()</code></button>
+        <button class="quiz-option" data-correct="false"><code>Integer()</code>, <code>Float()</code>, <code>String()</code></button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#konvertierung">
+        Modul 02 · Typkonvertierung
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F9</span>
+        Warum gibt es einen Fehler bei <code>'I don&#39;t want ' + 100 + ' spam mails.'</code>?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Weil <code>+</code> nicht mit Strings verwendet werden darf</button>
+        <button class="quiz-option" data-correct="true">Weil man einen String nicht direkt mit einem Integer (<code>+</code>) verketten kann — <code>str(100)</code> nötig</button>
+        <button class="quiz-option" data-correct="false">Weil Strings zu lang sind</button>
+        <button class="quiz-option" data-correct="false">Weil <code>don't</code> einen Syntaxfehler erzeugt</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#strings">
+        Modul 02 · Strings &amp; Verkettung
+      </a>
+    </div>
+
+    <!-- ===== QUIZ: LISTEN & DICTIONARIES ===== -->
+    <h2 class="section-title" id="quiz-listen">📋 Quiz: Listen &amp; Dictionaries</h2>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F1</span>
+        Was erzeugt <code>[]</code>?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Eine leere Tupel</button>
+        <button class="quiz-option" data-correct="true">Eine leere Liste</button>
+        <button class="quiz-option" data-correct="false">Einen leeren String</button>
+        <button class="quiz-option" data-correct="false">Ein leeres Set</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#listen">
+        Modul 02 · Listen
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F2</span>
+        Wie greifst du auf das drittletzte Element einer Liste zu?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="true"><code>my_list[-3]</code></button>
+        <button class="quiz-option" data-correct="false"><code>my_list[len(my_list) - 3]</code> — funktioniert, aber <code>-3</code> ist idiomatischer</button>
+        <button class="quiz-option" data-correct="false"><code>my_list[3]</code> — das ist das vierte Element von vorne</button>
+        <button class="quiz-option" data-correct="false"><code>my_list.get(-3)</code></button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#listen-indexing">
+        Modul 02 · Indexing &amp; Slicing
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F3</span>
+        Was macht <code>my_list[::4]</code>?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Gibt die ersten 4 Elemente zurück</button>
+        <button class="quiz-option" data-correct="true">Gibt jedes 4. Element der Liste zurück (Schrittweite 4)</button>
+        <button class="quiz-option" data-correct="false">Gibt die letzten 4 Elemente zurück</button>
+        <button class="quiz-option" data-correct="false">Gibt die Elemente von Index 0 bis 4 zurück</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#listen-indexing">
+        Modul 02 · Indexing &amp; Slicing
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F4</span>
+        Welche Ähnlichkeiten haben Strings und Listen in Python?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Beide sind mutable (veränderbar)</button>
+        <button class="quiz-option" data-correct="true">Beide unterstützen Indexing, Slicing und <code>len()</code></button>
+        <button class="quiz-option" data-correct="false">Beide können nur Zahlen enthalten</button>
+        <button class="quiz-option" data-correct="false">Sie haben keine Ähnlichkeiten</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#strings-listen">
+        Modul 02 · Strings &amp; Listen
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F5</span>
+        Wie erstellst du ein leeres Dictionary?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false"><code>my_dict = []</code></button>
+        <button class="quiz-option" data-correct="true"><code>my_dict = {}</code></button>
+        <button class="quiz-option" data-correct="false"><code>my_dict = ()</code></button>
+        <button class="quiz-option" data-correct="false"><code>my_dict = set()</code></button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#dictionaries">
+        Modul 02 · Dictionaries
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F6</span>
+        Was gibt <code>my_dict.keys()</code> zurück?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Eine Liste aller Werte</button>
+        <button class="quiz-option" data-correct="true">Eine dict_keys-Ansicht aller Schlüssel</button>
+        <button class="quiz-option" data-correct="false">Die Anzahl der Schlüssel</button>
+        <button class="quiz-option" data-correct="false">Einen Boolean</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#dictionaries">
+        Modul 02 · Dictionaries
+      </a>
+    </div>
+
+    <div class="quiz-question-block">
+      <p class="quiz-q-text">
+        <span class="quiz-q-num">F7</span>
+        Was passiert bei <code>my_dict['key'].append(42)</code> – was muss der Value sein?
+      </p>
+      <div class="quiz-options">
+        <button class="quiz-option" data-correct="false">Eine Zahl</button>
+        <button class="quiz-option" data-correct="true">Eine Liste — nur Listen haben <code>.append()</code></button>
+        <button class="quiz-option" data-correct="false">Ein String</button>
+        <button class="quiz-option" data-correct="false">Ein weiteres Dictionary</button>
+      </div>
+      <div class="quiz-feedback"></div>
+      <a class="quiz-mehr-info" href="02-variablen-datentypen.html#dictionaries">
+        Modul 02 · Dictionaries
+      </a>
+    </div>
+
+    <!-- ===== AUFGABEN: VARIABLEN & DATENTYPEN ===== -->
+    <h2 class="section-title" id="aufg-var">✏️ Aufgaben: Variablen &amp; Datentypen</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A1</span>
+        <div>
+          <p class="exercise-title">Tage konvertieren</p>
+          <div class="exercise-tags">int · float · arithmetic</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Schreibe ein Programm, das eine gegebene Anzahl von Tagen in Jahre, Wochen und übrig bleibende Tage umrechnet.</p>
+        <p>Beispiel: 1000 Tage = 2 Jahre, 38 Wochen, 4 Tage</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+days = 1000
+
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>days = 1000
+
+# Ganzzahlige Division (//) gibt uns die vollen Jahre ohne Rest
+years = days // 365
+
+# Mit % (Modulo) bekommen wir den Rest nach Abzug der Jahre
+remaining = days % 365
+
+# Aus dem Rest berechnen wir volle Wochen
+weeks = remaining // 7
+
+# Und nochmal Modulo für die übrig bleibenden einzelnen Tage
+remaining_days = remaining % 7
+
+print(f"{days} Tage = {years} Jahre, {weeks} Wochen, {remaining_days} Tage")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A2</span>
+        <div>
+          <p class="exercise-title">Dreisatz</p>
+          <div class="exercise-tags">float · variables</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Ein Auto fährt 120 km in 1,5 Stunden. Berechne, wie weit es in 2,75 Stunden kommt und wie lange es für 200 km braucht. Verwende sprechende Variablennamen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+distance_km = 120
+time_h = 1.5
+
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>distance_km = 120
+time_hours = 1.5
+
+# Geschwindigkeit = Weg / Zeit — das ist der Kernansatz des Dreisatzes
+speed = distance_km / time_hours
+print(f"Geschwindigkeit: {speed:.1f} km/h")
+
+# Mit der Geschwindigkeit können wir beliebige Zeit→Distanz Fragen lösen
+print(f"In 2.75 Stunden: {speed * 2.75:.1f} km")
+
+# Und Distanz→Zeit: Zeit = Weg / Geschwindigkeit
+print(f"Für 200 km: {200 / speed:.2f} Stunden")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A3</span>
+        <div>
+          <p class="exercise-title">Geburtstagsparadoxon</p>
+          <div class="exercise-tags">float · probability · math</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Berechne die Wahrscheinlichkeit, dass in einer Gruppe von 23 Personen mindestens zwei am gleichen Tag Geburtstag haben.</p>
+        <p>Hinweis: P(mind. 2 gleich) = 1 - P(alle verschieden). P(alle verschieden bei n Personen) = 365/365 * 364/365 * 363/365 * ... * (365-n+1)/365</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+n_people = 23
+p_all_different = 1.0
+
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>n = 23  # Anzahl Personen im Raum
+
+# Wir berechnen die Gegenwahrscheinlichkeit:
+# "Alle haben verschiedene Geburtstage"
+prob_no_shared = 1.0
+
+for i in range(n):
+    # Person i+1 muss einen anderen Tag als alle vorherigen haben.
+    # Von 365 Tagen sind i bereits vergeben → (365-i)/365 Wahrscheinlichkeit
+    prob_no_shared *= (365 - i) / 365
+
+# P(mind. 1 gemeinsam) = 1 - P(alle verschieden)
+prob_shared = 1 - prob_no_shared
+print(f"Wahrscheinlichkeit bei {n} Personen: {prob_shared:.1%}")
+# Überraschend: Bei nur 23 Personen ist es bereits wahrscheinlicher DASS
+# zwei den gleichen Geburtstag haben, als dass nicht!
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A4</span>
+        <div>
+          <p class="exercise-title">Wann bin ich halb so alt?</p>
+          <div class="exercise-tags">int · arithmetic · variables</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben dein aktuelles Alter und das Alter einer anderen Person: In wie vielen Jahren wird Person A halb so alt sein wie Person B? Löse die Gleichung und berechne das Ergebnis.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+age_a = 20
+age_b = 50
+
+# Wann gilt: age_a + x = (age_b + x) / 2
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>my_age = 25
+parent_age = 50  # Elternteil ist aktuell doppelt so alt
+
+# Der Altersunterschied bleibt immer konstant (beide werden gleich älter)
+age_diff = parent_age - my_age
+
+# Wann war ich halb so alt wie mein Elternteil?
+# Gesucht: my_age_then, sodass parent_age_then = 2 * my_age_then
+# parent_age_then = my_age_then + age_diff
+# → my_age_then + age_diff = 2 * my_age_then
+# → age_diff = my_age_then
+my_age_then = age_diff
+years_ago = my_age - my_age_then
+
+print(f"Vor {years_ago} Jahren war ich {my_age_then} und mein Elternteil {my_age_then + age_diff}")
+</code></pre>
+      </div>
+    </div>
+
+    <!-- ===== AUFGABEN: LISTEN ===== -->
+    <h2 class="section-title" id="aufg-listen">✏️ Aufgaben: Listen</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A5</span>
+        <div>
+          <p class="exercise-title">Non-Sense Generator</p>
+          <div class="exercise-tags">list · indexing · string concatenation</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Erstelle einen Satz-Generator, der aus drei Listen (Subjekte, Verben, Objekte) zufällige Sätze zusammenbaut. Greife mit Indizes auf die Elemente zu.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+subjects = ["Der Hund", "Die Katze", "Das Einhorn", "Professor Higgins"]
+verbs    = ["liebt", "hasst", "optimiert", "debuggt"]
+objects  = ["Pandas DataFrames", "den Montagmorgen", "rekursive Funktionen", "kalten Kaffee"]
+
+# Erstelle 3 verschiedene Sätze mit Indexzugriff
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import random
+
+sentence_parts_left = ["Der Hund", "Die Katze", "Das Kind", "Ein Roboter"]
+sentence_parts_right = ["schläft.", "läuft schnell.", "denkt nach.", "isst Pizza."]
+
+# shuffle() mischt die Liste in-place (verändert die Original-Liste!)
+random.shuffle(sentence_parts_left)
+random.shuffle(sentence_parts_right)
+
+# zip() kombiniert beide Listen paarweise — stoppt beim kürzeren Ende
+for left, right in zip(sentence_parts_left, sentence_parts_right):
+    print(left, right)
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A6</span>
+        <div>
+          <p class="exercise-title">Einkaufszettel</p>
+          <div class="exercise-tags">list · append · remove · slicing</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Erstelle eine leere Einkaufsliste. Füge 5 Artikel hinzu, entferne einen, füge am Anfang einen neuen ein, und gib die letzten 3 Artikel aus.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+shopping_list = []
+
+# Füge 5 Artikel hinzu (append)
+# Entferne einen Artikel (remove oder pop)
+# Füge am Anfang einen Artikel ein (insert)
+# Gib die letzten 3 Artikel aus (slicing)
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>einkaufszettel = []
+
+# append() hängt ans Ende — typische Methode zum Aufbauen einer Liste
+einkaufszettel.append("Milch")
+einkaufszettel.append("Brot")
+einkaufszettel.append("Äpfel")
+
+# insert(0, ...) fügt am Anfang (Index 0) ein — alle anderen rücken vor
+einkaufszettel.insert(0, "Butter")
+print("Einkaufszettel:", einkaufszettel)
+print(f"Anzahl Artikel: {len(einkaufszettel)}")
+
+# remove() sucht den ersten Treffer und löscht ihn — wirft ValueError wenn nicht gefunden
+einkaufszettel.remove("Brot")
+print("Nach Entfernen:", einkaufszettel)
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A7</span>
+        <div>
+          <p class="exercise-title">Analyzing Cardiac Cycles</p>
+          <div class="exercise-tags">list · slicing · indexing · min · max</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben ist eine Liste mit einem EKG-Zyklus. Bestimme den Minimal- und Maximalwert, schneide den positiven Peak-Bereich heraus (Index 3 bis 8) und berechne den Mittelwert dieses Ausschnitts.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+one_cycle = [-99, 60, 62, 64, 68, 150, 200, 180, 120, 80, 60, 40, 20, -10, -40, -80, -99]
+
+# 1. Min- und Maxwert bestimmen
+# 2. Peak-Bereich herausschneiden (Index 3 bis 8)
+# 3. Mittelwert des Peaks berechnen (ohne import: sum() / len())
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>one_cycle = [-99, 60, 62, 64, 68, 75, 90, 110, 130, 150, 170,
+             185, 175, 155, 130, 105, 80, 65, 60, 58, 55, -99]
+
+# -99 ist ein Sentinel-Wert (Markierung), kein echter EKG-Messwert
+# List Comprehension filtert -99 heraus — nur echte Messwerte behalten
+valid = [v for v in one_cycle if v != -99]
+
+print(f"Anzahl Samples: {len(valid)}")
+print(f"Min: {min(valid)}, Max: {max(valid)}")
+
+# sum() / len() ist der manuelle Weg für den Mittelwert (ohne numpy)
+print(f"Mittelwert: {sum(valid)/len(valid):.1f}")
+</code></pre>
+      </div>
+    </div>
+
+    <!-- ===== AUFGABEN: DICTIONARIES ===== -->
+    <h2 class="section-title" id="aufg-dict">✏️ Aufgaben: Dictionaries</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A8</span>
+        <div>
+          <p class="exercise-title">Cardiac Cycles Dictionary</p>
+          <div class="exercise-tags">dict · list · indexing · keys</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Lege ein Dictionary an, das mehrere EKG-Zyklen speichert. Greife auf einzelne Zyklen zu, füge einen neuen Zyklus hinzu und iteriere über alle Keys.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+cycles_dict = {
+    "cycle_1": [-99, 60, 62, 64, 68, 150, 200, 180, 120, 80, 60, 40, 20, -10, -40, -80, -99],
+    "cycle_2": [-95, 55, 60, 66, 70, 145, 195, 175, 115, 75, 55, 35, 15, -15, -45, -85, -95],
+    "cycle_3": [-100, 58, 63, 65, 69, 148, 198, 178, 118, 78, 58, 38, 18, -12, -42, -82, -100],
+}
+
+# 1. Greife auf cycle_2 zu und gib seinen Maximalwert aus
+# 2. Füge einen neuen Zyklus "cycle_4" hinzu (eigene Werte)
+# 3. Iteriere über alle Keys und gib jeweils Länge des Zyklus aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>cycles_dict = {
+    'patient_001': [-99, 60, 75, 110, 150, 185, 175, 130, 80, 60, -99],
+    'patient_002': [-99, 55, 70, 100, 145, 180, 170, 125, 75, 55, -99],
+}
+
+# .items() gibt uns Schlüssel-Wert-Paare — ideal für Dictionary-Iteration
+for patient, cycle in cycles_dict.items():
+    # Sentinel herausfiltern, dann Statistiken berechnen
+    valid = [v for v in cycle if v != -99]
+    print(f"{patient}: {len(valid)} Samples, Max={max(valid)}")
+</code></pre>
+      </div>
+    </div>
+
+    <!-- ===== KLAUSURBEISPIELE ===== -->
+    <div class="exa-section-banner">
+      <div class="exa-icon">📝</div>
+      <div>
+        <h2>Klausurbeispiele – 01_exa</h2>
+        <p>Echte Beispielaufgaben aus der Vorlesung · Variablen, Strings, Listen, Dictionaries</p>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 1</span>
+        <div>
+          <p class="exa-title">Planetare Waage</p>
+          <div class="exa-tags">assignment · operations · comparisons · numpy</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Wieviele Erden braucht man, um Jupiter zu wiegen? Berechne die Massen beider Planeten (Volumen × Dichte) und vergleiche mit Operatoren.</p>
+        <ul>
+          <li>Erde: Durchmesser 12 756 km, Dichte 5,51 × 10²⁴ kg/km³</li>
+          <li>Jupiter: Durchmesser 142 984 km, Dichte 1,33 × 10²⁴ kg/km³</li>
+          <li>Volumen Kugel: V = (4/3) · π · r³</li>
+        </ul>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+# Durchmesser (km)
+diameter_earth   = 12756
+diameter_jupiter = 142984
+
+# Dichten (kg/km³)
+density_earth   = 5.51e24
+density_jupiter = 1.33e24
+
+# Berechne Massen und Vergleiche
+# Masse = Volumen * Dichte,  Volumen = (4/3) * pi * r^3
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+
+diameter_earth   = 12756
+diameter_jupiter = 142984
+density_earth    = 5.51e24
+density_jupiter  = 1.33e24
+
+r_earth   = diameter_earth   / 2
+r_jupiter = diameter_jupiter / 2
+
+mass_earth   = (4/3) * np.pi * r_earth**3   * density_earth
+mass_jupiter = (4/3) * np.pi * r_jupiter**3 * density_jupiter
+
+# Wie viele Erden wiegen so viel wie Jupiter?
+n = 1
+while mass_earth * n < mass_jupiter:
+    n += 1
+print(f"Es braucht {n} Erden, um Jupiter zu wiegen.")
+print(f"Zum Vergleich: mass_earth * {n-1} < mass_jupiter ist {mass_earth*(n-1) < mass_jupiter}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 2</span>
+        <div>
+          <p class="exa-title">automate the boring stuff: Excel</p>
+          <div class="exa-tags">strings · .upper() · .lower() · .title()</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>In einem Unternehmen werden Bauteilnamen uneinheitlich in Excel-Listen eingetragen. Vereinheitliche sie mit Groß-/Kleinschreibung per String-Methoden.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>excel_cell_1 = 'engine'
+excel_cell_2 = 'Conveyor'
+excel_cell_3 = 'wheeL'
+
+# Wende .title(), .upper(), .lower() an und vergleiche die Ausgaben
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>excel_cell_1 = 'engine'
+excel_cell_2 = 'Conveyor'
+excel_cell_3 = 'wheeL'
+
+cells = [excel_cell_1, excel_cell_2, excel_cell_3]
+for cell in cells:
+    print(f"Original: {cell:10s}  | .title(): {cell.title():10s} | .upper(): {cell.upper():10s} | .lower(): {cell.lower()}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 3</span>
+        <div>
+          <p class="exa-title">automate the boring stuff: Domain ersetzen</p>
+          <div class="exa-tags">strings · .find() · .replace() · slicing</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Schreibe ein Programm, das in einer E-Mail-Adresse das @-Zeichen findet und die Domain durch <code>@oth-regensburg.de</code> ersetzt.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>mail_address = 'goldhacker@gmx.com'
+
+# 1. Finde den Index von '@' mit .find()
+# 2. Ersetze alles ab '@' durch '@oth-regensburg.de'
+# Tipp: Slicing oder .replace() nutzen
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>mail_address = 'goldhacker@gmx.com'
+
+# Variante 1: .find() + .replace()
+index_at = mail_address.find('@')
+new_mail = mail_address.replace(mail_address[index_at:], '@oth-regensburg.de')
+print(new_mail)
+
+# Variante 2: Slicing — alles vor @ behalten, neue Domain anhängen
+new_mail2 = mail_address[:index_at] + '@oth-regensburg.de'
+print(new_mail2)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 4</span>
+        <div>
+          <p class="exa-title">Temperaturüberwachung</p>
+          <div class="exa-tags">dict · list · indexing · slicing · sum · len</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Ein Temperatursensor liefert für 3 Maschinenzustände Messreihen. Jeder zweite Wert ist unzuverlässig (Index 0::2 = verlässlich). Berechne den mittleren Temperaturunterschied zwischen den Zuständen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>sensor_data_dict = {
+    '1602914400000': {
+        'machine_state': 'starting',
+        'batch_data': [34, 36, 40, 41, 33, 35, 39, 42, 40, 41, 35, 39]
+    },
+    '1602921600000': {
+        'machine_state': 'running',
+        'batch_data': [55, 60, 54, 52, 50, 55, 53, 61, 60, 59, 56, 57]
+    },
+    '1602928800000': {
+        'machine_state': 'stopping',
+        'batch_data': [65, 67, 70, 72, 70, 65, 73, 71, 68, 69, 66, 67]
+    }
+}
+
+# Berechne den Mittelwert jedes Zustands (nur jeder 2. Wert: [0::2])
+# Gib die Differenzen zwischen den Zuständen aus
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>sensor_data_dict = {
+    '1602914400000': {'machine_state': 'starting',  'batch_data': [34,36,40,41,33,35,39,42,40,41,35,39]},
+    '1602921600000': {'machine_state': 'running',   'batch_data': [55,60,54,52,50,55,53,61,60,59,56,57]},
+    '1602928800000': {'machine_state': 'stopping',  'batch_data': [65,67,70,72,70,65,73,71,68,69,66,67]},
+}
+
+means = {}
+for key, val in sensor_data_dict.items():
+    reliable = val['batch_data'][0::2]          # jeder 2. Wert
+    mean     = sum(reliable) / len(reliable)
+    means[val['machine_state']] = mean
+    print(f"{val['machine_state']:10s}: Mittelwert = {mean:.1f} °C")
+
+print(f"\nRunning - Starting  = {means['running']  - means['starting']:.1f} °C")
+print(f"Stopping - Running  = {means['stopping'] - means['running']:.1f} °C")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="ex01"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--color-ex);color:white;font-size:14px;font-weight:700;cursor:pointer;">
+        ✓ Übungsblatt gelesen
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="02-variablen-datentypen.html">
+        <span class="pnb-label">← Zum Modul</span>
+        <span class="pnb-title">02 · Variablen &amp; Datentypen</span>
+      </a>
+      <a class="page-nav-btn next" href="ex-02-loops.html">
+        <span class="pnb-label">Nächstes Übungsblatt →</span>
+        <span class="pnb-title">Ü02 · Loops &amp; Conditions</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+</body>
+</html>

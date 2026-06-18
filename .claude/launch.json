@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "DA-V1",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/Users/husinhassin/Library/Mobile Documents/com~apple~CloudDocs/Downloads/DA - Alles/Webseite/DA-V1/.claude/serve.py"],
+      "port": 8082
+    }
+  ]
+}

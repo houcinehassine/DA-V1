@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Übungsblatt 02 – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" href="01b-python-einfuehrung.html"><span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex active" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 6 Aufgaben</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Übungsblatt 02 – Loops &amp; Conditions</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-ex" style="--mc:var(--color-ex)">
+        <span>✏️</span> Übungsblatt 02
+      </div>
+      <h1 class="page-title">Loops &amp; Conditions</h1>
+      <p class="page-subtitle">Aufgaben zu for-Schleifen, while-Schleifen, if/elif/else und kombinierten Anwendungen aus Simulation und Textanalyse.</p>
+    </div>
+
+    <h2 class="section-title" id="aufg-loops">✏️ Aufgaben: Loops &amp; Conditions</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A1</span>
+        <div>
+          <p class="exercise-title">VONG-Generator</p>
+          <div class="exercise-tags">dict · for loop · string replace</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Der VONG-Dialekt ersetzt bestimmte Wörter und Buchstaben. Schreibe einen Generator, der einen Eingabetext mithilfe eines Mapping-Dictionaries in VONG-Sprache übersetzt.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+vong_mapping = {
+    "ich": "isch",
+    "bin": "vong",
+    "sehr": "seeehr",
+    "und": "udn",
+    "der": "da",
+    "die": "di",
+    "das": "des",
+}
+
+text = "ich bin sehr glücklich und der Hund ist da"
+
+# Übersetze text mit vong_mapping (Wort für Wort)
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>vong_mapping = {
+    'ich': 'ich bin',
+    'habe': 'vong',
+    'sehr': 'vong sehr',
+    'gut': 'gut her',
+    'das': 'daz',
+}
+
+sentence = "ich habe das sehr gut gemacht"
+
+# split() zerlegt den String an Leerzeichen in eine Wort-Liste
+words = sentence.split()
+
+# .get(w, w) schlägt das Wort im Dict nach — falls nicht gefunden,
+# gibt es das Original-Wort zurück (zweites Argument = Standardwert)
+result = [vong_mapping.get(w, w) for w in words]
+
+# join() verbindet die Liste wieder zu einem String mit Leerzeichen
+print(' '.join(result))
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A2</span>
+        <div>
+          <p class="exercise-title">Kugelvolumina berechnen</p>
+          <div class="exercise-tags">for loop · math · list</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben eine Liste von Radien: Berechne für jeden Radius das Kugelvolumen (V = 4/3 * π * r³) und speichere die Ergebnisse in einer neuen Liste.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import math
+
+radii = [1, 2, 3, 5, 7, 10, 15]
+volumes = []
+
+# Berechne das Volumen für jeden Radius und hänge es an volumes an
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import math
+
+# Überschrift mit Formatierung für eine lesbare Tabelle
+print(f"{'Radius':>8} | {'Volumen':>15}")
+print("-" * 27)
+
+for r in range(1, 11):
+    # Formel für Kugelvolumen: V = (4/3) * π * r³
+    vol = (4/3) * math.pi * r**3
+    # >8 und >15 richten die Zahlen rechtsbündig aus (padding)
+    print(f"{r:>8} | {vol:>15.2f}")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A3</span>
+        <div>
+          <p class="exercise-title">Coin Flip Streaks</p>
+          <div class="exercise-tags">while loop · random · counter</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Simuliere Münzwürfe. Finde heraus, wie viele Würfe es im Durchschnitt braucht, um 6 Köpfe (oder 6 Zahlen) in Folge zu werfen. Führe 1000 Experimente durch.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import random
+
+list_of_coin_flips = []
+n_experiments = 1000
+streak_length = 6
+
+# Führe n_experiments Experimente durch
+# Zähle in jedem Experiment, wie viele Würfe bis zum Streak benötigt werden
+# Speichere die Anzahl in list_of_coin_flips
+# Berechne am Ende den Durchschnitt
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import random
+
+# Zufällige Münzwürfe generieren (H=Heads, T=Tails)
+list_of_coin_flips = [random.choice(['H', 'T']) for _ in range(100)]
+
+max_streak = 1
+current_streak = 1
+
+# Ab Index 1 starten und immer mit dem Vorgänger vergleichen
+for i in range(1, len(list_of_coin_flips)):
+    if list_of_coin_flips[i] == list_of_coin_flips[i-1]:
+        # Gleiche Seite wie vorher → Streak verlängern
+        current_streak += 1
+        # Aktuelles Maximum aktualisieren
+        max_streak = max(max_streak, current_streak)
+    else:
+        # Andere Seite → Streak von vorne beginnen
+        current_streak = 1
+
+print(f"Längste Streak: {max_streak}")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A4</span>
+        <div>
+          <p class="exercise-title">Simple Data Size Reduction</p>
+          <div class="exercise-tags">for loop · list · slicing · downsampling</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben ist eine Liste von Zeitreihen. Reduziere jede Zeitreihe, indem du nur jeden n-ten Wert behältst (Downsampling). Erstelle eine neue Liste mit den reduzierten Zeitreihen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+list_of_time_series = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    [10, 20, 15, 25, 30, 20, 10, 5, 15, 25, 35, 40],
+    [0.1, 0.3, 0.2, 0.5, 0.4, 0.6, 0.8, 0.7, 0.9, 1.0, 0.8, 0.6],
+]
+n = 3  # Behalte jeden 3. Wert
+
+reduced = []
+# Iteriere über list_of_time_series und downsample jede Zeitreihe
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A5</span>
+        <div>
+          <p class="exercise-title">Illegal Companies</p>
+          <div class="exercise-tags">dict · for loop · if/else · filtering</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben ein Dictionary mit Firmennamen und ihren Umsätzen: Filtere alle Firmen heraus, die einen Umsatz unter einem bestimmten Schwellenwert haben (verdächtig niedrig) oder deren Name auf der Blacklist steht.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+companies_dict = {
+    "Alpha GmbH": 150000,
+    "Beta AG": 500,
+    "Gamma Ltd": 230000,
+    "Shell Corp": 999,
+    "Delta KG": 85000,
+    "Suspicious LLC": 1,
+    "Legit Corp": 320000,
+}
+blacklist = ["Shell Corp", "Suspicious LLC"]
+revenue_threshold = 10000
+
+# Erstelle eine Liste aller verdächtigen Firmen
+# (Umsatz &lt; threshold ODER in blacklist)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A6</span>
+        <div>
+          <p class="exercise-title">Geburtstagswahrscheinlichkeiten</p>
+          <div class="exercise-tags">for loop · probability · accumulator</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Berechne für Gruppengrößen von 2 bis 50 Personen die Wahrscheinlichkeit, dass mindestens zwei Personen am gleichen Tag Geburtstag haben. Gib die Gruppe aus, ab der die Wahrscheinlichkeit 50% übersteigt.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+# Für n Personen: P(mind. 2 gleich) = 1 - (365/365 * 364/365 * ... * (365-n+1)/365)
+
+for n in range(2, 51):
+    p_all_different = 1.0
+    # Berechne p_all_different für n Personen
+    # Berechne p_at_least_two_same
+    # Gib aus wenn &gt; 0.5
+    pass
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A7</span>
+        <div>
+          <p class="exercise-title">Text Mining for Beginners</p>
+          <div class="exercise-tags">for loop · dict · string · word count</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Zähle, wie oft jedes Wort in einem Text vorkommt. Erstelle ein Wörterbuch mit Wort → Häufigkeit. Ignoriere Groß-/Kleinschreibung und Satzzeichen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code># Starter Code
+text = """To be or not to be that is the question
+Whether tis nobler in the mind to suffer
+The slings and arrows of outrageous fortune
+Or to take arms against a sea of troubles"""
+
+word_count = {}
+# Zähle die Häufigkeit jedes Wortes (case-insensitive)
+# Tipp: text.lower().split() und str.strip(".,!?")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A8</span>
+        <div>
+          <p class="exercise-title">Monte Carlo Simulation von Pi</p>
+          <div class="exercise-tags">for loop · random · math · simulation</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Schätze π per Monte Carlo: Wirf zufällig Punkte in ein 1×1-Quadrat. Ein Punkt liegt im Einheitskreis-Viertel, wenn x² + y² ≤ 1. Das Verhältnis der Treffer zur Gesamtzahl * 4 approximiert π.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import random
+
+n_samples = 100000
+hits = 0
+
+for _ in range(n_samples):
+    x = random.random()
+    y = random.random()
+    # Prüfe ob Punkt im Viertelkreis liegt
+    # Zähle Treffer
+
+pi_estimate = 4 * hits / n_samples
+print(f"Pi estimate: {pi_estimate:.4f}  (true: 3.14159)")
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import random
+
+n = 100_000  # Mehr Punkte = genauere Schätzung (aber langsamer)
+inside = 0
+
+for _ in range(n):
+    # Zufälligen Punkt im Einheitsquadrat [0,1] x [0,1] wählen
+    x, y = random.random(), random.random()
+
+    # Prüfen ob der Punkt im Einheitskreis liegt (Radius 1, Mittelpunkt 0,0)
+    # Formel: x² + y² ≤ r² (hier r=1)
+    if x**2 + y**2 &lt;= 1:
+        inside += 1
+
+# Verhältnis Kreisfläche / Quadratfläche = π/4
+# → π ≈ 4 * (Punkte im Kreis / Gesamtpunkte)
+pi_estimate = 4 * inside / n
+print(f"Pi ≈ {pi_estimate:.4f}  (Fehler: {abs(pi_estimate - 3.14159):.4f})")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A9</span>
+        <div>
+          <p class="exercise-title">Foxes &amp; Chickens</p>
+          <div class="exercise-tags">while loop · simulation · predator-prey</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Simuliere ein einfaches Räuber-Beute-Modell: Jeden Monat wächst die Hühneranzahl um 20%, die Fuchspopulation frisst 5% der Hühner, und die Füchse sterben ohne Nahrung. Starte mit 100 Hühnern und 10 Füchsen. Simuliere 24 Monate.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code"># Starter Code
+chickens = 100
+foxes = 10
+
+chicken_growth_rate = 0.20   # +20% pro Monat
+fox_eat_rate = 0.05          # Füchse fressen 5% der Hühner
+fox_death_rate = 0.10        # 10% der Füchse sterben pro Monat
+fox_birth_rate = 0.02        # Pro gegessenem Huhn entstehen 0.02 neue Füchse
+
+history = [(chickens, foxes)]
+
+for month in range(1, 25):
+    # Berechne neue Populationen
+    # Speichere in history
+    pass
+
+# Gib die Entwicklung tabellarisch aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KLAUSURBEISPIELE ===== -->
+    <div class="exa-section-banner">
+      <div class="exa-icon">📝</div>
+      <div>
+        <h2>Klausurbeispiele – 02_exa</h2>
+        <p>Echte Beispielaufgaben aus der Vorlesung · for-Loop, while-Loop, Conditions, List Comprehensions</p>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 1</span>
+        <div>
+          <p class="exa-title">OTH Fakultäten – for-Loop &amp; parallele Listen</p>
+          <div class="exa-tags">for-loop · zip · f-strings · sum · len</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Gegeben sind zwei parallele Listen: Fakultätsnamen und Studierendenzahlen. Iteriere über beide gleichzeitig und gib für jede Fakultät einen Satz aus. Berechne danach die Gesamtzahl aller Studierenden.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>list_of_number_of_students = [793, 699, 937, 2014, 1275, 1876, 1683, 1793]
+oth_faculties = [
+    'Angewandte Natur- und Kulturwissenschaften',
+    'Architektur', 'Bauingenieurwesen', 'Betriebswirtschaft',
+    'Elektro- und Informationstechnik', 'Informatik und Mathematik',
+    'Maschinenbau', 'Angewandte Sozial- und Gesundheitswissenschaften'
+]
+
+# Gib pro Fakultät aus: "Die Fakultät X hat Y Studierende."
+# Berechne danach die Gesamtzahl
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>list_of_number_of_students = [793, 699, 937, 2014, 1275, 1876, 1683, 1793]
+oth_faculties = [
+    'Angewandte Natur- und Kulturwissenschaften',
+    'Architektur', 'Bauingenieurwesen', 'Betriebswirtschaft',
+    'Elektro- und Informationstechnik', 'Informatik und Mathematik',
+    'Maschinenbau', 'Angewandte Sozial- und Gesundheitswissenschaften'
+]
+
+total = 0
+for faculty, n in zip(oth_faculties, list_of_number_of_students):
+    print(f"Die Fakultät '{faculty}' hat {n} Studierende.")
+    total += n
+
+print(f"\nGesamt: {total} Studierende an der OTH Regensburg.")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 2</span>
+        <div>
+          <p class="exa-title">Sales Data – Nested Loops &amp; Mittelwert</p>
+          <div class="exa-tags">nested-loops · dict · keys() · sum · len</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Absatzzahlen von 3 Kunden über 3 Jahre (je 52 Wochen) liegen in einem verschachtelten Dictionary vor. Berechne den Mittelwert pro Kunde pro Jahr und über alle Kunden und Jahre.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+sales_dict = {
+    'Baldi':  {'2017': list(np.round(np.random.rand(52)*1e6)),
+               '2018': list(np.round(np.random.rand(52)*1e6)),
+               '2019': list(np.round(np.random.rand(52)*1e6))},
+    'Friedl': {'2017': list(np.round(np.random.rand(52)*1e6)),
+               '2018': list(np.round(np.random.rand(52)*1e6)),
+               '2019': list(np.round(np.random.rand(52)*1e6))},
+    'Pfenny': {'2017': list(np.round(np.random.rand(52)*1e6)),
+               '2018': list(np.round(np.random.rand(52)*1e6)),
+               '2019': list(np.round(np.random.rand(52)*1e6))},
+}
+
+# Nested Loop: für jeden Kunden, für jedes Jahr → Mittelwert berechnen
+# Dann Gesamtmittelwert über alle Kunden und Jahre
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+
+sales_dict = {
+    'Baldi':  {'2017': list(np.round(np.random.rand(52)*1e6)), '2018': list(np.round(np.random.rand(52)*1e6)), '2019': list(np.round(np.random.rand(52)*1e6))},
+    'Friedl': {'2017': list(np.round(np.random.rand(52)*1e6)), '2018': list(np.round(np.random.rand(52)*1e6)), '2019': list(np.round(np.random.rand(52)*1e6))},
+    'Pfenny': {'2017': list(np.round(np.random.rand(52)*1e6)), '2018': list(np.round(np.random.rand(52)*1e6)), '2019': list(np.round(np.random.rand(52)*1e6))},
+}
+
+all_avgs = []
+for customer in sales_dict.keys():
+    for year in sales_dict[customer].keys():
+        data = sales_dict[customer][year]
+        avg  = sum(data) / len(data)
+        all_avgs.append(avg)
+        print(f"{customer} {year}: Ø {avg:,.0f}")
+
+print(f"\nGesamtmittelwert: Ø {sum(all_avgs)/len(all_avgs):,.0f}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 3</span>
+        <div>
+          <p class="exa-title">while-Loop Zahlen raten</p>
+          <div class="exa-tags">while · input · randint · comparison</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Schreibe ein Programm, das zufällig eine Zahl zwischen 1 und 10 zieht und den User so lange raten lässt, bis er die richtige Zahl eingibt.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>from numpy.random import randint
+
+random_number = str(randint(1, 11))
+
+# while-Loop: frage den User solange, bis er richtig liegt
+# Gib nach dem richtigen Raten aus wie viele Versuche es gebraucht hat
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>from numpy.random import randint
+
+random_number = str(randint(1, 11))
+attempts = 0
+guess = ''
+
+while guess != random_number:
+    guess = input('Rate eine Zahl zwischen 1 und 10: ')
+    attempts += 1
+    if guess == random_number:
+        print(f'Richtig! Du hast {attempts} Versuche gebraucht.')
+    else:
+        print('Falsch, versuch nochmal.')
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 4</span>
+        <div>
+          <p class="exa-title">if/elif/else – kleinsten Wert finden</p>
+          <div class="exa-tags">for-loop · if · conditions · min</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Finde mittels eines for-Loops und einer if-Abfrage den kleinsten Wert in einer Liste — ohne die built-in Funktion <code>min()</code> zu nutzen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>my_list = [9, 41, 12, 3, 74, 15]
+
+# Finde den kleinsten Wert ohne min()
+# Initialisiere current_min mit dem ersten Element
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>my_list = [9, 41, 12, 3, 74, 15]
+
+current_min = my_list[0]
+for value in my_list:
+    if value < current_min:
+        current_min = value
+
+print(f"Kleinster Wert: {current_min}")
+# Zur Kontrolle:
+print(f"min() bestätigt: {min(my_list)}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="ex02"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--color-ex);color:white;font-size:14px;font-weight:700;cursor:pointer;">
+        ✓ Übungsblatt gelesen
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="ex-01-variablen.html">
+        <span class="pnb-label">← Vorheriges Übungsblatt</span>
+        <span class="pnb-title">Ü01 · Variablen &amp; Datentypen</span>
+      </a>
+      <a class="page-nav-btn next" href="ex-03-funktionen.html">
+        <span class="pnb-label">Nächstes Übungsblatt →</span>
+        <span class="pnb-title">Ü03 · Funktionen</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+</body>
+</html>

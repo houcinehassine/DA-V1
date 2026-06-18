@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Übungsblatt 05 – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" href="01b-python-einfuehrung.html"><span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex active" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 6 Aufgaben</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Übungsblatt 05 – NumPy &amp; Pandas</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-ex" style="--mc:var(--color-ex)">
+        <span>✏️</span> Übungsblatt 05
+      </div>
+      <h1 class="page-title">NumPy &amp; Pandas</h1>
+      <p class="page-subtitle">Aufgaben zu NumPy Arrays, Broadcasting, Outlier Detection und Pandas Rolling Windows.</p>
+    </div>
+
+    <!-- ===== NUMPY BASICS ===== -->
+    <h2 class="section-title" id="numpy-basics">✏️ NumPy Basics</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A1</span>
+        <div>
+          <p class="exercise-title">Maximales Nettoeinkommen</p>
+          <div class="exercise-tags">numpy · array · boolean indexing · arithmetic</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben ein Array mit Brutto-Jahresgehältern: Berechne das Nettoeinkommen (Steuer: 42% über 60.000€, 30% zwischen 20.000–60.000€, 0% darunter). Nutze NumPy Boolean-Indizierung statt Schleifen.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+gross = np.array([15000, 28000, 45000, 62000, 95000, 120000, 18000, 73000])
+
+# Berechne Nettoeinkommen mit Boolean-Indizierung
+# Steuer: 0% bei &lt;= 20000, 30% bei 20001-60000, 42% bei &gt; 60000
+net = gross.copy().astype(float)
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import numpy as np
+
+# 2D-Array: Zeilen = Mitarbeiter, Spalten = Monate (12 + Weihnachtsgeld)
+brutto = np.array([
+    [3200, 3200, 3200, 3200, 3200, 3200, 3200, 3200, 3200, 3200, 3200, 6400],
+    [4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 9000],
+    [2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 5600],
+])
+
+steuer = 0.30  # 30% Steuerabzug
+
+# Broadcasting: Skalar wird automatisch auf das gesamte Array angewendet
+netto = brutto * (1 - steuer)
+
+# axis=1 summiert zeilenweise (über alle Monate pro Mitarbeiter)
+jahres_netto = netto.sum(axis=1)
+print("Jahres-Nettoeinkommen:", jahres_netto)
+
+# argmax() gibt den Index des Maximum-Wertes zurück
+print(f"Maximum: {jahres_netto.max():.0f} € (Mitarbeiter {jahres_netto.argmax() + 1})")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A2</span>
+        <div>
+          <p class="exercise-title">Beförderung</p>
+          <div class="exercise-tags">numpy · 2D array · argmax · where</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben eine 2D-Matrix mit Mitarbeiterbewertungen (Zeilen = Mitarbeiter, Spalten = Quartale): Finde den Mitarbeiter mit der höchsten Durchschnittsbewertung und gib seinen Index aus.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+ratings = np.array([
+    [3.2, 4.1, 3.8, 4.5],   # Mitarbeiter 0
+    [4.8, 4.9, 4.7, 5.0],   # Mitarbeiter 1
+    [2.1, 3.0, 2.8, 3.2],   # Mitarbeiter 2
+    [4.0, 3.9, 4.2, 4.1],   # Mitarbeiter 3
+    [3.5, 3.7, 4.8, 4.6],   # Mitarbeiter 4
+])
+
+# Berechne Durchschnittsbewertung pro Mitarbeiter (axis=1)
+# Finde den Index des besten Mitarbeiters (argmax)
+# Gib alle Quartale dieses Mitarbeiters aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import numpy as np
+
+noten = np.array([2.3, 1.7, 3.0, 1.3, 2.7, 1.0, 2.0, 3.3, 1.7, 2.3])
+
+# np.arange(1, n, 2) erzeugt Indizes 1, 3, 5, ... (jeden zweiten ab Index 1)
+kandidaten_idx = np.arange(1, len(noten), 2)
+kandidaten_noten = noten[kandidaten_idx]  # Fancy Indexing mit Index-Array
+
+# Boolean Indexing: True-Maske für Noten ≤ 2.0
+befoerderung = kandidaten_idx[kandidaten_noten &lt;= 2.0]
+
+print(f"Beförderungskandidaten (Index): {befoerderung}")
+print(f"Deren Noten: {noten[befoerderung]}")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A3</span>
+        <div>
+          <p class="exercise-title">Air Quality Index</p>
+          <div class="exercise-tags">numpy · broadcasting · comparison · masking</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben Feinstaubmessungen (PM2.5 in µg/m³) für mehrere Städte über 7 Tage: Berechne den Tagesdurchschnitt je Stadt, markiere alle Tage über dem WHO-Grenzwert (15 µg/m³) und zähle die Überschreitungen je Stadt.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+# Zeilen = Städte, Spalten = Tage (Mo–So)
+X = np.array([
+    [12, 14, 18, 22, 19, 11,  9],   # München
+    [ 8,  9, 11, 13, 10,  7,  6],   # Berchtesgaden
+    [25, 28, 35, 40, 32, 27, 22],   # Augsburg
+    [10, 12, 14, 16, 13, 11,  9],   # Rosenheim
+])
+cities = ["München", "Berchtesgaden", "Augsburg", "Rosenheim"]
+WHO_LIMIT = 15
+
+# 1. Tagesdurchschnitt je Stadt (axis=1)
+# 2. Boolean-Maske: Welche Tage überschreiten WHO_LIMIT?
+# 3. Anzahl Überschreitungen je Stadt
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A4</span>
+        <div>
+          <p class="exercise-title">Stock Data</p>
+          <div class="exercise-tags">numpy · diff · percentage change · argmax</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben tägliche Schlusskurse einer Aktie: Berechne die tägliche prozentuale Veränderung, den maximalen Tagesgewinn, den maximalen Tagesverlust und die Gesamtrendite.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+prices = np.array([100, 102, 98, 105, 103, 110, 108, 115, 112, 120,
+                   118, 125, 122, 130, 128, 135, 132, 140, 138, 145])
+
+# 1. Tägliche prozentuale Veränderung: (prices[1:] - prices[:-1]) / prices[:-1] * 100
+# 2. Bester Tag (max gain) und schlechtester Tag (max loss)
+# 3. Gesamtrendite in Prozent
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NUMPY ADVANCED ===== -->
+    <h2 class="section-title" id="numpy-advanced">✏️ NumPy Advanced</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A5</span>
+        <div>
+          <p class="exercise-title">Count Machine State Switches</p>
+          <div class="exercise-tags">numpy · diff · nonzero · state changes</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Eine Maschine wechselt zwischen Zuständen (0=aus, 1=an, 2=Wartung). Gegeben ist ein Array mit Zustandsaufzeichnungen: Zähle, wie oft ein Zustandswechsel stattgefunden hat, und finde die Indizes aller Wechsel.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+states = np.array([0, 0, 1, 1, 1, 2, 2, 1, 1, 0, 0, 0, 1, 2, 2, 2, 1, 0])
+
+# 1. Berechne Differenz (np.diff) – Wechsel wo diff != 0
+# 2. Zähle Anzahl der Wechsel
+# 3. Gib Indizes der Wechsel aus (np.nonzero oder np.where)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A6</span>
+        <div>
+          <p class="exercise-title">Select Slice with lowest/highest Voxel Value (MRT)</p>
+          <div class="exercise-tags">numpy · 3D array · argmin · argmax · slicing</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Ein vereinfachtes MRT-Volumen ist als 3D-NumPy-Array gespeichert (z, y, x). Finde den Axialschnitt (z-Ebene) mit dem niedrigsten und höchsten mittleren Voxelwert.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+np.random.seed(42)
+# 3D MRT-Volumen: 10 Schichten, je 64x64 Voxel
+mrt_volume = np.random.rand(10, 64, 64) * 1000
+
+# 1. Berechne Mittelwert je Axialschnitt (mean über axis=(1,2))
+# 2. Finde Index des Schnitts mit niedrigstem Mittelwert
+# 3. Finde Index des Schnitts mit höchstem Mittelwert
+# 4. Gib Shape des ausgewählten Schnitts aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A7</span>
+        <div>
+          <p class="exercise-title">Neural Network from Scratch 1.1</p>
+          <div class="exercise-tags">numpy · matrix multiplication · sigmoid · forward pass</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Implementiere einen einzelnen Forward-Pass eines 2-Layer-Netzwerks: Input (3) → Hidden (4) → Output (1). Verwende Sigmoid-Aktivierung und zufällige Gewichte.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+np.random.seed(0)
+
+# Input: 5 Datenpunkte, je 3 Features
+X = np.random.randn(5, 3)
+
+# Gewichte (zufällig initialisiert)
+W1 = np.random.randn(3, 4)  # Input → Hidden
+b1 = np.zeros(4)
+W2 = np.random.randn(4, 1)  # Hidden → Output
+b2 = np.zeros(1)
+
+# Forward Pass:
+# hidden = sigmoid(X @ W1 + b1)
+# output = sigmoid(hidden @ W2 + b2)
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== OUTLIER DETECTION ===== -->
+    <h2 class="section-title" id="outlier">✏️ Outlier Detection</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A8</span>
+        <div>
+          <p class="exercise-title">Simple Outlier Detector</p>
+          <div class="exercise-tags">numpy · std · mean · z-score · boolean indexing</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Implementiere einen einfachen Z-Score-basierten Outlier-Detektor: Ein Wert ist ein Ausreißer, wenn |z| &gt; threshold. Gib die Ausreißer und ihre Indizes aus.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+np.random.seed(7)
+data = np.concatenate([
+    np.random.normal(loc=50, scale=5, size=95),
+    np.array([120, 5, 130, 3, 125])  # Ausreißer
+])
+
+threshold = 3.0  # Z-Score Schwelle
+
+# 1. Berechne Z-Scores: z = (data - mean) / std
+# 2. Finde Ausreißer (|z| &gt; threshold)
+# 3. Gib Werte und Indizes der Ausreißer aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import numpy as np
+
+data = np.array([12, 15, 14, 10, 100, 13, 12, 11, 14, 13, -50, 15])
+
+mean = np.mean(data)
+std = np.std(data)
+threshold = 2.0  # Z-Score Schwelle: Werte &gt; 2 Standardabweichungen gelten als Ausreißer
+
+# Z-Score-Methode: |x - μ| / σ &gt; threshold
+# np.abs() berechnet den Betrag für jedes Element gleichzeitig
+outliers = np.abs(data - mean) &gt; threshold * std
+
+print(f"Mittelwert: {mean:.1f}, Std: {std:.1f}")
+print(f"Ausreißer: {data[outliers]}")
+
+# np.where() gibt die Indizes zurück, wo die Bedingung True ist
+print(f"Ausreißer-Indizes: {np.where(outliers)[0]}")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A9</span>
+        <div>
+          <p class="exercise-title">Simple Outlier Detector 2.0 – IQR</p>
+          <div class="exercise-tags">numpy · percentile · IQR · robust statistics</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Der IQR-Methode ist robuster gegenüber Ausreißern. Ein Wert gilt als Ausreißer, wenn er unter Q1 - 1.5*IQR oder über Q3 + 1.5*IQR liegt. Implementiere diese Methode und vergleiche mit dem Z-Score-Ergebnis.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+np.random.seed(7)
+data = np.concatenate([
+    np.random.normal(loc=50, scale=5, size=95),
+    np.array([120, 5, 130, 3, 125])
+])
+
+# 1. Berechne Q1, Q3, IQR
+# 2. Bestimme untere und obere Grenze
+# 3. Finde Ausreißer
+# 4. Vergleiche: Welche Methode findet mehr/weniger Ausreißer?
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A10</span>
+        <div>
+          <p class="exercise-title">Kurtosis als Outlier-Maß</p>
+          <div class="exercise-tags">numpy · scipy · kurtosis · distribution shape</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Die Kurtosis misst, wie "spitz" eine Verteilung ist. Hohe Kurtosis deutet auf Ausreißer hin. Berechne die Kurtosis für verschiedene Datensätze und interpretiere das Ergebnis.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+from scipy import stats
+
+np.random.seed(42)
+
+datasets = {
+    "Normal":    np.random.normal(0, 1, 1000),
+    "Mit Outlier": np.concatenate([np.random.normal(0, 1, 990), np.array([10, -10, 15, -15, 20, -20, 12, -12, 11, -11])]),
+    "Uniform":   np.random.uniform(-3, 3, 1000),
+    "Laplace":   np.random.laplace(0, 1, 1000),
+}
+
+for name, d in datasets.items():
+    kurt = stats.kurtosis(d)  # Fisher's definition (Normal = 0)
+    print(f"{name:15s}: kurtosis = {kurt:.3f}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PANDAS & ROLLING WINDOWS ===== -->
+    <h2 class="section-title" id="pandas-rolling">✏️ Pandas &amp; Rolling Windows</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A11</span>
+        <div>
+          <p class="exercise-title">Hidden Changes</p>
+          <div class="exercise-tags">pandas · rolling · mean · change detection</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Gegeben eine Zeitreihe mit einem versteckten Niveauwechsel: Nutze einen Rolling Mean mit zwei verschiedenen Fenstergrößen, um den Zeitpunkt des Wechsels zu detektieren.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import pandas as pd
+import numpy as np
+
+np.random.seed(1)
+n = 200
+# Erste Hälfte: Mittelwert 10, zweite Hälfte: Mittelwert 20
+signal = np.concatenate([
+    np.random.normal(10, 2, n//2),
+    np.random.normal(20, 2, n//2)
+])
+ts = pd.Series(signal)
+
+# 1. Rolling Mean mit window=10 und window=50 berechnen
+# 2. Finde den Index, wo die Differenz zwischen beiden am größten ist
+rolling_short = ts.rolling(window=10).mean()
+rolling_long  = ts.rolling(window=50).mean()
+# Deine Lösung hier
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A12</span>
+        <div>
+          <p class="exercise-title">Die (Un-)ruhe vor dem Sturm</p>
+          <div class="exercise-tags">pandas · rolling · std · volatility · anomaly</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Vor einem Ausreißer-Ereignis sinkt die Volatilität oft ab ("Ruhe vor dem Sturm"). Berechne die Rolling Standard Deviation und finde das Minimum (ruhigste Periode) direkt vor dem Maximum (Sturm).</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import pandas as pd
+import numpy as np
+
+np.random.seed(5)
+# Normales Rauschen, dann plötzlich ein Spike
+signal = np.concatenate([
+    np.random.normal(0, 1, 80),
+    np.random.normal(0, 0.1, 20),   # Ruhe
+    np.array([15]),                  # Sturm
+    np.random.normal(0, 1, 99)
+])
+ts = pd.Series(signal)
+
+window = 10
+rolling_std = ts.rolling(window=window).std()
+
+# 1. Index des Maximums (Sturm)
+# 2. Index des Minimums der rolling_std (Ruhe) im Bereich vor dem Sturm
+# 3. Wie viele Zeitschritte liegen zwischen Ruhe und Sturm?
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A13</span>
+        <div>
+          <p class="exercise-title">RKI API – Inzidenzen</p>
+          <div class="exercise-tags">pandas · rolling · groupby · 7-day incidence</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Simuliere RKI-Daten für mehrere Regionen. Berechne den 7-Tage-Inzidenzwert (Fälle pro 100.000 Einwohner, geglättet über 7 Tage) für jede Region.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import pandas as pd
+import numpy as np
+
+np.random.seed(99)
+regions = {
+    "Bayern":          {"population": 13_140_183, "cases": np.random.poisson(50, 60)},
+    "Berlin":          {"population":  3_769_495, "cases": np.random.poisson(30, 60)},
+    "Hamburg":         {"population":  1_853_935, "cases": np.random.poisson(20, 60)},
+    "Mecklenburg-VP":  {"population":  1_609_675, "cases": np.random.poisson(10, 60)},
+}
+
+# Für jede Region:
+# 1. Erstelle pd.Series der täglichen Fälle
+# 2. Berechne 7-Tage-Summe (rolling sum, window=7)
+# 3. Berechne Inzidenz: 7-Tage-Summe / Bevölkerung * 100_000
+# 4. Gib Max-Inzidenz je Region aus
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KLAUSURBEISPIELE ===== -->
+    <div class="exa-section-banner">
+      <div class="exa-icon">📝</div>
+      <div>
+        <h2>Klausurbeispiele – 05_exa</h2>
+        <p>Echte Beispielaufgaben aus der Vorlesung · NumPy Arrays, Pandas DataFrames, Reshaping, Rolling</p>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 1</span>
+        <div>
+          <p class="exa-title">Neural Network from Scratch 1.0 – Initialisierung</p>
+          <div class="exa-tags">np.ones · np.random.rand · dict · list_of_layer_dims</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Schreibe eine Funktion <code>initialize_deep_neural_network(list_of_layer_dims)</code>. Layer werden mit <code>np.ones</code> initialisiert, Gewichtsmatrizen mit <code>np.random.rand</code>. Dimension der Gewichtsmatrix zwischen Layer i und i+1: <code>(dims[i+1], dims[i])</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+def initialize_deep_neural_network(list_of_layer_dims):
+    network = {'list_of_layer_dims': list_of_layer_dims}
+    # Für jeden Eintrag in list_of_layer_dims:
+    #   network['layer_i']         = np.ones((1, dims[i]))
+    #   network['weight_matrix_i'] = np.random.rand(dims[i], dims[i-1])
+    return network
+
+net = initialize_deep_neural_network([3, 4, 4, 2])
+for k, v in net.items():
+    if k != 'list_of_layer_dims':
+        print(k, v.shape)
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+
+def initialize_deep_neural_network(list_of_layer_dims):
+    network = {'list_of_layer_dims': list_of_layer_dims}
+    for i, dim in enumerate(list_of_layer_dims):
+        network[f'layer_{i}'] = np.ones((1, dim))
+        if i < len(list_of_layer_dims) - 1:
+            network[f'weight_matrix_{i+1}'] = np.random.rand(
+                list_of_layer_dims[i+1], list_of_layer_dims[i]
+            )
+    return network
+
+net = initialize_deep_neural_network([3, 4, 4, 2])
+for k, v in net.items():
+    if k != 'list_of_layer_dims':
+        print(f"{k}: {v.shape}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 2</span>
+        <div>
+          <p class="exa-title">Feed-Forward Neural Network</p>
+          <div class="exa-tags">np.dot · matmul · for-loop · dict</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Führe den Feed-Forward Prozess auf einem initialisierten Netzwerk durch: <code>layer_{i+1} = layer_{i} @ weight_matrix_{i+1}.T</code> — für alle Layer automatisiert per Loop.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+# Netzwerk initialisieren
+net = initialize_deep_neural_network([3, 4, 4, 2])
+
+# Feed Forward: layer_{i+1} = np.dot(layer_{i}, weight_matrix_{i+1}.T)
+# Loop über alle Layer ausser dem letzten
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+
+def feed_forward(network):
+    dims = network['list_of_layer_dims']
+    for i in range(len(dims) - 1):
+        network[f'layer_{i+1}'] = np.dot(
+            network[f'layer_{i}'],
+            network[f'weight_matrix_{i+1}'].T
+        )
+    return network
+
+net = initialize_deep_neural_network([3, 4, 4, 2])
+net = feed_forward(net)
+n_layers = len(net['list_of_layer_dims'])
+print("Output:", net[f'layer_{n_layers-1}'])
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 3</span>
+        <div>
+          <p class="exa-title">MRT Daten – Reshaping zur Datenmatrix</p>
+          <div class="exa-tags">np.load · reshape · np.vstack · flatten</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>5 MRT-Bilder (Dimension je <code>(128, 96, 24)</code>) sollen in eine Datenmatrix überführt werden — jedes Bild ist eine Zeile. Schreibe eine Funktion <code>create_data_matrix(file_list)</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+
+def create_data_matrix(file_list):
+    # Lade jedes .npy-File (np.load)
+    # Flatten jedes 3D-Bild zu 1D (.reshape(-1))
+    # Stapele alle Zeilen zu einer Matrix (np.vstack)
+    pass
+
+# Erwartete Ausgabe: (5, 294912) — 5 Bilder × 128×96×24 Pixel
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+
+def create_data_matrix(file_list):
+    rows = []
+    for fname in file_list:
+        img = np.load(fname)           # shape: (128, 96, 24)
+        rows.append(img.reshape(-1))   # shape: (294912,)
+    return np.vstack(rows)             # shape: (n_images, 294912)
+
+# Test mit simulierten Daten:
+fake = [np.random.rand(128, 96, 24) for _ in range(5)]
+matrix = np.vstack([img.reshape(-1) for img in fake])
+print(f"Datenmatrix: {matrix.shape}")  # (5, 294912)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 4</span>
+        <div>
+          <p class="exa-title">RKI API – GroupBy &amp; 7-Tage-Inzidenz Rolling</p>
+          <div class="exa-tags">pandas · groupby · rolling · sum · pd.to_datetime</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>COVID-19 Fallzahlen aus der RKI-API: Gruppiere nach <code>attributes.Meldedatum</code>, summiere Fälle, berechne gleitende 7-Tage-Inzidenz per <code>.rolling(7).sum() / residents * 100_000</code> und plotte.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import pandas as pd, matplotlib.pyplot as plt
+
+# region_data = DataFrame mit Spalten:
+#   'attributes.Meldedatum' (datetime), 'attributes.AnzahlFall' (int)
+residents = 194070
+
+# 1. groupby('attributes.Meldedatum')['attributes.AnzahlFall'].sum()
+# 2. .rolling(7).sum() / residents * 100_000
+# 3. .plot()
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import pandas as pd, numpy as np, matplotlib.pyplot as plt
+
+# Simulierte Daten
+dates = pd.date_range('2021-01-01', periods=90, freq='D')
+region_data = pd.DataFrame({
+    'attributes.Meldedatum': dates,
+    'attributes.AnzahlFall': np.random.randint(10, 100, 90)
+})
+residents = 194070
+
+daily     = region_data.groupby('attributes.Meldedatum')['attributes.AnzahlFall'].sum()
+incidence = daily.rolling(7).sum() / residents * 100_000
+
+incidence.plot(title='7-Tage-Inzidenz (gleitend)', ylabel='Inzidenz / 100k EW')
+plt.tight_layout(); plt.show()
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="ex05"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--color-ex);color:white;font-size:14px;font-weight:700;cursor:pointer;">
+        ✓ Übungsblatt gelesen
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="ex-03-funktionen.html">
+        <span class="pnb-label">← Vorheriges Übungsblatt</span>
+        <span class="pnb-title">Ü03 · Funktionen</span>
+      </a>
+      <a class="page-nav-btn next" href="ex-06-multivariate.html">
+        <span class="pnb-label">Nächstes Übungsblatt →</span>
+        <span class="pnb-title">Ü06 · Multivariate Analyse</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+</body>
+</html>

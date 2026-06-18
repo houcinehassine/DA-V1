@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suche – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label">
+        <span>Fortschritt</span>
+        <span class="progress-count">0 / 9 Module</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <!-- ===== HAUPTBEREICH ===== -->
+  <main class="main">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <span>Suche</span>
+    </div>
+
+    <!-- Such-Hero -->
+    <div class="sp-hero">
+      <h1>🔍 Kurssuche</h1>
+      <p>Durchsuche alle Themen, Konzepte und Übungsblätter</p>
+      <div class="sp-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input id="sp-search" class="sp-input" type="text" placeholder="Z.B. for-Loop, Pandas, LinearRegression …" autocomplete="off">
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:#475569">
+        Tipp: Drücke <kbd style="background:rgba(255,255,255,.1);padding:1px 6px;border-radius:4px;font-family:monospace">/</kbd> auf jeder Seite, um die Suche zu öffnen
+      </div>
+    </div>
+
+    <!-- Filter-Tabs -->
+    <div class="sp-filters">
+      <button class="sp-filter-btn active" data-tag="alle">Alle</button>
+      <button class="sp-filter-btn" data-tag="python">🐍 Python Crashkurs</button>
+      <button class="sp-filter-btn" data-tag="datascience">📊 Data Science</button>
+      <button class="sp-filter-btn" data-tag="uebung">📝 Übungsblätter</button>
+    </div>
+
+    <!-- Ergebnis-Zähler -->
+    <div id="sp-count" class="sp-count"></div>
+
+    <!-- Ergebnisse -->
+    <div id="sp-results" class="sp-results"></div>
+
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+<script>
+(function () {
+  const spInput  = document.getElementById('sp-search');
+  const spCount  = document.getElementById('sp-count');
+  const spRes    = document.getElementById('sp-results');
+  const filters  = document.querySelectorAll('.sp-filter-btn');
+
+  let activeTag  = 'alle';
+  let currentQuery = '';
+
+  const TAG_LABELS = {
+    python:      '🐍 Python',
+    datascience: '📊 Data Science',
+    uebung:      '📝 Übungsblatt',
+  };
+
+  function _hl(text, q) {
+    if (!q || q.length < 2) return text;
+    const words = q.trim().split(/\s+/).filter(w => w.length >= 2);
+    if (!words.length) return text;
+    const pat = new RegExp(
+      '(' + words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')',
+      'gi'
+    );
+    return text.replace(pat, '<mark>$1</mark>');
+  }
+
+  function renderResults(items, query) {
+    if (items.length === 0) {
+      spCount.innerHTML = '';
+      if (query.length >= 2) {
+        spRes.innerHTML = `
+          <div class="sp-empty">
+            <div class="sp-empty-icon">🔍</div>
+            <h3>Keine Ergebnisse für „${query}"</h3>
+            <p>Versuche andere Begriffe oder stöbere direkt in den Modulen.</p>
+          </div>`;
+      } else {
+        spRes.innerHTML = `
+          <div class="sp-empty">
+            <div class="sp-empty-icon">📚</div>
+            <h3>Wonach suchst du?</h3>
+            <p>Gib einen Begriff ein, um alle Themen zu durchsuchen.</p>
+            <div class="sp-tips">
+              <span class="sp-tip-chip">for-Loop</span>
+              <span class="sp-tip-chip">Pandas</span>
+              <span class="sp-tip-chip">DataFrame</span>
+              <span class="sp-tip-chip">Korrelation</span>
+              <span class="sp-tip-chip">LinearRegression</span>
+              <span class="sp-tip-chip">sklearn</span>
+              <span class="sp-tip-chip">f-String</span>
+              <span class="sp-tip-chip">lambda</span>
+            </div>
+          </div>`;
+        /* Tipp-Chips klickbar machen */
+        spRes.querySelectorAll('.sp-tip-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            spInput.value = chip.textContent;
+            spInput.dispatchEvent(new Event('input'));
+            spInput.focus();
+          });
+        });
+      }
+      return;
+    }
+
+    const total = items.length;
+    const tagLabel = activeTag !== 'alle' ? ` in <strong>${TAG_LABELS[activeTag] || activeTag}</strong>` : '';
+    spCount.innerHTML = query.length >= 2
+      ? `<strong>${total}</strong> Ergebnis${total !== 1 ? 'se' : ''} für „<strong>${query}</strong>"${tagLabel}`
+      : `<strong>${total}</strong> Einträge${tagLabel}`;
+
+    spRes.innerHTML = items.map(item => `
+      <a class="sp-card" href="${item.href}">
+        <div class="sp-card-body">
+          <div class="sp-card-badge tag-${item.tag}">${TAG_LABELS[item.tag] || item.tag}</div>
+          <div class="sp-card-title">${_hl(item.title, query)}</div>
+          <div class="sp-card-module">${item.module}</div>
+          <div class="sp-card-snippet">${_hl(item.snippet, query)}</div>
+        </div>
+        <div class="sp-card-arrow">→</div>
+      </a>
+    `).join('');
+  }
+
+  function runSearch() {
+    const q = currentQuery;
+
+    let pool = SEARCH_INDEX;
+    if (activeTag !== 'alle') {
+      pool = SEARCH_INDEX.filter(x => x.tag === activeTag);
+    }
+
+    if (q.length < 2) {
+      renderResults(pool, q);
+      return;
+    }
+
+    const fuse = new Fuse(pool, {
+      keys: [
+        { name: 'title',   weight: 0.5 },
+        { name: 'snippet', weight: 0.3 },
+        { name: 'module',  weight: 0.2 },
+      ],
+      threshold: 0.38,
+      includeScore: true,
+      minMatchCharLength: 2,
+    });
+
+    renderResults(fuse.search(q).map(r => r.item), q);
+  }
+
+  /* Input-Event */
+  spInput.addEventListener('input', () => {
+    currentQuery = spInput.value.trim();
+    runSearch();
+  });
+
+  /* Filter-Buttons */
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTag = btn.dataset.tag;
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      runSearch();
+    });
+  });
+
+  /* URL-Parameter ?q= auslesen */
+  const params = new URLSearchParams(window.location.search);
+  const preQ = params.get('q');
+  if (preQ) {
+    spInput.value = preQ;
+    currentQuery = preQ.trim();
+  }
+
+  /* Initial rendern (nachdem Fuse geladen) */
+  document.addEventListener('DOMContentLoaded', () => {
+    runSearch();
+    if (preQ) spInput.focus();
+  });
+  /* Fallback falls DOMContentLoaded schon vorbei */
+  if (document.readyState !== 'loading') runSearch();
+})();
+</script>
+</body>
+</html>

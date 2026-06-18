@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Machine Learning Intro – Data Analytics</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
 </head>
 <body>
 <div class="app">
@@ -23,6 +24,14 @@
     <nav class="sidebar-nav">
       <div class="nav-section-title">Übersicht</div>
       <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
       <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
       <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
       <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
@@ -37,6 +46,31 @@
       <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
       <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
       <a class="nav-item active mod-ml" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
     </nav>
     <div class="sidebar-footer">
       <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 9 Module</span></div>
@@ -56,7 +90,7 @@
         <span>🤖</span> Modul 09 · Machine Learning
       </div>
       <h1 class="page-title">Einführung in Machine Learning</h1>
-      <p class="page-subtitle">Der sklearn-Prozess, Lineare Regression als erstes Modell, Polynomiale Regression, und die wichtige Unterscheidung zwischen Overfitting und Underfitting.</p>
+      <p class="page-subtitle">Der sklearn-Prozess, Lineare Regression, Polynomiale Regression, KNN-Klassifikation, Entscheidungsbaum, Confusion Matrix und Feature Importance.</p>
     </div>
 
     <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px">
@@ -68,6 +102,10 @@
         <a href="#linear" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Lineare Regression</a>
         <a href="#polynomial" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Polynomiale Regression</a>
         <a href="#overfitting" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Overfitting vs. Underfitting</a>
+        <a href="#knn" style="font-size:13px;color:var(--color-ml);font-weight:600">→ KNN-Klassifikation</a>
+        <a href="#decision-tree" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Entscheidungsbaum</a>
+        <a href="#confusion-matrix" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Confusion Matrix</a>
+        <a href="#feature-importance" style="font-size:13px;color:var(--color-ml);font-weight:600">→ Feature Importance</a>
       </div>
     </div>
 
@@ -297,6 +335,367 @@ for degree in [1, 2, 5, 10, 15]:
 # degree=15  Train R²=0.999  Test R²=-2.341  ← Starkes Overfitting!</code></pre>
     </div>
 
+    <!-- ===== KNN KLASSIFIKATION ===== -->
+    <h2 class="section-title" id="knn">🔵 KNN-Klassifikation</h2>
+
+    <p><strong>K-Nearest Neighbors (KNN)</strong> ist das intuitivste Klassifikationsmodell: Ein neuer Punkt bekommt die Klasse, die unter seinen <em>k</em> nächsten Nachbarn am häufigsten vorkommt — kein Training, nur Distanzberechnung.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px">📐 Wie funktioniert KNN?</div>
+        <div style="font-size:12px;color:var(--text-secondary)">
+          <div style="margin-bottom:4px">1. Berechne <strong>Euklidische Distanz</strong> zu allen Trainingspunkten</div>
+          <div style="margin-bottom:4px">2. Wähle die <strong>k nächsten Nachbarn</strong></div>
+          <div>3. <strong>Mehrheitsvoting</strong>: häufigste Klasse gewinnt</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px">⚙️ Hyperparameter k wählen</div>
+        <div style="font-size:12px;color:var(--text-secondary)">
+          <div style="margin-bottom:4px">• <strong>k = 1</strong> — sehr flexibel → Overfitting-Risiko</div>
+          <div style="margin-bottom:4px">• <strong>k = 5</strong> — guter Standardwert</div>
+          <div>• <strong>k groß</strong> — glatte Grenzen → Underfitting</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.datasets import make_blobs
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+# Synthetische Klassifikationsdaten (3 Klassen)
+X, y = make_blobs(n_samples=300, centers=3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# KNN mit k=5
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")  # → z.B. 0.967
+
+# Verschiedene k-Werte vergleichen
+for k in [1, 3, 5, 10, 20]:
+    m = KNeighborsClassifier(n_neighbors=k)
+    m.fit(X_train, y_train)
+    print(f"k={k:2d}  Train: {m.score(X_train, y_train):.3f}  Test: {m.score(X_test, y_test):.3f}")</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>KNN für Klassifikation vs. Regression</strong>
+        <p>Klassifikation → <code>KNeighborsClassifier</code>, Ausgabe ist eine <strong>Klasse</strong> (z.B. 0, 1, 2). Regression → <code>KNeighborsRegressor</code>, Ausgabe ist der <strong>Mittelwert</strong> der k Nachbarn. Die API (<code>fit</code> / <code>predict</code> / <code>score</code>) ist in beiden Fällen identisch.</p>
+      </div>
+    </div>
+
+    <!-- ===== ENTSCHEIDUNGSBAUM ===== -->
+    <h2 class="section-title" id="decision-tree">🌳 Entscheidungsbaum (Decision Tree)</h2>
+
+    <p>Ein <strong>Decision Tree</strong> trifft Entscheidungen durch eine Kette von Ja/Nein-Fragen. Jeder Split wählt das Feature und den Schwellenwert, der die Daten am reinsten trennt (Gini-Impurity oder Entropy).</p>
+
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:16px 0">
+      <svg viewBox="0 0 520 190" style="width:100%;display:block">
+        <rect x="185" y="8" width="150" height="38" rx="7" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="260" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">Feature A ≤ 2.5?</text>
+        <text x="260" y="42" text-anchor="middle" font-size="10" fill="#7c3aed">Root Node</text>
+        <line x1="260" y1="46" x2="120" y2="92" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="260" y1="46" x2="400" y2="92" stroke="#94a3b8" stroke-width="1.5"/>
+        <text x="175" y="76" text-anchor="middle" font-size="10" fill="#059669" font-weight="600">Ja</text>
+        <text x="345" y="76" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="600">Nein</text>
+        <rect x="45" y="92" width="150" height="36" rx="7" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+        <text x="120" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Klasse 0 ✓</text>
+        <text x="120" y="125" text-anchor="middle" font-size="10" fill="#166534">Leaf Node</text>
+        <rect x="325" y="92" width="150" height="36" rx="7" fill="#fdf4ff" stroke="#d8b4fe" stroke-width="1.5"/>
+        <text x="400" y="113" text-anchor="middle" font-size="12" font-weight="700" fill="#6d28d9">Feature B ≤ 1.0?</text>
+        <text x="400" y="125" text-anchor="middle" font-size="10" fill="#7c3aed">Split Node</text>
+        <line x1="400" y1="128" x2="310" y2="158" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="400" y1="128" x2="490" y2="158" stroke="#94a3b8" stroke-width="1.5"/>
+        <rect x="245" y="158" width="130" height="28" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+        <text x="310" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#166534">Klasse 1</text>
+        <rect x="425" y="158" width="90" height="28" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+        <text x="470" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">Klasse 2</text>
+      </svg>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_text
+
+X, y = make_classification(n_samples=200, n_features=4,
+                            n_informative=3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# max_depth begrenzt den Baum → verhindert Overfitting
+tree = DecisionTreeClassifier(max_depth=4, random_state=42)
+tree.fit(X_train, y_train)
+
+print(f"Train Accuracy: {tree.score(X_train, y_train):.3f}")
+print(f"Test  Accuracy: {tree.score(X_test,  y_test):.3f}")
+
+# Baumstruktur als Text ausgeben
+feature_names = ["F0", "F1", "F2", "F3"]
+print(export_text(tree, feature_names=feature_names, max_depth=3))
+
+# max_depth vergleichen: Overfitting erkennen
+for d in [1, 2, 4, 6, None]:
+    t = DecisionTreeClassifier(max_depth=d, random_state=42)
+    t.fit(X_train, y_train)
+    print(f"max_depth={str(d):4s}  Train: {t.score(X_train,y_train):.3f}  Test: {t.score(X_test,y_test):.3f}")</code></pre>
+    </div>
+
+    <div class="info-box warning">
+      <div class="icon">⚠️</div>
+      <div class="content">
+        <strong>max_depth kontrolliert Overfitting</strong>
+        <p>Ohne <code>max_depth</code> wächst der Baum bis jedes Blatt nur noch einen Datenpunkt enthält — Train Accuracy = 100%, Test Accuracy niedrig. Typische Werte: <code>max_depth=3</code>–<code>6</code>. Immer Train- und Test-Score vergleichen.</p>
+      </div>
+    </div>
+
+    <!-- ===== CONFUSION MATRIX ===== -->
+    <h2 class="section-title" id="confusion-matrix">📊 Confusion Matrix</h2>
+
+    <p>Die <strong>Confusion Matrix</strong> zeigt im Detail, welche Klassen das Modell verwechselt — viel aussagekräftiger als die reine Accuracy, besonders bei unbalancierten Datensätzen.</p>
+
+    <div style="display:flex;gap:24px;margin:16px 0;align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:0 0 auto">
+        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-align:center;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">Vorhergesagt →</div>
+        <table style="border-collapse:separate;border-spacing:4px;font-size:13px">
+          <tr>
+            <td style="padding:4px 8px"></td>
+            <td style="padding:4px 12px;font-weight:700;color:#059669;text-align:center">Positiv</td>
+            <td style="padding:4px 12px;font-weight:700;color:#dc2626;text-align:center">Negativ</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;font-weight:700;color:#059669;white-space:nowrap">↓ Tatsächlich Positiv</td>
+            <td style="padding:14px 18px;background:#dcfce7;border:2px solid #86efac;border-radius:8px;text-align:center;font-weight:800;color:#166534;line-height:1.4">TP<br><span style="font-size:10px;font-weight:400">True Positive</span></td>
+            <td style="padding:14px 18px;background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;text-align:center;font-weight:800;color:#991b1b;line-height:1.4">FN<br><span style="font-size:10px;font-weight:400">False Negative</span></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;font-weight:700;color:#dc2626;white-space:nowrap">↓ Tatsächlich Negativ</td>
+            <td style="padding:14px 18px;background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;text-align:center;font-weight:800;color:#991b1b;line-height:1.4">FP<br><span style="font-size:10px;font-weight:400">False Positive</span></td>
+            <td style="padding:14px 18px;background:#dcfce7;border:2px solid #86efac;border-radius:8px;text-align:center;font-weight:800;color:#166534;line-height:1.4">TN<br><span style="font-size:10px;font-weight:400">True Negative</span></td>
+          </tr>
+        </table>
+      </div>
+      <div style="flex:1;min-width:200px;font-size:12px;color:var(--text-secondary)">
+        <div style="margin-bottom:6px"><strong style="color:#166534">TP</strong> — Richtig als Positiv erkannt</div>
+        <div style="margin-bottom:6px"><strong style="color:#166534">TN</strong> — Richtig als Negativ erkannt</div>
+        <div style="margin-bottom:6px"><strong style="color:#991b1b">FP</strong> — Fälschlich als Positiv (Typ-I-Fehler)</div>
+        <div style="margin-bottom:12px"><strong style="color:#991b1b">FN</strong> — Fälschlich als Negativ (Typ-II-Fehler)</div>
+        <div style="font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:10px;font-family:var(--font-mono);line-height:1.8">
+          Accuracy  = (TP + TN) / Gesamt<br>
+          Precision = TP / (TP + FP)<br>
+          Recall    = TP / (TP + FN)<br>
+          F1        = 2 · (P · R) / (P + R)
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+
+X, y = make_classification(n_samples=300, n_features=4, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = DecisionTreeClassifier(max_depth=4, random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+# Confusion Matrix — Zeilen = tatsächlich, Spalten = vorhergesagt
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(cm)
+# [[TN  FP]
+#  [FN  TP]]
+
+# Vollständiger Bericht: Precision, Recall, F1-Score je Klasse
+print(classification_report(y_test, y_pred, target_names=["Klasse 0", "Klasse 1"]))</code></pre>
+    </div>
+
+    <!-- ===== FEATURE IMPORTANCE ===== -->
+    <h2 class="section-title" id="feature-importance">🏆 Feature Importance</h2>
+
+    <p>Decision Trees berechnen automatisch, wie wichtig jedes Feature für die Vorhersage war. <code>.feature_importances_</code> gibt Werte zwischen 0 und 1 zurück — Summe ist immer 1.0.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">PYTHON</span><button class="code-copy-btn">Kopieren</button></div>
+      <pre><code>from sklearn.datasets import make_classification
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+feature_names = ["Alter", "Einkommen", "Schulden", "Kredit-Score"]
+X, y = make_classification(n_samples=500, n_features=4,
+                            n_informative=3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+tree = DecisionTreeClassifier(max_depth=5, random_state=42)
+tree.fit(X_train, y_train)
+
+# Feature Importance auslesen und sortieren
+importances = tree.feature_importances_
+sorted_idx  = np.argsort(importances)[::-1]  # absteigend
+
+print("Feature Importance:")
+for i in sorted_idx:
+    bar = "█" * int(importances[i] * 40)
+    print(f"  {feature_names[i]:15s} {importances[i]:.3f}  {bar}")
+
+# Ausgabe z.B.:
+#   Kredit-Score    0.421  ████████████████
+#   Schulden        0.318  ████████████
+#   Einkommen       0.201  ████████
+#   Alter           0.060  ██
+
+print(f"\nSumme: {importances.sum():.3f}")  # immer 1.0</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <div class="icon">💡</div>
+      <div class="content">
+        <strong>Feature Importance für Feature Selection</strong>
+        <p>Features mit Importance &lt; 0.01 lassen sich oft weglassen ohne Qualitätsverlust. Typischer Workflow: erst Decision Tree trainieren → unwichtige Features entfernen → komplexeres Modell auf bereinigten Daten trainieren.</p>
+      </div>
+    </div>
+
+    <!-- ===== KLAUSURBEISPIELE ===== -->
+    <div class="exa-section-banner" style="margin-top:32px">
+      <div class="exa-icon">📝</div>
+      <div>
+        <h2 style="margin:0 0 4px">Klausurbeispiele – Klassifikation</h2>
+        <p style="margin:0">Typische Prüfungsaufgaben · KNN, Decision Tree, Confusion Matrix, Feature Importance</p>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 1</span>
+        <div>
+          <p class="exa-title">KNN-Klassifikator – vollständiger Workflow</p>
+          <div class="exa-tags">KNeighborsClassifier · accuracy_score · k-Vergleich · Iris</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Trainiere einen KNN-Klassifikator auf den Iris-Daten. Vergleiche k = 1, 5, 15 und wähle den besten Wert anhand des Test-Scores. Was beobachtest du bei k = 1?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Aufgabe: Teste k = 1, 5, 15 und drucke Train- & Test-Accuracy
+# Welcher k-Wert generalisiert am besten?</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+for k in [1, 5, 15]:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train, y_train)
+    train_acc = accuracy_score(y_train, knn.predict(X_train))
+    test_acc  = accuracy_score(y_test,  knn.predict(X_test))
+    print(f"k={k:2d}  Train: {train_acc:.3f}  Test: {test_acc:.3f}")
+
+# k= 1  Train: 1.000  Test: 0.967  ← Overfitting (Train = perfekt)
+# k= 5  Train: 0.975  Test: 1.000  ← optimal
+# k=15  Train: 0.950  Test: 0.967  ← leicht schlechter</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 2</span>
+        <div>
+          <p class="exa-title">Decision Tree + Confusion Matrix + Feature Importance</p>
+          <div class="exa-tags">DecisionTreeClassifier · confusion_matrix · classification_report · feature_importances_</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Trainiere einen Decision Tree auf dem Wine-Dataset (3 Weinsorten, 13 chemische Features). Analysiere Confusion Matrix und Feature Importance: Welche Eigenschaften sind am wichtigsten?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+import numpy as np
+
+wine = load_wine()
+X, y = wine.data, wine.target  # 3 Weinsorten, 13 Features
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 1. DecisionTreeClassifier(max_depth=4) trainieren
+# 2. Confusion Matrix ausgeben
+# 3. classification_report ausgeben
+# 4. Top-3 wichtigste Features ausgeben</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+import numpy as np
+
+wine = load_wine()
+X, y = wine.data, wine.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 1. Modell trainieren
+tree = DecisionTreeClassifier(max_depth=4, random_state=42)
+tree.fit(X_train, y_train)
+y_pred = tree.predict(X_test)
+
+print(f"Test Accuracy: {tree.score(X_test, y_test):.3f}")
+
+# 2. Confusion Matrix (Zeilen = tatsächlich, Spalten = vorhergesagt)
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+
+# 3. Detaillierter Bericht
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred, target_names=wine.target_names))
+
+# 4. Top-3 Features
+importances = tree.feature_importances_
+top3 = np.argsort(importances)[::-1][:3]
+print("Top-3 Features:")
+for i in top3:
+    print(f"  {wine.feature_names[i]:25s}  {importances[i]:.3f}")</code></pre>
+        </div>
+      </div>
+    </div>
+
     <!-- Coding Yoga -->
     <div class="yoga-box">
       <div class="yoga-header">
@@ -363,12 +762,32 @@ for degree in [1, 2, 5, 10, 15]:
         <div class="quiz-feedback"></div>
       </div>
 
-      <div class="quiz-question-block">
+      <div class="quiz-question-block" style="margin-bottom:20px">
         <div class="quiz-question">4. Warum teilt man Daten in Training und Test?</div>
         <div class="quiz-options">
           <div class="quiz-option" data-correct="false">Um Rechenzeit zu sparen</div>
           <div class="quiz-option" data-correct="false">Weil sklearn das so verlangt</div>
           <div class="quiz-option" data-correct="true">Um zu prüfen, ob das Modell auf unbekannten Daten generalisiert — nicht nur die Trainingsdaten "auswendig" lernt</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block" style="margin-bottom:20px">
+        <div class="quiz-question">5. Was passiert bei einem KNN-Classifier mit k = 1 auf den Trainingsdaten?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="true">Train Accuracy = 100% — jeder Punkt ist sein eigener nächster Nachbar und wird korrekt klassifiziert</div>
+          <div class="quiz-option" data-correct="false">Train Accuracy ist zufällig, da k = 1 zu wenig Nachbarn nutzt</div>
+          <div class="quiz-option" data-correct="false">k = 1 ist ungültig — sklearn wirft einen Fehler</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question-block">
+        <div class="quiz-question">6. In der Confusion Matrix: Was bedeutet ein hoher FN-Wert (False Negatives) bei einem Krankheitstest?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">Viele gesunde Personen werden fälschlich als krank eingestuft</div>
+          <div class="quiz-option" data-correct="true">Viele kranke Personen werden fälschlich als gesund eingestuft — gefährlich, da echte Fälle übersehen werden</div>
+          <div class="quiz-option" data-correct="false">Das Modell hat eine hohe Accuracy und ist sehr zuverlässig</div>
         </div>
         <div class="quiz-feedback"></div>
       </div>
@@ -402,7 +821,8 @@ for degree in [1, 2, 5, 10, 15]:
   </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/search.js"></script>
 </body>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Übungsblatt 08 – Machine Learning – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" href="../index.html"><span class="nav-dot" style="background:var(--color-start)"></span>Dashboard<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" href="01-getting-started.html"><span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m01b" href="01b-python-einfuehrung.html"><span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m02" href="02-variablen-datentypen.html"><span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m03" href="03-loops-conditions.html"><span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m04" href="04-funktionen-packages.html"><span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" href="05-data-science-prozess.html"><span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06a" href="06-data-understanding-single.html"><span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m06b" href="07-data-understanding-multivariate.html"><span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m07" href="08-data-preparation.html"><span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation<span class="nav-check">✓</span></a>
+      <a class="nav-item" data-id="m08" href="09-machine-learning.html"><span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning<span class="nav-check">✓</span></a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex active" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label"><span>Fortschritt</span><span class="progress-count">0 / 6 Aufgaben</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a><span class="sep">›</span>
+      <span>Übungsblatt 08 – Machine Learning</span>
+    </div>
+
+    <div class="page-header">
+      <div class="module-badge mod-ex" style="--mc:var(--color-ex)">
+        <span>✏️</span> Übungsblatt 08
+      </div>
+      <h1 class="page-title">Machine Learning</h1>
+      <p class="page-subtitle">Aufgaben zu Train-Test-Split, Cross-Validation, Overfitting, Polynomregression und Grid Search – von Intuition bis Implementierung from Scratch.</p>
+    </div>
+
+    <!-- ===== WARMUP ===== -->
+    <h2 class="section-title" id="warmup">🏋️ WarmUp: Train-Test-Split</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A1</span>
+        <div>
+          <p class="exercise-title">G'fühl für Train-Test-Split</p>
+          <div class="exercise-tags">sklearn · make_blobs · train_test_split · KNN · accuracy</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Erzeuge einen Blob-Datensatz und trainiere einen K-Nearest-Neighbor-Klassifikator. Variiere die <code>test_size</code> zwischen 0.1 und 0.9 und beobachte, wie sich Train- und Test-Accuracy verhalten.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>from sklearn.datasets import make_blobs
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+X, y = make_blobs(n_samples=300, centers=3, random_state=42)
+
+for test_size in [0.1, 0.2, 0.3, 0.5, 0.7, 0.9]:
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=0
+    )
+    model = KNeighborsClassifier(n_neighbors=5)
+    model.fit(X_train, y_train)
+
+    train_acc = accuracy_score(y_train, model.predict(X_train))
+    test_acc  = accuracy_score(y_test,  model.predict(X_test))
+    print(f"test_size={test_size:.1f}  |  train={train_acc:.3f}  test={test_acc:.3f}")
+</code></pre>
+        </div>
+        <p>Beobachtung: Was passiert mit der Test-Accuracy wenn test_size sehr klein oder sehr groß ist? Warum?</p>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+# Synthetischen Datensatz erstellen: 200 Proben, 4 Features
+X, y = make_classification(n_samples=200, n_features=4, random_state=42)
+
+# Verschiedene Aufteilungen vergleichen — was passiert mit Accuracy?
+for test_size in [0.1, 0.2, 0.3, 0.5]:
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=42
+    )
+
+    model = LogisticRegression(random_state=42, max_iter=200)
+    # Modell lernt NUR auf Trainingsdaten
+    model.fit(X_train, y_train)
+
+    # Evaluierung auf Testdaten (die das Modell nie gesehen hat)
+    acc = accuracy_score(y_test, model.predict(X_test))
+    print(f"test_size={test_size:.0%}  Train: {len(X_train):3d}  Test: {len(X_test):3d}  Accuracy: {acc:.2%}")
+# Beobachtung: Bei wenig Testdaten (10%) ist die Schätzung unzuverlässiger
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A2</span>
+        <div>
+          <p class="exercise-title">Larifari Cross-Validation</p>
+          <div class="exercise-tags">sklearn · cross_val_score · KFold · variance</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Führe eine 5-Fold und 10-Fold Cross-Validation auf demselben Datensatz durch. Vergleiche die Mittelwerte und Standardabweichungen der Scores. Welcher Fold-Wert liefert stabilere Schätzungen?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">from sklearn.datasets import make_blobs
+from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+
+X, y = make_blobs(n_samples=300, centers=3, random_state=42)
+model = KNeighborsClassifier(n_neighbors=5)
+
+for k in [3, 5, 10, 20]:
+    scores = cross_val_score(model, X, y, cv=k)
+    print(f"cv={k:2d}  mean={scores.mean():.4f}  std={scores.std():.4f}  scores={np.round(scores, 3)}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PYTHON SCHMANKERL ===== -->
+    <h2 class="section-title" id="schmankerl">🐍 Python Schmankerl</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A3</span>
+        <div>
+          <p class="exercise-title">Garage Train-Test-Split</p>
+          <div class="exercise-tags">numpy · manual split · shuffling · indexing</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Implementiere einen Train-Test-Split ohne sklearn: Mische die Indizes zufällig und teile sie in Train/Test auf. Wende ihn auf die Garage-Daten an.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+np.random.seed(7)
+
+# Garage-Daten: Fläche (qm) → Preis (€)
+X = np.array([15, 20, 25, 30, 35, 40, 50, 60, 80, 100,
+              18, 22, 28, 33, 38, 45, 55, 70, 90, 110]).reshape(-1, 1)
+y = np.array([5000, 7000, 8500, 10000, 12000, 14000, 18000, 22000, 30000, 38000,
+              6000, 7500, 9000, 11000, 13000, 15500, 19000, 25000, 33000, 42000])
+
+def my_train_test_split(X, y, test_size=0.2, random_state=None):
+    """Train-Test-Split ohne sklearn."""
+    if random_state is not None:
+        np.random.seed(random_state)
+    n = len(X)
+    indices = np.arange(n)
+    np.random.shuffle(indices)
+    n_test = int(n * test_size)
+    test_idx  = indices[:n_test]
+    train_idx = indices[n_test:]
+    return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
+
+X_train, X_test, y_train, y_test = my_train_test_split(X, y, test_size=0.3, random_state=42)
+print(f"Train: {len(X_train)}, Test: {len(X_test)}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="exercise-solution">
+      <div class="exercise-solution-label">✅ Musterlösung</div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+        <pre><code>import numpy as np
+
+def my_train_test_split(X, y, test_size=0.2, random_state=None):
+    # Reproduzierbarkeit: gleicher random_state → immer gleiche Aufteilung
+    rng = np.random.RandomState(random_state)
+    n = len(X)
+
+    # permutation() erzeugt eine zufällige Reihenfolge der Indizes 0..n-1
+    indices = rng.permutation(n)
+
+    # Die ersten n_test Indizes kommen ins Test-Set
+    n_test = int(n * test_size)
+    test_idx  = indices[:n_test]
+    train_idx = indices[n_test:]
+
+    # Fancy Indexing: Zeilen aus X und y auswählen
+    return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
+
+# Testen
+rng = np.random.RandomState(42)
+X = rng.randn(100, 3)
+y = (X[:, 0] &gt; 0).astype(int)  # Binäres Label basierend auf erster Feature
+
+X_train, X_test, y_train, y_test = my_train_test_split(X, y, test_size=0.2, random_state=42)
+print(f"Train: {X_train.shape}, Test: {X_test.shape}")
+
+# Klassenverteilung prüfen: sollte ähnlich sein (zufällige Aufteilung)
+print(f"Klassenverteilung Train: {y_train.mean():.2f}, Test: {y_test.mean():.2f}")
+</code></pre>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A4</span>
+        <div>
+          <p class="exercise-title">Train-Test-Split from Scratch – Stratified</p>
+          <div class="exercise-tags">numpy · stratified split · class balance · indexing</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Implementiere einen <em>stratifizierten</em> Train-Test-Split: Die Klassenverteilung im Train- und Test-Set soll der Gesamtverteilung entsprechen. Vergleiche mit einem nicht-stratifizierten Split.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+np.random.seed(42)
+# Unbalancierter Datensatz: 80% Klasse 0, 20% Klasse 1
+y = np.array([0]*80 + [1]*20)
+X = np.random.randn(100, 2)
+
+def stratified_split(X, y, test_size=0.2, random_state=None):
+    """Stratifizierter Train-Test-Split."""
+    if random_state is not None:
+        np.random.seed(random_state)
+    classes = np.unique(y)
+    train_idx, test_idx = [], []
+    for cls in classes:
+        cls_idx = np.where(y == cls)[0]
+        np.random.shuffle(cls_idx)
+        n_test = max(1, int(len(cls_idx) * test_size))
+        test_idx.extend(cls_idx[:n_test])
+        train_idx.extend(cls_idx[n_test:])
+    return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
+
+X_tr, X_te, y_tr, y_te = stratified_split(X, y, test_size=0.2, random_state=0)
+print(f"Train Klasse-1-Anteil: {y_tr.mean():.2f}  (erwartet ~0.20)")
+print(f"Test  Klasse-1-Anteil: {y_te.mean():.2f}  (erwartet ~0.20)")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A5</span>
+        <div>
+          <p class="exercise-title">Polynomfunktionsspaß</p>
+          <div class="exercise-tags">sklearn · PolynomialFeatures · Ridge · overfitting · degree</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Passe Polynomregression unterschiedlichen Grades (1–15) an einen verrauschten Sinus-Datensatz an. Beobachte Underfitting (niedriger Grad) und Overfitting (hoher Grad) anhand von Train- und Test-MSE.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.pipeline import make_pipeline
+
+np.random.seed(3)
+X = np.linspace(0, 2*np.pi, 40).reshape(-1, 1)
+y = np.sin(X.ravel()) + np.random.randn(40) * 0.3
+
+split = 30
+X_train, X_test = X[:split], X[split:]
+y_train, y_test = y[:split], y[split:]
+
+print(f"{'Grad':&gt;5} | {'Train MSE':&gt;12} | {'Test MSE':&gt;12}")
+print("-" * 35)
+for degree in range(1, 16):
+    model = make_pipeline(PolynomialFeatures(degree), LinearRegression())
+    model.fit(X_train, y_train)
+    train_mse = mean_squared_error(y_train, model.predict(X_train))
+    test_mse  = mean_squared_error(y_test,  model.predict(X_test))
+    note = " &lt;-- sweet spot?" if degree == 4 else ""
+    print(f"{degree:&gt;5} | {train_mse:&gt;12.4f} | {test_mse:&gt;12.4f}{note}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A6</span>
+        <div>
+          <p class="exercise-title">Data-Generator</p>
+          <div class="exercise-tags">numpy · sklearn · data generation · noise · bias-variance</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Schreibe eine Funktion <code>generate_regression_data(n, noise, func)</code>, die synthetische Regressionsdaten mit einer beliebigen Funktion und einstellbarem Rauschen erzeugt. Verwende sie, um Bias-Variance-Tradeoff zu demonstrieren.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+
+def generate_regression_data(n=100, noise=0.5, func=None, x_range=(0, 2*np.pi), random_state=None):
+    """
+    Erzeugt (X, y) Paare.
+    func: callable, default = sin
+    noise: Standardabweichung des Gauß-Rauschens
+    """
+    if random_state is not None:
+        np.random.seed(random_state)
+    if func is None:
+        func = np.sin
+    X = np.linspace(x_range[0], x_range[1], n).reshape(-1, 1)
+    y = func(X.ravel()) + np.random.randn(n) * noise
+    return X, y
+
+# Test mit verschiedenen Funktionen und Rausch-Leveln
+for noise in [0.1, 0.5, 1.0, 2.0]:
+    X, y = generate_regression_data(n=50, noise=noise, random_state=0)
+    print(f"noise={noise:.1f}  y_std={y.std():.3f}  y_range=[{y.min():.2f}, {y.max():.2f}]")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== GRID SEARCH ===== -->
+    <h2 class="section-title" id="gridsearch">🔍 Grid Search from Scratch</h2>
+
+    <div class="exercise-box">
+      <div class="exercise-header">
+        <span class="exercise-num">A7</span>
+        <div>
+          <p class="exercise-title">Grid Search from Scratch</p>
+          <div class="exercise-tags">for loop · cross-validation · hyperparameter · KNN · dict</div>
+        </div>
+      </div>
+      <div class="exercise-body">
+        <p>Implementiere einen einfachen Grid Search ohne sklearn: Teste alle Kombinationen aus einem Hyperparameter-Grid per Cross-Validation und finde die beste Konfiguration.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import KFold
+from sklearn.metrics import accuracy_score
+
+X, y = make_classification(n_samples=200, n_features=10, random_state=42)
+
+# Hyperparameter-Grid
+param_grid = {
+    "n_neighbors": [1, 3, 5, 7, 10, 15, 20],
+    "weights":     ["uniform", "distance"],
+    "metric":      ["euclidean", "manhattan"],
+}
+
+def my_grid_search(X, y, param_grid, cv=5):
+    """
+    Einfacher Grid Search mit Cross-Validation.
+    Gibt bestes Ergebnis als dict zurück.
+    """
+    from itertools import product
+
+    kf = KFold(n_splits=cv, shuffle=True, random_state=0)
+    best_score = -np.inf
+    best_params = None
+    results = []
+
+    # Alle Parameterkombinationen erzeugen
+    keys   = list(param_grid.keys())
+    values = list(param_grid.values())
+
+    for combo in product(*values):
+        params = dict(zip(keys, combo))
+        fold_scores = []
+
+        for train_idx, val_idx in kf.split(X):
+            X_tr, X_val = X[train_idx], X[val_idx]
+            y_tr, y_val = y[train_idx], y[val_idx]
+
+            model = KNeighborsClassifier(**params)
+            model.fit(X_tr, y_tr)
+            score = accuracy_score(y_val, model.predict(X_val))
+            fold_scores.append(score)
+
+        mean_score = np.mean(fold_scores)
+        results.append({"params": params, "score": mean_score})
+
+        if mean_score &gt; best_score:
+            best_score = mean_score
+            best_params = params
+
+    return best_params, best_score, results
+
+best_params, best_score, all_results = my_grid_search(X, y, param_grid, cv=5)
+
+print(f"Beste Parameter: {best_params}")
+print(f"Bester CV-Score: {best_score:.4f}")
+print(f"Anzahl getesteter Kombinationen: {len(all_results)}")
+</code></pre>
+        </div>
+        <p>Vergleiche dein Ergebnis mit <code>sklearn.model_selection.GridSearchCV</code>. Stimmen die besten Parameter überein?</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code">from sklearn.model_selection import GridSearchCV
+
+gs = GridSearchCV(KNeighborsClassifier(), param_grid, cv=5, scoring="accuracy")
+gs.fit(X, y)
+print(f"sklearn best params: {gs.best_params_}")
+print(f"sklearn best score:  {gs.best_score_:.4f}")
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KLAUSURBEISPIELE ===== -->
+    <div class="exa-section-banner">
+      <div class="exa-icon">📝</div>
+      <div>
+        <h2>Klausurbeispiele – 08_exa</h2>
+        <p>Echte Beispielaufgaben aus der Vorlesung · sklearn Prozess, Lineare &amp; Polynomiale Regression</p>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 1</span>
+        <div>
+          <p class="exa-title">Lineare Regression – der typische sklearn-Prozess</p>
+          <div class="exa-tags">LinearRegression · fit · predict · score · train_test_split</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Der komplette sklearn-Prozess in 4 Schritten: Modell wählen → Hyperparameter setzen → <code>.fit(X, y)</code> → <code>.predict(X_new)</code>. Lerne diesen Ablauf auswendig — er ist die Grundlage jedes Modells.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+rng = np.random.RandomState(42)
+X = 10 * rng.rand(50, 1)
+y = 2 * X.ravel() - 1 + rng.randn(50)
+
+# 1. Wähle Modellklasse: LinearRegression
+# 2. Setze Hyperparameter (hier: Default)
+# 3. Trainiere auf X_train, y_train
+# 4. Evaluiere Score auf X_test, y_test
+# 5. Plotte Daten + Regressionslinie
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np, matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+rng = np.random.RandomState(42)
+X = 10 * rng.rand(50, 1)
+y = 2 * X.ravel() - 1 + rng.randn(50)
+
+# Train/Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 1. Modell wählen
+model = LinearRegression()
+
+# 2. Hyperparameter: Default (fit_intercept=True)
+
+# 3. Trainieren
+model.fit(X_train, y_train)
+
+# 4. Evaluieren
+print(f"R² Score (Test):  {model.score(X_test, y_test):.3f}")
+print(f"Koeffizient: {model.coef_[0]:.3f}, Intercept: {model.intercept_:.3f}")
+
+# 5. Regressionslinie plotten
+X_line = np.linspace(0, 10, 100).reshape(-1, 1)
+plt.scatter(X, y, alpha=0.6)
+plt.plot(X_line, model.predict(X_line), color='red', lw=2)
+plt.xlabel('X'); plt.ylabel('y'); plt.title('Lineare Regression')
+plt.tight_layout(); plt.show()
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 2</span>
+        <div>
+          <p class="exa-title">Polynomiale Regression – PolynomialFeatures + Pipeline</p>
+          <div class="exa-tags">PolynomialFeatures · LinearRegression · make_pipeline · Grad 1–5</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Für nicht-lineare Daten: kombiniere <code>PolynomialFeatures(degree=n)</code> mit <code>LinearRegression()</code> zu einer Pipeline. Teste verschiedene Grade und erkenne Overfitting vs. Underfitting.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>import numpy as np, matplotlib.pyplot as plt
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+
+rng = np.random.RandomState(1)
+X = 2 * rng.rand(80, 1) - 1
+y = X.ravel()**3 + 0.1 * rng.randn(80)
+
+# Plotte Fits für degree = 1, 3, 5, 10
+# make_pipeline(PolynomialFeatures(degree=d), LinearRegression())
+# Was beobachtest du bei degree=1 (Underfitting) und degree=10 (Overfitting)?
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np, matplotlib.pyplot as plt
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+
+rng = np.random.RandomState(1)
+X = 2 * rng.rand(80, 1) - 1
+y = X.ravel()**3 + 0.1 * rng.randn(80)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+X_line = np.linspace(-1, 1, 200).reshape(-1, 1)
+fig, axes = plt.subplots(1, 4, figsize=(16, 4))
+
+for ax, degree in zip(axes, [1, 3, 5, 10]):
+    model = make_pipeline(PolynomialFeatures(degree), LinearRegression())
+    model.fit(X_train, y_train)
+    r2 = model.score(X_test, y_test)
+    ax.scatter(X, y, s=15, alpha=0.5)
+    ax.plot(X_line, model.predict(X_line), color='red', lw=2)
+    ax.set_title(f'Grad {degree}  R²={r2:.2f}')
+    ax.set_ylim(-1.5, 1.5)
+
+plt.suptitle('Polynomiale Regression: Underfitting → Overfitting')
+plt.tight_layout(); plt.show()
+# Grad 1: Underfitting (zu einfach)
+# Grad 3: ideal (entspricht den echten Daten)
+# Grad 10: Overfitting (zu komplex, schlechter Test-Score)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="exa-box">
+      <div class="exa-header">
+        <span class="exa-num">EXA 3</span>
+        <div>
+          <p class="exa-title">Grid Search from Scratch</p>
+          <div class="exa-tags">PolynomialFeatures · cross_val_score · nested-loops · best_model</div>
+        </div>
+      </div>
+      <div class="exa-body">
+        <p>Implementiere einen eigenen Grid Search für die Polynomiale Regression. Durchsuche den Hyperparameterraum (Polynomial Degree), führe Cross-Validation durch und gib das beste Modell zurück.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AUFGABE</span><button class="code-copy-btn">Kopieren</button></div>
+          <pre><code>from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+X, y = ...  # Deine Daten
+
+def full_grid_search(X, y, degrees, cv=5):
+    # Loop über alle degrees
+    # Für jeden: cross_val_score berechnen (scoring='r2')
+    # Bestes Modell anhand des mittleren CV-Scores auswählen
+    # Bestes Modell auf allen Daten trainieren und zurückgeben
+    pass
+</code></pre>
+        </div>
+      </div>
+      <div class="exa-solution">
+        <div class="exa-solution-label">✅ Lösung</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">LÖSUNG</span></div>
+          <pre><code>import numpy as np
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+
+rng = np.random.RandomState(1)
+X = 2 * rng.rand(100, 1) - 1
+y = X.ravel()**3 + 0.1 * rng.randn(100)
+
+def full_grid_search(X, y, degrees=range(1, 11), cv=5):
+    best_score  = -np.inf
+    best_degree = None
+    best_model  = None
+
+    for degree in degrees:
+        model  = make_pipeline(PolynomialFeatures(degree), LinearRegression())
+        scores = cross_val_score(model, X, y, cv=cv, scoring='r2')
+        mean_score = scores.mean()
+        print(f"Degree {degree:2d}: CV R² = {mean_score:.3f} ± {scores.std():.3f}")
+        if mean_score > best_score:
+            best_score  = mean_score
+            best_degree = degree
+            best_model  = model
+
+    best_model.fit(X, y)
+    print(f"\nBester Grad: {best_degree}, CV R²: {best_score:.3f}")
+    return best_model
+
+best = full_grid_search(X, y)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center">
+      <button class="mark-done-btn" data-module="ex08"
+        style="padding:10px 28px;border:none;border-radius:8px;background:var(--color-ex);color:white;font-size:14px;font-weight:700;cursor:pointer;">
+        ✓ Übungsblatt gelesen
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="ex-06-multivariate.html">
+        <span class="pnb-label">← Vorheriges Übungsblatt</span>
+        <span class="pnb-title">Ü06 · Multivariate Analyse</span>
+      </a>
+      <a class="page-nav-btn next" href="09-machine-learning.html">
+        <span class="pnb-label">Zum Modul →</span>
+        <span class="pnb-title">09 · Machine Learning</span>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+</body>
+</html>
