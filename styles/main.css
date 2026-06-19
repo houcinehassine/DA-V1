@@ -1796,6 +1796,23 @@ mark {
   color: var(--code-text);
 }
 
+/* Code blocks auto-upgraded from .ref-code inside ref-cards */
+.ref-card-body .code-block {
+  margin: 8px 0 0;
+  border-radius: 8px;
+}
+.ref-card-body .code-block pre {
+  font-size: 12.5px;
+  line-height: 1.65;
+  padding: 12px 14px;
+}
+.ref-card-body .code-block .code-header {
+  padding: 5px 10px;
+}
+.ref-card-body .run-output {
+  border-radius: 0 0 8px 8px;
+}
+
 /* Theory Q&A Accordion */
 .qa-list {
   display: flex;
@@ -1940,7 +1957,8 @@ body.sidebar-collapsed .sidebar {
 }
 body.sidebar-collapsed .main {
   margin-left: 0;
-  transition: margin-left .3s ease;
+  max-width: 100vw;
+  transition: margin-left .3s ease, max-width .3s ease;
 }
 .main {
   transition: margin-left .3s ease;
@@ -2058,15 +2076,6 @@ p {
   }
 }
 
-/* Ultra-wide monitors (≥ 1440px total width):
-   auto-center content and cap line length at ~900px */
-@media (min-width: 1440px) {
-  .main {
-    padding-left:  max(44px, calc((100% - 900px) / 2));
-    padding-right: max(44px, calc((100% - 900px) / 2));
-  }
-}
-
 /* ---- Medium windows: sidebar visible, 801–1100px content area ---- */
 @media (max-width: 1100px) {
   /* 3-column inline-grid cards → 2 columns (prevent squishing) */
@@ -2156,6 +2165,111 @@ p {
   h1.page-title { font-size: 18pt; }
   .page-header { animation: none; border-bottom: 1pt solid #ccc; padding-bottom: 8pt; }
   a { color: inherit; }
+}
+
+/* ===== Prüfung Sub-Navigation ===== */
+.pruef-subnav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  border-left: 4px solid #dc2626;
+}
+.pruef-subnav-btn {
+  padding: 5px 13px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+  transition: all .15s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pruef-subnav-btn:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+.pruef-subnav-btn.active {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
+}
+
+/* ===== Prüfung Hub Navigation Cards ===== */
+.pruef-nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 32px;
+}
+.pruef-nav-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  border-top: 3px solid #dc2626;
+  text-decoration: none;
+  color: inherit;
+  transition: all .15s;
+}
+.pruef-nav-card:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,.10);
+  transform: translateY(-2px);
+}
+.pruef-nav-card-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+  width: 44px;
+  text-align: center;
+  line-height: 1;
+  margin-top: 2px;
+}
+.pruef-nav-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.pruef-nav-card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.pruef-nav-card-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.pruef-nav-card-tags span {
+  background: var(--border);
+  border-radius: 99px;
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.pruef-nav-card-arrow {
+  margin-left: auto;
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  flex-shrink: 0;
+  align-self: center;
+  transition: color .15s;
+}
+.pruef-nav-card:hover .pruef-nav-card-arrow {
+  color: #dc2626;
+}
+@media (max-width: 720px) {
+  .pruef-nav-grid { grid-template-columns: 1fr; }
 }
 
 /* Print button (visible on pruefung.html only) */

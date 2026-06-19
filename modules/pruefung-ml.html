@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prüfungsvorbereitung – Data Analytics</title>
+  <title>Prüfung – Machine Learning – Data Analytics</title>
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/highlight.min.css">
 </head>
@@ -117,92 +117,158 @@
     <div class="breadcrumb">
       <a href="../index.html">Dashboard</a>
       <span class="sep">›</span>
-      <span>Prüfungsvorbereitung</span>
+      <a href="pruefung.html">Prüfung</a>
+      <span class="sep">›</span>
+      <span>Machine Learning</span>
     </div>
 
-    <div class="page-header">
-      <div class="module-badge" style="background:#dc2626;color:white;padding:4px 14px;border-radius:99px;font-size:13px;font-weight:700">
-        📋 Klausur SS26
+    <div class="pruef-subnav">
+      <a class="pruef-subnav-btn" href="pruefung-python.html">🐍 Python</a>
+      <a class="pruef-subnav-btn" href="pruefung-datascience.html">📊 Data Science</a>
+      <a class="pruef-subnav-btn active" href="pruefung-ml.html">🤖 Machine Learning</a>
+      <a class="pruef-subnav-btn" href="pruefung-theorie.html">❓ Theoriefragen</a>
+      <a class="pruef-subnav-btn" href="pruefung-muster.html">📐 Klausurmuster</a>
+    </div>
+
+    <div class="pruef-section">
+      <span class="pruef-section-title">🤖 Machine Learning</span>
+      <span class="pruef-section-badge" style="background:var(--color-ml)">Modul 08–09</span>
+    </div>
+
+    <div class="ref-grid">
+
+      <div class="ref-card" id="sklearn">
+        <div class="ref-card-head" style="background:var(--color-ml)">
+          <h3>sklearn Prozess (4 Schritte)</h3>
+          <a class="ref-link" href="09-machine-learning.html">→ Modul 09</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>X muss 2D sein:</strong> <code>x.reshape(-1, 1)</code> für einzelne Feature-Spalte</li>
+            <li><strong>R²:</strong> 0–1, erklärt Anteil der Varianz. 1 = perfekt</li>
+            <li><strong>random_state=42:</strong> macht Split reproduzierbar</li>
+            <li><strong>test_size=0.2:</strong> 20% Test, 80% Training</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split, cross_val_score
+
+# 1. Daten aufbereiten (X muss 2D sein!)
+X = df[["feature1", "feature2"]].values
+y = df["target"].values
+# bei 1 Feature: X = x.reshape(-1, 1)
+
+# 2. Train/Test Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 3. Modell trainieren
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# 4. Vorhersagen &amp; Bewerten
+y_pred       = model.predict(X_test)
+r2_train     = model.score(X_train, y_train)
+r2_test      = model.score(X_test, y_test)
+
+print(f"Train R²: {r2_train:.3f}")
+print(f"Test  R²: {r2_test:.3f}")
+
+# Cross-Validation (robustere Bewertung)
+scores = cross_val_score(model, X, y, cv=5, scoring='r2')
+print(f"CV R²: {scores.mean():.3f} ± {scores.std():.3f}")</code></pre>
+        </div>
       </div>
-      <h1 class="page-title">Prüfungsvorbereitung</h1>
-      <p class="page-subtitle">Alle wichtigen Konzepte, Code-Muster und Theoriefragen – aufgeteilt in 5 Unterseiten zum Lernen und Ausdrucken.</p>
-    </div>
 
-    <div class="pruef-info-banner">
-      <div class="pib-icon">⚠️</div>
-      <div>
-        <div class="pib-title">Prüfungsrelevante Themen</div>
-        <div class="pib-body">
-          Die Klausur basiert auf den Übungsblättern (<strong>01, 02, 03, 05, 06, 08</strong>) und den Beispielklausuren (<strong>01_exa, 02_exa, 03_exa, 05_exa, 06_exa, 08_exa</strong>).
-          Aufgaben sind ähnlich den Übungsaufgaben + einige <strong>Theoriefragen</strong>. Python-Grundlagen bis Machine Learning.
+      <div class="ref-card" id="polynom">
+        <div class="ref-card-head" style="background:var(--color-ml)">
+          <h3>Polynomiale Regression &amp; Pipeline</h3>
+          <a class="ref-link" href="09-machine-learning.html">→ Modul 09</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>make_pipeline():</strong> verkettet Schritte (Preprocessing + Modell)</li>
+            <li><strong>PolynomialFeatures(degree=n):</strong> erstellt x, x², x³, … automatisch</li>
+            <li><strong>Grid Search über Grad:</strong> bestes degree durch Loop finden</li>
+            <li><strong>Overfitting:</strong> Train R² ↑, Test R² ↓ → degree zu hoch!</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Polynomiale Regression (Grad n)
+def poly_model(degree):
+    return make_pipeline(
+        PolynomialFeatures(degree=degree, include_bias=False),
+        LinearRegression()
+    )
+
+# Grid Search über Grad
+best_degree, best_score = 0, -np.inf
+train_scores, test_scores = [], []
+
+for degree in range(1, 10):
+    model = poly_model(degree)
+    model.fit(X_train, y_train)
+    tr = model.score(X_train, y_train)
+    te = model.score(X_test,  y_test)
+    train_scores.append(tr)
+    test_scores.append(te)
+    print(f"Grad {degree}: Train={tr:.3f} | Test={te:.3f}")
+    if te &gt; best_score:
+        best_score  = te
+        best_degree = degree
+
+print(f"Bester Grad: {best_degree}  (Test R² = {best_score:.3f})")</code></pre>
         </div>
       </div>
+
+      <div class="ref-card" id="overfitting">
+        <div class="ref-card-head" style="background:#d946ef">
+          <h3>Overfitting &amp; Modellbewertung</h3>
+          <a class="ref-link" href="09-machine-learning.html">→ Modul 09</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>Overfitting:</strong> hoher Train-R², niedriger Test-R² → Grad zu hoch</li>
+            <li><strong>Underfitting:</strong> niedriger Train-R² → Modell zu einfach</li>
+            <li><strong>Gutes Modell:</strong> Train ≈ Test, beide hoch</li>
+            <li><strong>Cross-Validation (cv=5):</strong> robustere Bewertung als einmaliger Split</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">import matplotlib.pyplot as plt
+
+degrees = range(1, 10)
+
+plt.figure(figsize=(10, 6))
+plt.plot(degrees, train_scores, label="Train R²", marker="o", color="blue")
+plt.plot(degrees, test_scores,  label="Test R²",  marker="s", color="red")
+plt.xlabel("Polynomgrad")
+plt.ylabel("R²")
+plt.title("Overfitting-Diagnose")
+plt.legend()
+plt.axhline(0, color="gray", linestyle="--", alpha=0.5)
+plt.show()
+
+# Cross-Validation
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(
+    poly_model(best_degree), X, y,
+    cv=5, scoring='r2'
+)
+print(f"CV R²: {scores.mean():.3f} ± {scores.std():.3f}")</code></pre>
+        </div>
+      </div>
+
     </div>
 
-    <h2 class="section-title" style="margin-top:32px">Themengebiete</h2>
+    <div style="text-align:right;margin-bottom:20px">
+      <button class="pruef-print-btn" onclick="window.print()">🖨️ Drucken / als PDF</button>
+    </div>
 
-    <div class="pruef-nav-grid">
-
-      <a class="pruef-nav-card" href="pruefung-python.html" style="border-top-color:var(--color-py1)">
-        <div class="pruef-nav-card-icon">🐍</div>
-        <div>
-          <div class="pruef-nav-card-title">Python Grundlagen</div>
-          <div class="pruef-nav-card-meta">Module 02–04 · 4 Referenzkarten</div>
-          <div class="pruef-nav-card-tags">
-            <span>Variablen</span><span>Listen &amp; Dicts</span><span>Loops</span><span>Funktionen</span>
-          </div>
-        </div>
-        <div class="pruef-nav-card-arrow">→</div>
-      </a>
-
-      <a class="pruef-nav-card" href="pruefung-datascience.html" style="border-top-color:var(--color-du1)">
-        <div class="pruef-nav-card-icon">📊</div>
-        <div>
-          <div class="pruef-nav-card-title">Data Science</div>
-          <div class="pruef-nav-card-meta">Module 05–07 · 4 Referenzkarten</div>
-          <div class="pruef-nav-card-tags">
-            <span>NumPy</span><span>Pandas</span><span>Korrelation</span><span>t-Test</span>
-          </div>
-        </div>
-        <div class="pruef-nav-card-arrow">→</div>
-      </a>
-
-      <a class="pruef-nav-card" href="pruefung-ml.html" style="border-top-color:var(--color-ml)">
-        <div class="pruef-nav-card-icon">🤖</div>
-        <div>
-          <div class="pruef-nav-card-title">Machine Learning</div>
-          <div class="pruef-nav-card-meta">Modul 08–09 · 3 Referenzkarten</div>
-          <div class="pruef-nav-card-tags">
-            <span>sklearn</span><span>Polynom-Regression</span><span>Overfitting</span>
-          </div>
-        </div>
-        <div class="pruef-nav-card-arrow">→</div>
-      </a>
-
-      <a class="pruef-nav-card" href="pruefung-theorie.html" style="border-top-color:#dc2626">
-        <div class="pruef-nav-card-icon">❓</div>
-        <div>
-          <div class="pruef-nav-card-title">Theoriefragen</div>
-          <div class="pruef-nav-card-meta">16 Fragen mit Antworten · klappbar</div>
-          <div class="pruef-nav-card-tags">
-            <span>Expression/Statement</span><span>Mutable</span><span>p-Wert</span><span>R²</span>
-          </div>
-        </div>
-        <div class="pruef-nav-card-arrow">→</div>
-      </a>
-
-      <a class="pruef-nav-card" href="pruefung-muster.html" style="border-top-color:#7c3aed">
-        <div class="pruef-nav-card-icon">📐</div>
-        <div>
-          <div class="pruef-nav-card-title">Typische Klausurmuster</div>
-          <div class="pruef-nav-card-meta">aus den _exa_ Notebooks · 4 Muster</div>
-          <div class="pruef-nav-card-tags">
-            <span>Variablen</span><span>Loops/Dicts</span><span>Statistik</span><span>Neural Net</span>
-          </div>
-        </div>
-        <div class="pruef-nav-card-arrow">→</div>
-      </a>
-
+    <div class="page-nav">
+      <a class="page-nav-btn" href="pruefung-datascience.html"><span>←</span><div>← Data Science</div></a>
+      <a class="page-nav-btn next" href="pruefung-theorie.html"><div>Theoriefragen →</div><span>→</span></a>
     </div>
 
     <div style="height:48px"></div>

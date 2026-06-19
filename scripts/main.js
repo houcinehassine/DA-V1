@@ -110,6 +110,38 @@ function initQuizzes() {
   });
 }
 
+/* ---------- Auto-upgrade pre.ref-code → .code-block wrapper ---------- */
+function initRefCodeBlocks() {
+  document.querySelectorAll('pre.ref-code, pre:not(.exercise-hl-overlay)').forEach(pre => {
+    if (pre.closest('.code-block')) return;
+    const codeEl = pre.querySelector('code');
+    if (!codeEl) return;
+
+    const block = document.createElement('div');
+    block.className = 'code-block';
+
+    const header = document.createElement('div');
+    header.className = 'code-header';
+
+    const langSpan = document.createElement('span');
+    langSpan.className = 'code-lang';
+    langSpan.textContent = 'PYTHON';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'code-copy-btn';
+    copyBtn.title = 'Code kopieren';
+    copyBtn.textContent = 'Kopieren';
+
+    header.appendChild(langSpan);
+    header.appendChild(copyBtn);
+
+    pre.parentNode.insertBefore(block, pre);
+    block.appendChild(header);
+    block.appendChild(pre);
+    pre.classList.remove('ref-code');
+  });
+}
+
 /* ---------- Code Copy-Buttons ---------- */
 function initCodeCopy() {
   document.querySelectorAll('.code-copy-btn').forEach(btn => {
@@ -321,11 +353,14 @@ function initCodeRunner() {
     const copyBtn = header && header.querySelector('.code-copy-btn');
     if (!header) return;
 
-    /* Separator label above the block (between text and code) */
-    const sep = document.createElement('div');
-    sep.className = 'code-block-sep';
-    sep.textContent = 'Code-Beispiel';
-    block.parentNode.insertBefore(sep, block);
+    /* Separator label — only outside ref-cards and info boxes */
+    const inCard = block.closest('.ref-card-body, .ref-card, .qa-a, .info-box, .tip-box, .yoga-body, .exa-box');
+    if (!inCard) {
+      const sep = document.createElement('div');
+      sep.className = 'code-block-sep';
+      sep.textContent = 'Code-Beispiel';
+      block.parentNode.insertBefore(sep, block);
+    }
 
     /* Build run button */
     const runBtn = document.createElement('button');
@@ -864,6 +899,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSlides();
   initYogaBoxes();
   initQuizzes();
+  initRefCodeBlocks();
   initCodeCopy();
   initCodeRunner();
   initExerciseBlocks();

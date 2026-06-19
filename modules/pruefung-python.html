@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prüfung – Python Grundlagen – Data Analytics</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/highlight.min.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="../index.html" style="text-decoration:none">
+        <div class="logo-title">📊 Data Analytics</div>
+        <div class="logo-sub">Interaktive Lernplattform · SS26</div>
+      </a>
+    </div>
+    <div class="sidebar-search">
+      <input id="search-input" class="search-input" type="text" placeholder="Suchen…" autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Übersicht</div>
+      <a class="nav-item" data-id="index" data-href="index.html" href="../index.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>Dashboard
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="search" data-href="search.html" href="search.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>🔍 Suche
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item active" data-id="pruefung" data-href="pruefung.html" href="pruefung.html">
+        <span class="nav-dot" style="background:#dc2626"></span>📋 Prüfung
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Python Crashkurs</div>
+      <a class="nav-item" data-id="m01" data-href="01-getting-started.html" href="01-getting-started.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01 · Setup &amp; Tools
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m01b" data-href="01b-python-einfuehrung.html" href="01b-python-einfuehrung.html">
+        <span class="nav-dot" style="background:var(--color-start)"></span>01b · Python Einführung
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m02" data-href="02-variablen-datentypen.html" href="02-variablen-datentypen.html">
+        <span class="nav-dot" style="background:var(--color-py1)"></span>02 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m03" data-href="03-loops-conditions.html" href="03-loops-conditions.html">
+        <span class="nav-dot" style="background:var(--color-py2)"></span>03 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m04" data-href="04-funktionen-packages.html" href="04-funktionen-packages.html">
+        <span class="nav-dot" style="background:var(--color-py3)"></span>04 · Funktionen &amp; Packages
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Data Science</div>
+      <a class="nav-item" data-id="m05" data-href="05-data-science-prozess.html" href="05-data-science-prozess.html">
+        <span class="nav-dot" style="background:var(--color-ds)"></span>05 · Data Science Prozess
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06a" data-href="06-data-understanding-single.html" href="06-data-understanding-single.html">
+        <span class="nav-dot" style="background:var(--color-du1)"></span>06 · Data Understanding I
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m06b" data-href="07-data-understanding-multivariate.html" href="07-data-understanding-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-du2)"></span>07 · Data Understanding II
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item" data-id="m07" data-href="08-data-preparation.html" href="08-data-preparation.html">
+        <span class="nav-dot" style="background:var(--color-dp)"></span>08 · Data Preparation
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ml" data-id="m08" data-href="09-machine-learning.html" href="09-machine-learning.html">
+        <span class="nav-dot" style="background:var(--color-ml)"></span>09 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+      <div class="nav-section-title" style="margin-top:8px">Übungsblätter</div>
+      <a class="nav-item mod-ex" data-id="ex01" data-href="ex-01-variablen.html" href="ex-01-variablen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü01 · Variablen &amp; Datentypen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex02" data-href="ex-02-loops.html" href="ex-02-loops.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü02 · Loops &amp; Conditions
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex03" data-href="ex-03-funktionen.html" href="ex-03-funktionen.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü03 · Funktionen
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex05" data-href="ex-05-numpy.html" href="ex-05-numpy.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü05 · NumPy &amp; Pandas
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex06" data-href="ex-06-multivariate.html" href="ex-06-multivariate.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü06 · Multivariate Analyse
+        <span class="nav-check">✓</span>
+      </a>
+      <a class="nav-item mod-ex" data-id="ex08" data-href="ex-08-ml.html" href="ex-08-ml.html">
+        <span class="nav-dot" style="background:var(--color-ex)"></span>Ü08 · Machine Learning
+        <span class="nav-check">✓</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="progress-label">
+        <span>Fortschritt</span>
+        <span class="progress-count">0 / 9 Module</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Dashboard</a>
+      <span class="sep">›</span>
+      <a href="pruefung.html">Prüfung</a>
+      <span class="sep">›</span>
+      <span>Python Grundlagen</span>
+    </div>
+
+    <div class="pruef-subnav">
+      <a class="pruef-subnav-btn active" href="pruefung-python.html">🐍 Python</a>
+      <a class="pruef-subnav-btn" href="pruefung-datascience.html">📊 Data Science</a>
+      <a class="pruef-subnav-btn" href="pruefung-ml.html">🤖 Machine Learning</a>
+      <a class="pruef-subnav-btn" href="pruefung-theorie.html">❓ Theoriefragen</a>
+      <a class="pruef-subnav-btn" href="pruefung-muster.html">📐 Klausurmuster</a>
+    </div>
+
+    <div class="pruef-section">
+      <span class="pruef-section-title">🐍 Python Grundlagen</span>
+      <span class="pruef-section-badge" style="background:var(--color-py1)">Module 02–04</span>
+    </div>
+
+    <div class="ref-grid">
+
+      <div class="ref-card" id="variablen">
+        <div class="ref-card-head" style="background:var(--color-py1)">
+          <h3>Variablen &amp; Datentypen</h3>
+          <a class="ref-link" href="02-variablen-datentypen.html">→ Modul 02</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>Naming:</strong> snake_case, keine Zahlen am Anfang, keine Reserved Words</li>
+            <li><strong>Typen:</strong> <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>list</code>, <code>dict</code>, <code>tuple</code>, <code>set</code></li>
+            <li><strong>Falsy:</strong> <code>0</code>, <code>0.0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>None</code> → alle ergeben <code>bool(x) == False</code></li>
+            <li><strong>Konvertierung:</strong> <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code></li>
+            <li><strong>Operatoren:</strong> <code>//</code> ganzzahlig, <code>%</code> Rest, <code>**</code> Potenz</li>
+            <li><strong>f-String:</strong> <code>f"Text {variable:.2f}"</code> → 2 Dezimalstellen</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">alter = 25           # int
+pi = 3.14159         # float
+name = "Max"         # str
+aktiv = True         # bool
+
+# Typkonvertierung
+int("42")    # → 42
+float("3.14")# → 3.14
+str(100)     # → "100"
+bool(0)      # → False
+
+# Arithmetik
+10 // 3  # → 3   (ganzzahlig)
+10 % 3   # → 1   (Rest / Modulo)
+2 ** 3   # → 8   (Potenz)
+
+# f-String
+print(f"{name} ist {alter} Jahre alt, Pi ≈ {pi:.2f}")</code></pre>
+        </div>
+      </div>
+
+      <div class="ref-card" id="listen">
+        <div class="ref-card-head" style="background:var(--color-py2)">
+          <h3>Listen &amp; Dictionaries</h3>
+          <a class="ref-link" href="02-variablen-datentypen.html">→ Modul 02</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>Indexing:</strong> <code>lst[0]</code> erstes, <code>lst[-1]</code> letztes, <code>lst[-2]</code> vorletztes</li>
+            <li><strong>Slicing:</strong> <code>lst[1:3]</code>, <code>lst[::2]</code> jedes 2., <code>lst[::-1]</code> umgekehrt</li>
+            <li><strong>Mutable:</strong> list, dict, set – veränderbar. <strong>Immutable:</strong> str, tuple – unveränderbar</li>
+            <li><strong>dict.get(key, default):</strong> kein KeyError wenn Key fehlt</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">lst = [10, 20, 30, 40, 50]
+lst[0]      # → 10  lst[-1]  → 50
+lst[1:3]    # → [20, 30]
+lst[::2]    # → [10, 30, 50]
+lst[::-1]   # → [50, 40, 30, 20, 10]
+
+lst.append(60)      # hinten anhängen
+lst.insert(0, 5)    # an Position 0
+lst.remove(30)      # Wert 30 entfernen
+lst.pop()           # letztes entfernen
+len(lst)            # Länge
+
+# Strings = immutable Liste
+s = "Hallo"
+s.upper()           # → "HALLO"
+s.replace("l","L")  # → "HaLLo"
+s.split("l")        # → ["Ha", "", "o"]
+s.find("ll")        # → Index (oder -1)
+
+# Dict
+person = {"name": "Max", "alter": 25}
+person["name"]              # → "Max"
+person.get("job", "N/A")    # → "N/A" (kein KeyError!)
+person["stadt"] = "München" # neuer Key
+del person["alter"]         # Key löschen
+for k, v in person.items(): # iterieren
+    print(f"{k}: {v}")</code></pre>
+        </div>
+      </div>
+
+      <div class="ref-card" id="loops">
+        <div class="ref-card-head" style="background:var(--color-py2)">
+          <h3>Loops &amp; Conditions</h3>
+          <a class="ref-link" href="03-loops-conditions.html">→ Modul 03</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>for</strong> wenn Anzahl bekannt (Liste, range, dict)</li>
+            <li><strong>while</strong> wenn Bedingung geprüft wird – <strong>immer Abbruchbedingung!</strong></li>
+            <li><strong>List Comprehension:</strong> äquivalent zu for + append, kürzer</li>
+            <li><code>zip()</code> parallele Listen, <code>enumerate()</code> Index + Wert</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">for i in range(1, 6):        # 1 2 3 4 5
+    print(i)
+
+for k, v in person.items():  # Dict iterieren
+    print(f"{k} = {v}")
+
+for a, b in zip(list1, list2):  # parallel
+    print(a, b)
+
+# while – immer Abbruchbedingung!
+n = 0
+while n &lt; 5:
+    n += 1
+
+# break / continue
+for i in range(10):
+    if i == 3: continue    # 3 überspringen
+    if i == 7: break       # bei 7 stoppen
+
+# if / elif / else
+if x &gt; 10:
+    print("groß")
+elif x &gt; 5:
+    print("mittel")
+else:
+    print("klein")
+
+# List Comprehension
+quadrate = [x**2 for x in range(1, 6)]
+gerade   = [x for x in range(20) if x % 2 == 0]</code></pre>
+        </div>
+      </div>
+
+      <div class="ref-card" id="funktionen">
+        <div class="ref-card-head" style="background:var(--color-py3)">
+          <h3>Funktionen &amp; Error Handling</h3>
+          <a class="ref-link" href="04-funktionen-packages.html">→ Modul 04</a>
+        </div>
+        <div class="ref-card-body">
+          <ul class="ref-bullets">
+            <li><strong>4 Formen:</strong> ohne Ein/Ausgabe | mit Eingabe | mit Ausgabe | mit beidem</li>
+            <li><strong>Default-Parameter:</strong> <code>def f(x, y=0):</code> – immer am Ende!</li>
+            <li><strong>Mehrere Rückgabewerte</strong> als Tuple: <code>return a, b</code> → <code>x, y = f()</code></li>
+            <li><strong>try/except:</strong> ValueError, TypeError, ZeroDivisionError</li>
+            <li><strong>Lambda:</strong> einzeilige anonyme Funktion</li>
+          </ul>
+<pre class="ref-code"><code class="language-python">def berechne_bmi(gewicht, groesse, einheit="kg"):
+    bmi = gewicht / groesse**2
+    return round(bmi, 1)
+
+# Mehrere Rückgabewerte
+def stats(lst):
+    return min(lst), max(lst), sum(lst)/len(lst)
+
+lo, hi, avg = stats([1, 2, 3, 4, 5])
+
+# Error Handling
+def safe_convert(s):
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+# Lambda + sorted
+names = ["Bob", "Alice", "Charlie"]
+sorted(names, key=lambda x: len(x))  # nach Länge
+
+# map / filter
+sq = list(map(lambda x: x**2, [1,2,3,4]))
+ev = list(filter(lambda x: x%2==0, [1,2,3,4]))
+
+# Domain ersetzen (Klausur-Muster!)
+def replace_domain(email, old, new):
+    if old not in email:
+        raise ValueError(f"Domain '{old}' nicht gefunden")
+    return email.replace(old, new)</code></pre>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:right;margin-bottom:20px">
+      <button class="pruef-print-btn" onclick="window.print()">🖨️ Drucken / als PDF</button>
+    </div>
+
+    <div class="page-nav">
+      <a class="page-nav-btn" href="pruefung.html"><span>←</span><div>← Zur Übersicht</div></a>
+      <a class="page-nav-btn next" href="pruefung-datascience.html"><div>Data Science →</div><span>→</span></a>
+    </div>
+
+    <div style="height:48px"></div>
+  </main>
+</div>
+
+<script src="../scripts/fuse.min.js"></script>
+<script src="../scripts/highlight.min.js"></script>
+<script src="../scripts/main.js"></script>
+<script src="../scripts/search.js"></script>
+<script>
+document.querySelectorAll('.ref-code code').forEach(b => hljs.highlightElement(b));
+</script>
+</body>
+</html>
