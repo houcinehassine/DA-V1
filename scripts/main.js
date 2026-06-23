@@ -172,21 +172,31 @@ function _esc(s) {
     .replace(/>/g,'&gt;');
 }
 
-/* Lazy-load Pyodide — only on first "Ausführen" click */
+/* Basis-Pfad zu /scripts/ ermitteln — funktioniert von index.html UND modules/*.html aus */
+function _scriptsBase() {
+  const s = document.querySelector('script[src$="scripts/main.js"]');
+  if (s) return s.getAttribute('src').replace(/main\.js$/, '');
+  return 'scripts/';
+}
+
+/* Lazy-load Pyodide (lokal, kein CDN nötig) — only on first "Ausführen" click */
 async function _getPyodide() {
   if (_pyodide) return _pyodide;
   if (_pyLoading) return new Promise(res => _pyCallbacks.push(res));
   _pyLoading = true;
 
-  // Inject Pyodide CDN script
+  const pyBase = _scriptsBase() + 'pyodide/';
+
+  // Lokales Pyodide-Skript laden (scripts/pyodide/pyodide.js)
   await new Promise((res, rej) => {
     const s = document.createElement('script');
-    s.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
+    s.src = pyBase + 'pyodide.js';
     s.onload = res; s.onerror = rej;
     document.head.appendChild(s);
   });
 
-  _pyodide = await loadPyodide();
+  // indexURL zeigt auf den lokalen Ordner statt aufs CDN
+  _pyodide = await loadPyodide({ indexURL: pyBase });
 
   /* One-time global setup: stdout capture + matplotlib hook */
   await _pyodide.runPythonAsync(`
@@ -260,10 +270,10 @@ async function _runBlock(code, outputEl, runBtn) {
   try {
     const py = await _getPyodide();
 
-    /* Load required packages */
+    /* Load required packages (alle lokal, kein PyPI/CDN nötig) */
     const pkgs = _detectPkgs(code);
     const builtins = pkgs.filter(p => p !== 'seaborn');
-    const pipPkgs  = pkgs.filter(p => p === 'seaborn');
+    const needsSeaborn = pkgs.includes('seaborn');
 
     if (pkgs.length) {
       outputEl.innerHTML = `
@@ -271,10 +281,9 @@ async function _runBlock(code, outputEl, runBtn) {
           <span class="co-spinner"></span>Lade Pakete: ${pkgs.join(', ')}…
         </div>`;
       if (builtins.length) await py.loadPackage(builtins);
-      if (pipPkgs.length) {
-        await py.loadPackage('micropip');
-        const micropip = py.pyimport('micropip');
-        for (const p of pipPkgs) await micropip.install(p);
+      if (needsSeaborn) {
+        const pyBase = _scriptsBase() + 'pyodide/';
+        await py.loadPackage(pyBase + 'seaborn-0.13.2-py3-none-any.whl');
       }
     }
 

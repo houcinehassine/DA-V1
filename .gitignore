@@ -1,0 +1,9 @@
+# Pyodide Runtime (lokal gebündelt für Offline-Betrieb, ~145MB)
+# Wird per scripts/download-pyodide.sh nachgeladen, nicht versioniert.
+scripts/pyodide/
+
+# macOS
+.DS_Store
+
+# Claude Code Worktrees
+.claude/worktrees/

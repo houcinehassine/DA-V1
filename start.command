@@ -3,6 +3,25 @@
 
 cd "$(dirname "$0")"
 
+echo "============================================"
+echo " Data Analytics – Lernplattform"
+echo "============================================"
+
+# Python finden (python3 bevorzugt, sonst python)
+if command -v python3 &>/dev/null; then
+  PY=python3
+elif command -v python &>/dev/null; then
+  PY=python
+else
+  echo ""
+  echo "FEHLER: Python wurde nicht gefunden."
+  echo "Bitte installiere Python von https://www.python.org/downloads/"
+  echo "und starte dieses Skript danach erneut."
+  echo ""
+  read "?Enter drücken zum Schließen..."
+  exit 1
+fi
+
 # Port
 PORT=8080
 
@@ -16,7 +35,7 @@ fi
 echo "Starte Server auf http://localhost:$PORT ..."
 
 # Python-Server im Hintergrund starten
-python3 -m http.server $PORT &
+$PY -m http.server $PORT &
 SERVER_PID=$!
 
 # Kurz warten, dann Browser öffnen
